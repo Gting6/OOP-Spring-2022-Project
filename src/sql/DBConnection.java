@@ -11,7 +11,13 @@ public class DBConnection {
     private static final String USER = "root";
     private static final String PASS = "123456";
 	
-	static {
+
+	private DBConnection() {
+		
+	}
+	
+	public static Connection getConnection() {
+		
 		try {
 			Class.forName(JDBC_DRIVER);
 		} 
@@ -22,16 +28,8 @@ public class DBConnection {
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 		} 
 		catch (SQLException e) {
-			e.printStackTrace();
+			conn = DBCreation.createDB();
 		}
-	}
-    
-	private DBConnection() {
-		
-	}
-	
-	public static Connection getConnection() {
-		
 		return conn;
 	}
 }
