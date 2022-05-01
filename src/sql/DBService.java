@@ -45,7 +45,7 @@ public class DBService {
 			PreparedStatement stmt = conn.prepareStatement("insert into orders values(?,?,?,?,?)"); 
 			
 			stmt.setString(1, order.getOrderNO());
-			stmt.setString(2, order.getCreateTime());
+			stmt.setString(2, order.getCreateTime());		// need to change to date time??
 			stmt.setString(3, order.getDeliverTime());		// no need telephone change to address is better
 			stmt.setString(4, order.getRestaurantName());
 			stmt.setArray(5, order.getUserName());
