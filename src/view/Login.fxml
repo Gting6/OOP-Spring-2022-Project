@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+   <children>
+      <Button fx:id="btn1" layoutX="301.0" layoutY="323.0" mnemonicParsing="false" onAction="#pressBtn1" text="Log in" />
+      <Label layoutX="50.0" layoutY="131.0" text="Login Page">
+         <font>
+            <Font size="36.0" />
+         </font></Label>
+      <TextField fx:id="usernameTf" layoutX="363.0" layoutY="112.0" />
+      <TextField fx:id="passwordTf" layoutX="363.0" layoutY="174.0" />
+      <Button fx:id="btn2" layoutX="433.0" layoutY="329.0" mnemonicParsing="false" onAction="#pressBtn2" text="Sign up" />
+      <Label layoutX="270.0" layoutY="118.0" text="Username" />
+      <Label layoutX="270.0" layoutY="180.0" text="Password" />
+      <Label fx:id="confirmLb" layoutX="265.0" layoutY="221.0" prefHeight="115.0" prefWidth="91.0" text="Confirm Password" visible="false" wrapText="true" />
+      <TextField fx:id="confirmTf" layoutX="363.0" layoutY="259.0" visible="false" />
+      <Label fx:id="wrongLb" layoutX="338.0" layoutY="216.0" prefHeight="27.0" prefWidth="275.0" text="Wrong Username or Password !" textFill="#f80606" visible="false" />
+   </children>
+</AnchorPane>
