@@ -1,5 +1,5 @@
 package application;
-	
+
 import control.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-
 
 public class Main extends Application {
 	@Override
@@ -21,16 +20,16 @@ public class Main extends Application {
 			stage.setScene(scene);
 			stage.show();
 
-		
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
+		// Initialize FX
 		launch(args);
 		Controller controller = new Controller();
 		controller.controlMain();
-		
+
 	}
 }

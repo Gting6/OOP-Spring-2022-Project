@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,11 +16,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Member;
+import model.Model;
+import model.UserType;
 import view.LoginView;
 
 public class LoginController extends Controller implements Initializable  {
-	private String username;
-	private String password;
 	private LoginView status;
 
 	@FXML
@@ -64,25 +66,44 @@ public class LoginController extends Controller implements Initializable  {
 		
 	public void pressBtn1(ActionEvent event) throws IOException {
 		if (status == LoginView.Login) {
-			username = usernameTf.getText();
-			password = passwordTf.getText();
+			Model model = new Model();
+			usernameTf.getText();
+			passwordTf.getText();
+			// Add check who want to login? or use if to handle
+			String pattern = "[0-9a-zA-Z]+";
+			
+			while (true) {
+				if (!Pattern.matches(pattern, usernameTf.getText()) || !Pattern.matches(pattern, passwordTf.getText())) {
+					// TODO change the errormsg
+					System.out.println("Error pattern in username or password");
+					wrongLb.setVisible(true);
+					// refresh
+					break;
+				}
+				
+				if (model.checkMemberLoginIn(usernameTf.getText(), passwordTf.getText())) {
+					switchScene(ViewEnum.MEMBER, event, usernameTf.getText());
+					System.out.println("Login success");
+				}
+				else {
+					System.out.println("Login fail");
+					wrongLb.setVisible(true);
+				}
+				
+				break;
+				
+				// TODO [BackEnd] check restaurant and deliver
+//				case "restaurant":
+//				switchScene(ViewEnum.RESTAURANT, event, username);
+//				break;
+//				case "deliver":
+//				switchScene(ViewEnum.DELIVER, event, username);
+//				break;
+				
+			}
+			
 
-			// switch to main page, please modify the logic here.
-			// You may change the login status or store the user name.
-			// Here I simply use password as user type.
-			switch (password) {
-			case "member":
-				switchScene(ViewEnum.MEMBER, event, username);
-				break;
-			case "restaurant":
-				switchScene(ViewEnum.RESTAURANT, event, username);
-				break;
-			case "deliver":
-				switchScene(ViewEnum.DELIVER, event, username);
-				break;
-			default:
-				wrongLb.setVisible(true);
-			}			
+
 		}
 		
 		// When the status is SignUp, btn1 becomes "back" button.
@@ -98,25 +119,61 @@ public class LoginController extends Controller implements Initializable  {
 			render();
 		}
 		else if (status == LoginView.SignUp) {
-			username = usernameTf.getText();
-			password = passwordTf.getText();
+			Model model = new Model();
+			usernameTf.getText();
+			passwordTf.getText();
+			confirmTf.getText();
 			
-			// switch to main page, please modify the logic here.
-			// You may change the login status or store the user name.
-			// Here I simply use password as user type.
-			switch (password) {
-			case "member":
-				switchScene(ViewEnum.MEMBER, event, username);
+			// TODO [FX] need add the Tf of email 
+			String email = "abcd@gmail.com";
+			
+			// TODO [FX] need add the Tf of phoneNumber
+			String address = "0922323232";
+			
+			// TODO [FX] need add the Tf of name
+			String name = "";
+						
+			String pattern = "[0-9a-zA-Z]+";
+			
+			System.out.println(passwordTf.getText());
+			System.out.println(confirmTf.getText());
+
+			while (true) {
+				
+			
+				if (!Pattern.matches(pattern, usernameTf.getText()) || !Pattern.matches(pattern, passwordTf.getText())) {
+					// TODO [Fx] The string in wrongLb can be change to the string mentioned below.
+					System.out.println("Error pattern in username or password");
+					wrongLb.setVisible(true);
+					break;
+				}
+				
+				if (!passwordTf.getText().equals(confirmTf.getText())) {
+					// TODO [Fx] The string in wrongLb can be change to the string mentioned below.
+					System.out.println("Error password and confirm password");
+					wrongLb.setVisible(true);
+					break;
+				}
+				
+				// TODO [FX] Need a <select> in css to check which type(member, rest, deliver...) the user want to sign-up.
+				// usertype = UserType.Member;
+				
+				Member member = new Member(usernameTf.getText(), passwordTf.getText(), email, address, name);
+				if (!model.checkMemberInWhenRegister(member.getUserName(), member.getPassword())) {
+					model.addMember(member);
+					// TODO [FX] Success, show sign-up success, and give a button to back to login page.
+					System.out.println(model.checkMemberInWhenRegister(member.getUserName(), member.getPassword()));
+					switchScene(ViewEnum.MEMBER, event, member.getUserName());
+				}
+				else {
+					// TODO [Fx] The string in wrongLb can be change to the string mentioned below.
+					System.out.println("fail to register");
+					wrongLb.setVisible(true);
+				}
+				
 				break;
-			case "restaurant":
-				switchScene(ViewEnum.RESTAURANT, event, username);
-				break;
-			case "deliver":
-				switchScene(ViewEnum.DELIVER, event, username);
-				break;
-			default:
-				wrongLb.setVisible(true);
-			}			
+
+			}
 		}
 
 	}
