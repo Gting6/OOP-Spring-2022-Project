@@ -167,7 +167,6 @@ public class DBService {
 			Connection conn = DBConnection.getConnection();
 //			role stands for his identity
 //			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username=? AND userpassword=?"); 
-			// Username should be primary
 			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM members WHERE username=?"); 
 			
 			stmt.setString(1, username);
