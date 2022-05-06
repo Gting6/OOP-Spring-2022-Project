@@ -38,37 +38,37 @@ public class DBCreation {
 		try {	
 			
 			String create_table_member = "CREATE TABLE members " + 
-	                   "(username varchar(255), " +
+	                   "(username varchar(255) primary key, " +
 	                   " password varchar(255), " + 
 	                   " address varchar(255), " + 
 	                   " email varchar(255), " + 
-	                   " name varchar(255) primary key," +
+	                   " name varchar(255)," +
 	                   " vip Boolean," +
 	                   " vip_expire_date Date" +
 	                   ")";
 			
 			String create_table_restaurant = "CREATE TABLE restaurants " +
-	                   "(username varchar(255), " +
+	                   "(username varchar(255) primary key, " +
 	                   " password varchar(255), " + 
 	                   " address varchar(255), " + 
 	                   " email varchar(255), " + 
-	                   " name varchar(255) primary key," +
+	                   " name varchar(255)," +
 	                   " vip_expire_date Date" +
 	                   ")";
 			
 			String create_table_products = "CREATE TABLE products " +
 	                   "( restaurant_name varchar(255),"
-	                   + "foreign key(restaurant_name) references restaurants(name),"
+	                   + "foreign key(restaurant_name) references restaurants(username),"
 	                   + "product_name varchar(255),"
 	                   + "price int"
 	                   + ")";
 			
 			String create_table_deliveryman = "CREATE TABLE deliverymen " +
-	                   "(username varchar(255), " +
+	                   "(username varchar(255) primary key, " +
 	                   " password varchar(255), " + 
 	                   " address varchar(255), " + 
 	                   " email varchar(255), " + 
-	                   " name varchar(255) primary key" +
+	                   " name varchar(255) " +
 	                   ")";
 			
 			String create_table_order = "CREATE TABLE orders " +
@@ -76,11 +76,11 @@ public class DBCreation {
 	                   " create_time datetime, " + 
 	                   " arrival_time datetime, " + 
 	                   " restaurant_name varchar(255), " + 
-	                   " foreign key(restaurant_name) references restaurants(name), " +
+	                   " foreign key(restaurant_name) references restaurants(username), " +
 	                   " member_name varchar(255), " +
-	                   " foreign key(member_name) references members(name), " +
+	                   " foreign key(member_name) references members(username), " +
 	                   " deliveryman_name varchar(255), " +
-	                   " foreign key(deliveryman_name) references deliverymen(name)" +
+	                   " foreign key(deliveryman_name) references deliverymen(username)" +
 	                   ")";
 			
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
