@@ -6,21 +6,37 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MemberController">
-   <children>
-      <Label fx:id="welcomeLb" layoutX="45.0" layoutY="46.0" text="Member Page">
-         <font>
-            <Font size="35.0" />
-         </font>
-      </Label>
-      <Button fx:id="logoutBtn" layoutX="45.0" layoutY="338.0" mnemonicParsing="false" onAction="#logout" text="Log out" />
-      <Button fx:id="searchBtn" layoutX="45.0" layoutY="111.0" mnemonicParsing="false" onAction="#pressSearchBtn" prefHeight="39.0" prefWidth="179.0" text="Search Restaurant" />
-      <Button fx:id="infoBtn" layoutX="45.0" layoutY="161.0" mnemonicParsing="false" onAction="#pressInfoBtn" prefHeight="39.0" prefWidth="179.0" text="Basic Info" />
-      <Button fx:id="orderBtn" layoutX="45.0" layoutY="217.0" mnemonicParsing="false" onAction="#pressOrderBtn" prefHeight="39.0" prefWidth="179.0" text="Order" />
-      <Button fx:id="trackBtn" layoutX="45.0" layoutY="272.0" mnemonicParsing="false" onAction="#pressTrackBtn" prefHeight="39.0" prefWidth="179.0" text="Order Track" />
-      <Label fx:id="displayLb" alignment="CENTER" layoutX="306.0" layoutY="88.0" prefHeight="236.0" prefWidth="274.0">
-         <font>
-            <Font size="30.0" />
-         </font></Label>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.MemberController">
+	<children>
+		<Label fx:id="welcomeLb" layoutX="45.0" layoutY="46.0"
+			text="Member Page">
+			<font>
+				<Font size="35.0" />
+			</font>
+		</Label>
+		<Button fx:id="logoutBtn" layoutX="45.0" layoutY="338.0"
+			mnemonicParsing="false" onAction="#logout" text="Log out" />
+		<Button fx:id="searchBtn" layoutX="45.0" layoutY="111.0"
+			mnemonicParsing="false" onAction="#pressSearchBtn" prefHeight="39.0"
+			prefWidth="179.0" text="Search Restaurant" />
+		<Button fx:id="infoBtn" layoutX="45.0" layoutY="161.0"
+			mnemonicParsing="false" onAction="#pressInfoBtn" prefHeight="39.0"
+			prefWidth="179.0" text="Basic Info" />
+		<Button fx:id="orderBtn" layoutX="45.0" layoutY="217.0"
+			mnemonicParsing="false" onAction="#pressOrderBtn" prefHeight="39.0"
+			prefWidth="179.0" text="Order" />
+		<Button fx:id="trackBtn" layoutX="45.0" layoutY="272.0"
+			mnemonicParsing="false" onAction="#pressTrackBtn" prefHeight="39.0"
+			prefWidth="179.0" text="Order Track" />
+		<Label fx:id="displayLb" alignment="CENTER" layoutX="306.0"
+			layoutY="88.0" prefHeight="236.0" prefWidth="274.0">
+			<font>
+				<Font size="30.0" />
+			</font>
+		</Label>
+	</children>
 </AnchorPane>
