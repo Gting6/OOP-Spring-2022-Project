@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.SignupSuccessController">
+	<children>
+		<Label layoutX="35.0" layoutY="51.0" text="Sign Up Success"
+			textFill="#116cf5">
+			<font>
+				<Font size="37.0" />
+			</font>
+		</Label>
+		<Button fx:id="backBtn" layoutX="69.0" layoutY="249.0"
+			mnemonicParsing="false" text="Back to login" onAction="#pressBtn" />
+		<Label fx:id="welcomeLb" layoutX="69.0" layoutY="148.0"
+			prefHeight="39.0" prefWidth="461.0" text="Welcome, " />
+	</children>
+</AnchorPane>

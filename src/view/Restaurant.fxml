@@ -6,20 +6,34 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RestaurantController">
-   <children>
-      <Label fx:id="welcomeLb" layoutX="45.0" layoutY="46.0" text="Restaurant Page">
-         <font>
-            <Font size="35.0" />
-         </font>
-      </Label>
-      <Button fx:id="logoutBtn" onAction="#logout" layoutX="45.0" layoutY="338.0" mnemonicParsing="false"  text="Log out" />
-      <Button fx:id="discountBtn" onAction="#pressDiscountBtn" layoutX="45.0" layoutY="226.0" mnemonicParsing="false"  prefHeight="39.0" prefWidth="179.0" text="Discount Setting" />
-      <Button fx:id="infoBtn" onAction="#pressInfoBtn" layoutX="45.0" layoutY="120.0" mnemonicParsing="false"  prefHeight="39.0" prefWidth="179.0" text="Basic Info" />
-      <Button fx:id="orderBtn" onAction="#pressOrderBtn" layoutX="45.0" layoutY="176.0" mnemonicParsing="false"  prefHeight="39.0" prefWidth="179.0" text="Order" />
-      <Label fx:id="displayLb" alignment="CENTER" layoutX="306.0" layoutY="88.0" prefHeight="236.0" prefWidth="274.0">
-         <font>
-            <Font size="30.0" />
-         </font></Label>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.RestaurantController">
+	<children>
+		<Label fx:id="welcomeLb" layoutX="45.0" layoutY="46.0"
+			text="Restaurant Page">
+			<font>
+				<Font size="35.0" />
+			</font>
+		</Label>
+		<Button fx:id="logoutBtn" onAction="#logout" layoutX="45.0"
+			layoutY="338.0" mnemonicParsing="false" text="Log out" />
+		<Button fx:id="discountBtn" onAction="#pressDiscountBtn"
+			layoutX="45.0" layoutY="226.0" mnemonicParsing="false"
+			prefHeight="39.0" prefWidth="179.0" text="Discount Setting" />
+		<Button fx:id="infoBtn" onAction="#pressInfoBtn" layoutX="45.0"
+			layoutY="120.0" mnemonicParsing="false" prefHeight="39.0"
+			prefWidth="179.0" text="Basic Info" />
+		<Button fx:id="orderBtn" onAction="#pressOrderBtn"
+			layoutX="45.0" layoutY="176.0" mnemonicParsing="false"
+			prefHeight="39.0" prefWidth="179.0" text="Order" />
+		<Label fx:id="displayLb" alignment="CENTER" layoutX="306.0"
+			layoutY="88.0" prefHeight="236.0" prefWidth="274.0">
+			<font>
+				<Font size="30.0" />
+			</font>
+		</Label>
+	</children>
 </AnchorPane>
