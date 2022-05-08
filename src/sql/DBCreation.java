@@ -43,8 +43,7 @@ public class DBCreation {
 	                   " address varchar(255), " + 
 	                   " email varchar(255), " + 
 	                   " name varchar(255)," +
-	                   " vip Boolean," +
-	                   " vip_expire_date Date" +
+	                   " vip_expire_date Date default null" +
 	                   ")";
 			
 			String create_table_restaurant = "CREATE TABLE restaurants " +
@@ -52,8 +51,7 @@ public class DBCreation {
 	                   " password varchar(255), " + 
 	                   " address varchar(255), " + 
 	                   " email varchar(255), " + 
-	                   " name varchar(255)," +
-	                   " vip_expire_date Date" +
+	                   " name varchar(255)" +
 	                   ")";
 			
 			String create_table_products = "CREATE TABLE products " +
@@ -72,7 +70,7 @@ public class DBCreation {
 	                   ")";
 			
 			String create_table_order = "CREATE TABLE orders " +
-	                   "(id varchar(255), " +			// can be varchar or int
+	                   "(id Int(20), " +			// can be varchar or int
 	                   " create_time datetime, " + 
 	                   " arrival_time datetime, " + 
 	                   " restaurant_name varchar(255), " + 

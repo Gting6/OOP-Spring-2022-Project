@@ -1,11 +1,16 @@
 package model;
 
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.Calendar;
+
+import sql.DBService;
 
 public class Member extends User {
-	// 做會員info輸出系統
+	// ���info頛詨蝟餌絞
 	boolean is_vip;
-	int vip_expire_date;
+	Date vip_expire_date;
+	DBService dbService = new DBService();
 
 	// TODO OrderHandler
 
@@ -16,50 +21,69 @@ public class Member extends User {
 	public Member(String username, String password, String address, String email, String name) {
 		super(username, password, address, email, name);
 		this.is_vip = false;
-		this.vip_expire_date = -1;
+		this.vip_expire_date = null;	
+	}
+	
+	public Member(String username, String password, String address, String email, String name, Date vip_expire_date) {
+		super(username, password, address, email, name);
+		this.is_vip = false;
+		this.vip_expire_date = vip_expire_date;	
+	}
+	
+	public void setToDB() {
+		try {
+			dbService.createMember(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Member(User usr) {
 		super(usr);
 		this.is_vip = false;
-		this.vip_expire_date = -1;
+		this.vip_expire_date = null;
 	}
 
-	public void getMemberInfo() {
+	public Member getMemberInfo() throws SQLException {
 		// TODO view page
+		return dbService.getMember(this.getUserName(), this.getPassword());
 	}
 
 	public void searchMemberDetail() {
-
+		// Seems to be the same as above??
 	}
 
-	public void becomeVIP() {
+	public boolean becomeVIP() throws SQLException {
 		// TODO
-		// 經過一串手續 才能call become vip或是修改值
+		return dbService.setVIP(this.getUserName());
 	}
 
-	// status->string, 用enum實作
-	// 先new 一個order by input 人 商家, ParseOrder by UI 就是說要點啥 並計算, 確認後再丟placeOrder回傳狀態
+	// status->string, �enum撖虫��
+	// ��ew 銝��rder by input 鈭� ��振, ParseOrder by UI 撠望隤芾�� 銝西���, 蝣箄����laceOrder�������
 	public void placeOrder(Order order) {
 		// push order in order list
 		// Order newOrder = new Order(this.is_vip_);
-		// new一單
-		// 讓單子吃距離 計算外送金額回傳
-		// check是否付費會員 加總金額 存進單子內
+		try {
+			dbService.createOrder(order);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// return newOrder.getStatus();
 	}
 
-	// 應該要回傳status
+	// ��府閬�status
 	// user.callSearch
-	// 要想一下怎麼存怎麼查再遇到修改刪除時方便
+	// 閬銝�銝�獐摮�獐����靽格����靘�
 	public Restaurant searchRestaurant(String restaurant_name) {
-		// 要在model內生成 name->Restaurant
-		// 每註冊一個就要新增一個
-		// 問要怎麼查 存enum
-		// 判定查詢方式
-		// call 查詢方式
-		// 判斷是否查詢成功 輸出UI並回傳狀態？
+		// 閬model����� name->Restaurant
+		// 瘥酉����停閬憓���
+		// ����獐� 摮num
+		// �摰閰Ｘ撘�
+		// call �閰Ｘ撘�
+		// �����閰Ｘ��� 頛詨UI銝血�������
 		return null;
 	}
 
@@ -67,19 +91,30 @@ public class Member extends User {
 		return restaurant;
 	}
 
-	// view出去 告訴我是啥單
+	// view�� ��迄����
 	public String checkOrderStatus(int no) {
 		return new String();
 	}
 
-	public boolean getVIP() {
+	public boolean getVIP() throws SQLException {
 		// TODO Auto-generated method stub
+		Calendar c = Calendar.getInstance();
+		c.getTime();
+		Date today = new java.sql.Date(c.getTimeInMillis());
+		
+		Date expire_day = dbService.getVIPDate(this.getUserName());
+		
+		if(today.compareTo(expire_day) >= 0) {
+			this.is_vip = false;
+		}
+		else this.is_vip = true;
+
 		return this.is_vip;
 	}
 
-	public Date getVIP_expire_date() {
+	public Date getVIP_expire_date() throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		return dbService.getVIPDate(this.getUserName());
 	}
 
 }
