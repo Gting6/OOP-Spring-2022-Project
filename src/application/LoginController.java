@@ -243,6 +243,7 @@ public class LoginController extends Controller implements Initializable {
 		// TODO Auto-generated method stub
 		status = LoginView.Login;
 		typeCombo.getItems().setAll("Member", "Deliver", "Restaurant"); // set the options
+		typeCombo.setValue("Member");
 		render();
 	}
 }
