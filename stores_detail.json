@@ -1,0 +1,2149 @@
+[
+    {
+        "name": "雞の專家_劍潭",
+        "position": {
+            "address": "台北市士林區文林路110巷9號",
+            "latitude": 25.088,
+            "longitude": 121.527
+        },
+        "phone": "0000000",
+        "store_description": "",
+        "order_description": "1.大量訂購,請提早2日預約2.雞排一律不切",
+        "type": [
+            "日式",
+            "其他",
+            "小吃",
+            "中式",
+            "西式"
+        ],
+        "menu": [
+            {
+                "name": "雞排",
+                "price": "辣 70, 不辣 70"
+            },
+            {
+                "name": "雞翅",
+                "price": "30"
+            },
+            {
+                "name": "無骨雞塊(限量)",
+                "price": "70"
+            },
+            {
+                "name": "薯條",
+                "price": "40"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "10:00",
+                "end": "16:30"
+            },
+            "tue": {
+                "start": "10:00",
+                "end": "16:30"
+            },
+            "wed": {
+                "start": "10:00",
+                "end": "16:30"
+            },
+            "thu": {
+                "start": "10:00",
+                "end": "16:30"
+            },
+            "fri": {
+                "start": "10:00",
+                "end": "16:30"
+            },
+            "sat": {
+                "start": "10:00",
+                "end": "16:30"
+            },
+            "sun": {
+                "start": "10:00",
+                "end": "16:30"
+            }
+        }
+    },
+    {
+        "name": "春來麵線",
+        "position": {
+            "address": "台北市信義區忠孝東路五段743巷7號",
+            "latitude": 25.043,
+            "longitude": 121.581
+        },
+        "phone": "02-8785-1257",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "麵食"
+        ],
+        "menu": [
+            {
+                "name": "綜合麵線",
+                "price": "大 70, 小 50"
+            },
+            {
+                "name": "大腸麵線",
+                "price": "大 70, 小 50"
+            },
+            {
+                "name": "蚵仔麵線",
+                "price": "大 70, 小 50"
+            },
+            {
+                "name": "清麵線",
+                "price": "大 45, 小 35"
+            },
+            {
+                "name": "魚丸湯",
+                "price": "30"
+            },
+            {
+                "name": "貢丸湯",
+                "price": "30"
+            },
+            {
+                "name": "魚貢綜合湯",
+                "price": "30"
+            },
+            {
+                "name": "碗粿",
+                "price": "40"
+            },
+            {
+                "name": "南部肉粽",
+                "price": "60"
+            },
+            {
+                "name": "蘿蔔",
+                "price": "30"
+            },
+            {
+                "name": "滷豆腐",
+                "price": "25"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "17:30",
+                "end": "21:00"
+            },
+            "tue": {
+                "start": "17:30",
+                "end": "21:00"
+            },
+            "wed": {
+                "start": "17:30",
+                "end": "21:00"
+            },
+            "thu": {
+                "start": "17:30",
+                "end": "21:00"
+            },
+            "fri": {
+                "start": "17:30",
+                "end": "21:00"
+            },
+            "sat": {
+                "start": "17:30",
+                "end": "21:00"
+            },
+            "sun": {
+                "start": "17:30",
+                "end": "21:00"
+            }
+        }
+    },
+    {
+        "name": "Miss Energy 低GI廚房 台北",
+        "position": {
+            "address": "106台北市大安區和平東路二段201號",
+            "latitude": 25.034,
+            "longitude": 121.543
+        },
+        "phone": "02 2708 6728",
+        "store_description": "",
+        "order_description": "飯為紫米飯。10個以上外送",
+        "type": [
+            "便當"
+        ],
+        "menu": [
+            {
+                "name": "水煮嫩雞胸(437cal)",
+                "price": "110"
+            },
+            {
+                "name": "蒜泥豬里肌(472cal)",
+                "price": "110"
+            },
+            {
+                "name": "韓式菇菇雞(457cal)",
+                "price": "120"
+            },
+            {
+                "name": "香滷雞腿(572cal)",
+                "price": "110"
+            },
+            {
+                "name": "泡菜豬里肌(468cal)",
+                "price": "120"
+            },
+            {
+                "name": "鹽烤鯖魚(539cal)",
+                "price": "120"
+            },
+            {
+                "name": "清滷牛腱(480cal)",
+                "price": "165"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "13:30",
+                "end": "22:00"
+            },
+            "tue": {
+                "start": "13:30",
+                "end": "22:00"
+            },
+            "wed": {
+                "start": "13:30",
+                "end": "22:00"
+            },
+            "thu": {
+                "start": "13:30",
+                "end": "22:00"
+            },
+            "fri": {
+                "start": "13:30",
+                "end": "22:00"
+            },
+            "sat": {
+                "start": "13:30",
+                "end": "22:00"
+            },
+            "sun": {
+                "start": "13:30",
+                "end": "22:00"
+            }
+        }
+    },
+    {
+        "name": "樸食",
+        "position": {
+            "address": "台北市中山區吉林路456巷16-1號",
+            "latitude": 25.067,
+            "longitude": 121.53
+        },
+        "phone": "02-2595-3783",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "便當"
+        ],
+        "menu": [
+            {
+                "name": "宮保雞丁",
+                "price": "100"
+            },
+            {
+                "name": "香煎雞腿",
+                "price": "100"
+            },
+            {
+                "name": "梅花豬",
+                "price": "100"
+            },
+            {
+                "name": "挪威鯖魚",
+                "price": "100"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "16:00",
+                "end": "21:30"
+            },
+            "tue": {
+                "start": "16:00",
+                "end": "21:30"
+            },
+            "wed": {
+                "start": "16:00",
+                "end": "21:30"
+            },
+            "thu": {
+                "start": "16:00",
+                "end": "21:30"
+            },
+            "fri": {
+                "start": "16:00",
+                "end": "21:30"
+            },
+            "sat": {
+                "start": "16:00",
+                "end": "21:30"
+            },
+            "sun": {
+                "start": "16:00",
+                "end": "21:30"
+            }
+        }
+    },
+    {
+        "name": "煲柏思維",
+        "position": {
+            "address": "114台北市內湖區內湖路一段285巷66號之3號",
+            "latitude": 25.085,
+            "longitude": 121.567
+        },
+        "phone": "0963068576",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "小吃",
+            "中式"
+        ],
+        "menu": [
+            {
+                "name": "蛋炒飯套餐",
+                "price": "40"
+            },
+            {
+                "name": "牛肉蛋炒飯套餐",
+                "price": "40"
+            },
+            {
+                "name": "豬肉蛋炒飯套餐",
+                "price": "40"
+            },
+            {
+                "name": "炒青菜",
+                "price": "60"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "10:30",
+                "end": "13:00"
+            },
+            "tue": {
+                "start": "10:30",
+                "end": "13:00"
+            },
+            "wed": {
+                "start": "10:30",
+                "end": "13:00"
+            },
+            "thu": {
+                "start": "10:30",
+                "end": "13:00"
+            },
+            "fri": {
+                "start": "10:30",
+                "end": "13:00"
+            },
+            "sat": {
+                "start": "10:30",
+                "end": "13:00"
+            },
+            "sun": {
+                "start": "10:30",
+                "end": "13:00"
+            }
+        }
+    },
+    {
+        "name": "盛味豐炭烤燒餅",
+        "position": {
+            "address": "台北市大安區和平東路二段321號",
+            "latitude": 25.025,
+            "longitude": 121.545
+        },
+        "phone": "(02)2702-2232",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "甜點"
+        ],
+        "menu": [
+            {
+                "name": "炭烤燒餅(原味)",
+                "price": "20"
+            },
+            {
+                "name": "芝麻糖餅(甜)",
+                "price": "15"
+            },
+            {
+                "name": "豆沙酥餅(甜)",
+                "price": "15"
+            },
+            {
+                "name": "蔥酥餅(鹹)",
+                "price": "15"
+            },
+            {
+                "name": "豆漿(有焦味那種)",
+                "price": "20"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "tue": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "wed": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "thu": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "fri": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "sat": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "sun": {
+                "start": "21:00",
+                "end": "23:00"
+            }
+        }
+    },
+    {
+        "name": "UFO車輪餅",
+        "position": {
+            "address": "台北市大安區通安街77號",
+            "latitude": 25.03,
+            "longitude": 121.553
+        },
+        "phone": "0983-580-031 , 0986-881-488",
+        "store_description": "",
+        "order_description": "30個外送",
+        "type": [
+            "餅類",
+            "甜點"
+        ],
+        "menu": [
+            {
+                "name": "奶油布蕾",
+                "price": "15"
+            },
+            {
+                "name": "蘿蔔絲",
+                "price": "15"
+            },
+            {
+                "name": "雙拼(紅豆+奶油)",
+                "price": "15"
+            },
+            {
+                "name": "巧克力",
+                "price": "15"
+            },
+            {
+                "name": "紅豆",
+                "price": "15"
+            },
+            {
+                "name": "芋頭",
+                "price": "15"
+            },
+            {
+                "name": "紅豆麻糬",
+                "price": "15"
+            },
+            {
+                "name": "起司玉米",
+                "price": "15"
+            },
+            {
+                "name": "起司火腿",
+                "price": "15"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "16:00",
+                "end": "17:30"
+            },
+            "tue": {
+                "start": "16:00",
+                "end": "17:30"
+            },
+            "wed": {
+                "start": "16:00",
+                "end": "17:30"
+            },
+            "thu": {
+                "start": "16:00",
+                "end": "17:30"
+            },
+            "fri": {
+                "start": "16:00",
+                "end": "17:30"
+            },
+            "sat": {
+                "start": "16:00",
+                "end": "17:30"
+            },
+            "sun": {
+                "start": "16:00",
+                "end": "17:30"
+            }
+        }
+    },
+    {
+        "name": "緯大雞排（內湖店）Gver.",
+        "position": {
+            "address": "台北市內湖區江南街65巷29號",
+            "latitude": 25.077,
+            "longitude": 121.578
+        },
+        "phone": "02-2797-1284",
+        "store_description": "",
+        "order_description": "500外送",
+        "type": [
+            "小吃",
+            "中式"
+        ],
+        "menu": [
+            {
+                "name": "香酥雞排",
+                "price": "70"
+            },
+            {
+                "name": "香酥嫩雞柳",
+                "price": "70"
+            },
+            {
+                "name": "無骨雞腿",
+                "price": "70"
+            },
+            {
+                "name": "3號餐:雞排(柳)/原萃日式綠茶",
+                "price": "95"
+            },
+            {
+                "name": "4號餐:雞排(柳)/可樂",
+                "price": "95"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "12:00",
+                "end": "16:00"
+            },
+            "tue": {
+                "start": "12:00",
+                "end": "16:00"
+            },
+            "wed": {
+                "start": "12:00",
+                "end": "16:00"
+            },
+            "thu": {
+                "start": "12:00",
+                "end": "16:00"
+            },
+            "fri": {
+                "start": "12:00",
+                "end": "16:00"
+            },
+            "sat": {
+                "start": "12:00",
+                "end": "16:00"
+            },
+            "sun": {
+                "start": "12:00",
+                "end": "16:00"
+            }
+        }
+    },
+    {
+        "name": "腿庫*豬腳便當",
+        "position": {
+            "address": "台北市士林區大南路313號",
+            "latitude": 25.089,
+            "longitude": 121.518
+        },
+        "phone": "02-2880-3368",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "便當"
+        ],
+        "menu": [
+            {
+                "name": "醬爆肉絲便當",
+                "price": "90"
+            },
+            {
+                "name": "炸蝦捲便當",
+                "price": "90"
+            },
+            {
+                "name": "辣子雞便當",
+                "price": "90"
+            },
+            {
+                "name": "滷雞腿便當",
+                "price": "95"
+            },
+            {
+                "name": "炸雞腿便當",
+                "price": "95"
+            },
+            {
+                "name": "滷豬排便當",
+                "price": "90"
+            },
+            {
+                "name": "炸豬排便當",
+                "price": "90"
+            },
+            {
+                "name": "魚排便當",
+                "price": "90"
+            },
+            {
+                "name": "香腸便當",
+                "price": "80"
+            },
+            {
+                "name": "豬腳便當",
+                "price": "90"
+            },
+            {
+                "name": "腿庫便當",
+                "price": "90"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "11:30",
+                "end": "21:00"
+            },
+            "tue": {
+                "start": "11:30",
+                "end": "21:00"
+            },
+            "wed": {
+                "start": "11:30",
+                "end": "21:00"
+            },
+            "thu": {
+                "start": "11:30",
+                "end": "21:00"
+            },
+            "fri": {
+                "start": "11:30",
+                "end": "21:00"
+            },
+            "sat": {
+                "start": "11:30",
+                "end": "21:00"
+            },
+            "sun": {
+                "start": "11:30",
+                "end": "21:00"
+            }
+        }
+    },
+    {
+        "name": "古早味涼麵&雞魯飯",
+        "position": {
+            "address": "台北市內湖區江南街119號",
+            "latitude": 25.076,
+            "longitude": 121.576
+        },
+        "phone": "0952-503-157",
+        "store_description": "",
+        "order_description": "滿300元外送",
+        "type": [
+            "飲料",
+            "麵食"
+        ],
+        "menu": [
+            {
+                "name": "涼麵",
+                "price": "50"
+            },
+            {
+                "name": "雞魯飯",
+                "price": "50"
+            },
+            {
+                "name": "涼麵套餐",
+                "price": "60"
+            },
+            {
+                "name": "雞魯飯套餐",
+                "price": "60"
+            },
+            {
+                "name": "味增湯",
+                "price": "20"
+            },
+            {
+                "name": "味增貢丸湯",
+                "price": "30"
+            },
+            {
+                "name": "紅茶",
+                "price": "20"
+            },
+            {
+                "name": "綠茶",
+                "price": "20"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "12:30",
+                "end": "23:30"
+            },
+            "tue": {
+                "start": "12:30",
+                "end": "23:30"
+            },
+            "wed": {
+                "start": "12:30",
+                "end": "23:30"
+            },
+            "thu": {
+                "start": "12:30",
+                "end": "23:30"
+            },
+            "fri": {
+                "start": "12:30",
+                "end": "23:30"
+            },
+            "sat": {
+                "start": "12:30",
+                "end": "23:30"
+            },
+            "sun": {
+                "start": "12:30",
+                "end": "23:30"
+            }
+        }
+    },
+    {
+        "name": "阿琴自助餐",
+        "position": {
+            "address": "台北市士林區福港街9號",
+            "latitude": 25.091,
+            "longitude": 121.518
+        },
+        "phone": "(02)2883-7642",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "便當"
+        ],
+        "menu": [
+            {
+                "name": "海鮮粥",
+                "price": "80"
+            },
+            {
+                "name": "肉絲炒麵",
+                "price": "80"
+            },
+            {
+                "name": "蝦仁炒麵",
+                "price": "80"
+            },
+            {
+                "name": "海鮮麵",
+                "price": "80"
+            },
+            {
+                "name": "肉絲炒飯",
+                "price": "80"
+            },
+            {
+                "name": "蝦仁炒飯",
+                "price": "80"
+            },
+            {
+                "name": "蝦捲飯",
+                "price": "85"
+            },
+            {
+                "name": "香腸飯",
+                "price": "85"
+            },
+            {
+                "name": "控肉販",
+                "price": "90"
+            },
+            {
+                "name": "排骨飯",
+                "price": "90"
+            },
+            {
+                "name": "魚便當",
+                "price": "100"
+            },
+            {
+                "name": "雞腿飯",
+                "price": "100"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "14:00",
+                "end": "20:00"
+            },
+            "tue": {
+                "start": "14:00",
+                "end": "20:00"
+            },
+            "wed": {
+                "start": "14:00",
+                "end": "20:00"
+            },
+            "thu": {
+                "start": "14:00",
+                "end": "20:00"
+            },
+            "fri": {
+                "start": "14:00",
+                "end": "20:00"
+            },
+            "sat": {
+                "start": "14:00",
+                "end": "20:00"
+            },
+            "sun": {
+                "start": "14:00",
+                "end": "20:00"
+            }
+        }
+    },
+    {
+        "name": "鴨寶精緻便當",
+        "position": {
+            "address": "台北市萬大路385之1號",
+            "latitude": 25.023,
+            "longitude": 121.499
+        },
+        "phone": "2305-6236",
+        "store_description": "",
+        "order_description": "滿五個可外送",
+        "type": [
+            "便當"
+        ],
+        "menu": [
+            {
+                "name": "排骨飯",
+                "price": "80"
+            },
+            {
+                "name": "爌肉飯",
+                "price": "80"
+            },
+            {
+                "name": "糖醋里肌飯",
+                "price": "80"
+            },
+            {
+                "name": "牛柳飯",
+                "price": "90"
+            },
+            {
+                "name": "雞腿飯",
+                "price": "90"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "11:00",
+                "end": "20:30"
+            },
+            "tue": {
+                "start": "11:00",
+                "end": "20:30"
+            },
+            "wed": {
+                "start": "11:00",
+                "end": "20:30"
+            },
+            "thu": {
+                "start": "11:00",
+                "end": "20:30"
+            },
+            "fri": {
+                "start": "11:00",
+                "end": "20:30"
+            },
+            "sat": {
+                "start": "11:00",
+                "end": "20:30"
+            },
+            "sun": {
+                "start": "11:00",
+                "end": "20:30"
+            }
+        }
+    },
+    {
+        "name": "萊客潤餅捲(內湖)",
+        "position": {
+            "address": "台北市內湖區內湖路一段737巷21號旁",
+            "latitude": 25.08,
+            "longitude": 121.579
+        },
+        "phone": "0955-216291",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "小吃"
+        ],
+        "menu": [
+            {
+                "name": "原味",
+                "price": "45"
+            },
+            {
+                "name": "咖哩",
+                "price": "55"
+            },
+            {
+                "name": "芥末",
+                "price": "55"
+            },
+            {
+                "name": "辣粉",
+                "price": "55"
+            },
+            {
+                "name": "無糖花生",
+                "price": "45"
+            },
+            {
+                "name": "起司",
+                "price": "55"
+            },
+            {
+                "name": "海苔",
+                "price": "55"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "9:30",
+                "end": "22:30"
+            },
+            "tue": {
+                "start": "9:30",
+                "end": "22:30"
+            },
+            "wed": {
+                "start": "9:30",
+                "end": "22:30"
+            },
+            "thu": {
+                "start": "9:30",
+                "end": "22:30"
+            },
+            "fri": {
+                "start": "9:30",
+                "end": "22:30"
+            },
+            "sat": {
+                "start": "9:30",
+                "end": "22:30"
+            },
+            "sun": {
+                "start": "9:30",
+                "end": "22:30"
+            }
+        }
+    },
+    {
+        "name": "東湖頂尖排骨大王",
+        "position": {
+            "address": "台北市內湖區康樂街72巷8弄1號",
+            "latitude": 25.069,
+            "longitude": 121.618
+        },
+        "phone": "0226338442",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "便當"
+        ],
+        "menu": [
+            {
+                "name": "雞腿飯",
+                "price": "110"
+            },
+            {
+                "name": "排骨飯",
+                "price": "100"
+            },
+            {
+                "name": "焢肉飯",
+                "price": "100"
+            },
+            {
+                "name": "日式豬排飯",
+                "price": "100"
+            },
+            {
+                "name": "鱈魚排飯",
+                "price": "90"
+            },
+            {
+                "name": "蝦仁捲飯",
+                "price": "90"
+            },
+            {
+                "name": "香檸雞柳飯",
+                "price": "90"
+            },
+            {
+                "name": "菜飯便當",
+                "price": "70"
+            },
+            {
+                "name": "雞腿",
+                "price": "60"
+            },
+            {
+                "name": "排骨",
+                "price": "50"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "22:30",
+                "end": "23:30"
+            },
+            "tue": {
+                "start": "22:30",
+                "end": "23:30"
+            },
+            "wed": {
+                "start": "22:30",
+                "end": "23:30"
+            },
+            "thu": {
+                "start": "22:30",
+                "end": "23:30"
+            },
+            "fri": {
+                "start": "22:30",
+                "end": "23:30"
+            },
+            "sat": {
+                "start": "22:30",
+                "end": "23:30"
+            },
+            "sun": {
+                "start": "22:30",
+                "end": "23:30"
+            }
+        }
+    },
+    {
+        "name": "湯圓妹現烤甜甜圈 八德店",
+        "position": {
+            "address": "台北市松山區八德路四段",
+            "latitude": 25.049,
+            "longitude": 121.569
+        },
+        "phone": "0968821381",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "甜點"
+        ],
+        "menu": [
+            {
+                "name": "原味",
+                "price": "35"
+            },
+            {
+                "name": "巧克力",
+                "price": "35"
+            },
+            {
+                "name": "起司",
+                "price": "35"
+            },
+            {
+                "name": "草莓",
+                "price": "35"
+            },
+            {
+                "name": "黑糖",
+                "price": "35"
+            },
+            {
+                "name": "奶酥",
+                "price": "35"
+            },
+            {
+                "name": "棉花糖",
+                "price": "40"
+            },
+            {
+                "name": "肉桂",
+                "price": "40"
+            },
+            {
+                "name": "煉乳",
+                "price": "40"
+            },
+            {
+                "name": "香蒜",
+                "price": "40"
+            },
+            {
+                "name": "香濃花生",
+                "price": "45"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "21:00",
+                "end": "23:30"
+            },
+            "tue": {
+                "start": "21:00",
+                "end": "23:30"
+            },
+            "wed": {
+                "start": "21:00",
+                "end": "23:30"
+            },
+            "thu": {
+                "start": "21:00",
+                "end": "23:30"
+            },
+            "fri": {
+                "start": "21:00",
+                "end": "23:30"
+            },
+            "sat": {
+                "start": "21:00",
+                "end": "23:30"
+            },
+            "sun": {
+                "start": "21:00",
+                "end": "23:30"
+            }
+        }
+    },
+    {
+        "name": "Uncle L2 手作舒芙蕾甜點店",
+        "position": {
+            "address": "台北市大安區泰順街40巷38號",
+            "latitude": 25.024,
+            "longitude": 121.53
+        },
+        "phone": "無",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "甜點"
+        ],
+        "menu": [
+            {
+                "name": "經典原味",
+                "price": "90"
+            },
+            {
+                "name": "苦甜巧克力",
+                "price": "100"
+            },
+            {
+                "name": "抹茶紅豆",
+                "price": "100"
+            },
+            {
+                "name": "焦糖伯爵卡士達",
+                "price": "120"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "10:30",
+                "end": "21:30"
+            },
+            "tue": {
+                "start": "10:30",
+                "end": "21:30"
+            },
+            "wed": {
+                "start": "10:30",
+                "end": "21:30"
+            },
+            "thu": {
+                "start": "10:30",
+                "end": "21:30"
+            },
+            "fri": {
+                "start": "10:30",
+                "end": "21:30"
+            },
+            "sat": {
+                "start": "10:30",
+                "end": "21:30"
+            },
+            "sun": {
+                "start": "10:30",
+                "end": "21:30"
+            }
+        }
+    },
+    {
+        "name": "億圓花炮煙火公司",
+        "position": {
+            "address": "台北市延平北路",
+            "latitude": 25.09,
+            "longitude": 121.503
+        },
+        "phone": "0900-000-000",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "其他"
+        ],
+        "menu": [
+            {
+                "name": "魯肉飯",
+                "price": "40"
+            },
+            {
+                "name": "叉燒飯",
+                "price": "60"
+            },
+            {
+                "name": "雞排飯",
+                "price": "70"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "12:00",
+                "end": "19:00"
+            },
+            "tue": {
+                "start": "12:00",
+                "end": "19:00"
+            },
+            "wed": {
+                "start": "12:00",
+                "end": "19:00"
+            },
+            "thu": {
+                "start": "12:00",
+                "end": "19:00"
+            },
+            "fri": {
+                "start": "12:00",
+                "end": "19:00"
+            },
+            "sat": {
+                "start": "12:00",
+                "end": "19:00"
+            },
+            "sun": {
+                "start": "12:00",
+                "end": "19:00"
+            }
+        }
+    },
+    {
+        "name": "大安站那邊",
+        "position": {
+            "address": "台北市大安區復興南路二段13-1號",
+            "latitude": 25.033,
+            "longitude": 121.544
+        },
+        "phone": "0227078188",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "便當"
+        ],
+        "menu": [
+            {
+                "name": "五花肉佐糯米椒飯",
+                "price": "120"
+            },
+            {
+                "name": "宮保辣雞丁飯",
+                "price": "120"
+            },
+            {
+                "name": "九層打拋豬飯",
+                "price": "120"
+            },
+            {
+                "name": "佐宗棠雞飯",
+                "price": "120"
+            },
+            {
+                "name": "糖醋里肌飯",
+                "price": "120"
+            },
+            {
+                "name": "蒜泥白肉飯",
+                "price": "120"
+            },
+            {
+                "name": "鐵板牛柳飯",
+                "price": "150"
+            },
+            {
+                "name": "青椒牛肉飯",
+                "price": "150"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "10:30",
+                "end": "11:30"
+            },
+            "tue": {
+                "start": "10:30",
+                "end": "11:30"
+            },
+            "wed": {
+                "start": "10:30",
+                "end": "11:30"
+            },
+            "thu": {
+                "start": "10:30",
+                "end": "11:30"
+            },
+            "fri": {
+                "start": "10:30",
+                "end": "11:30"
+            },
+            "sat": {
+                "start": "10:30",
+                "end": "11:30"
+            },
+            "sun": {
+                "start": "10:30",
+                "end": "11:30"
+            }
+        }
+    },
+    {
+        "name": "台灣第一味(台北松山店)",
+        "position": {
+            "address": "台北市信義區松山路574號",
+            "latitude": 25.037,
+            "longitude": 121.578
+        },
+        "phone": "02-0346-8866",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "飲料"
+        ],
+        "menu": [
+            {
+                "name": "當代雙Q",
+                "price": "M 45, L 50, H 50"
+            },
+            {
+                "name": "冷泡綠茶",
+                "price": "M 30, L 35"
+            },
+            {
+                "name": "黑糖鮮奶珍珠",
+                "price": "M 55, L 65, H 65"
+            },
+            {
+                "name": "甘蔗青了",
+                "price": "L 55"
+            },
+            {
+                "name": "招牌高山青",
+                "price": "M 25, L 30, H 30"
+            },
+            {
+                "name": "紫芋西米露",
+                "price": "L 55"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "14:00",
+                "end": "18:00"
+            },
+            "tue": {
+                "start": "14:00",
+                "end": "18:00"
+            },
+            "wed": {
+                "start": "14:00",
+                "end": "18:00"
+            },
+            "thu": {
+                "start": "14:00",
+                "end": "18:00"
+            },
+            "fri": {
+                "start": "14:00",
+                "end": "18:00"
+            },
+            "sat": {
+                "start": "14:00",
+                "end": "18:00"
+            },
+            "sun": {
+                "start": "14:00",
+                "end": "18:00"
+            }
+        }
+    },
+    {
+        "name": "台灣大咖哩(雙城)",
+        "position": {
+            "address": "台北市中山區雙城街17巷5號",
+            "latitude": 25.065,
+            "longitude": 121.525
+        },
+        "phone": "02)25976131",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "日式"
+        ],
+        "menu": [
+            {
+                "name": "日式咖哩雞飯",
+                "price": "小 60, 大 80"
+            },
+            {
+                "name": "印度咖哩雞飯",
+                "price": "小 60, 大 80"
+            },
+            {
+                "name": "控肉蓋飯",
+                "price": "小 60, 大 80"
+            },
+            {
+                "name": "紅燒牛腩飯",
+                "price": "小 60, 大 80"
+            },
+            {
+                "name": "雞肉丼飯",
+                "price": "小 60, 大 80"
+            },
+            {
+                "name": "香菇雞湯",
+                "price": "40"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "15:30",
+                "end": "20:00"
+            },
+            "tue": {
+                "start": "15:30",
+                "end": "20:00"
+            },
+            "wed": {
+                "start": "15:30",
+                "end": "20:00"
+            },
+            "thu": {
+                "start": "15:30",
+                "end": "20:00"
+            },
+            "fri": {
+                "start": "15:30",
+                "end": "20:00"
+            },
+            "sat": {
+                "start": "15:30",
+                "end": "20:00"
+            },
+            "sun": {
+                "start": "15:30",
+                "end": "20:00"
+            }
+        }
+    },
+    {
+        "name": "龍記燒臘-南港店",
+        "position": {
+            "address": "台北市南港區向陽路90號",
+            "latitude": 25.053,
+            "longitude": 121.595
+        },
+        "phone": "2651-3222",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "便當"
+        ],
+        "menu": [
+            {
+                "name": "燒鴨飯",
+                "price": "100"
+            },
+            {
+                "name": "三寶飯",
+                "price": "100"
+            },
+            {
+                "name": "黯然消魂飯",
+                "price": "100"
+            },
+            {
+                "name": "蒜香排骨飯",
+                "price": "90"
+            },
+            {
+                "name": "油雞飯",
+                "price": "90"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "16:30",
+                "end": "20:00"
+            },
+            "tue": {
+                "start": "16:30",
+                "end": "20:00"
+            },
+            "wed": {
+                "start": "16:30",
+                "end": "20:00"
+            },
+            "thu": {
+                "start": "16:30",
+                "end": "20:00"
+            },
+            "fri": {
+                "start": "16:30",
+                "end": "20:00"
+            },
+            "sat": {
+                "start": "16:30",
+                "end": "20:00"
+            },
+            "sun": {
+                "start": "16:30",
+                "end": "20:00"
+            }
+        }
+    },
+    {
+        "name": "壹森泰食堂",
+        "position": {
+            "address": "台北市大安區龍泉街31號",
+            "latitude": 25.024,
+            "longitude": 121.529
+        },
+        "phone": "02 2363 3391",
+        "store_description": "20個便當才外送",
+        "order_description": "",
+        "type": [
+            "便當"
+        ],
+        "menu": [
+            {
+                "name": "泰式雞腿便當",
+                "price": "110"
+            },
+            {
+                "name": "霜降豬肉片便當",
+                "price": "110"
+            },
+            {
+                "name": "香茅豬排便當",
+                "price": "100"
+            },
+            {
+                "name": "椰子咖哩雞便當(微辣)",
+                "price": "100"
+            },
+            {
+                "name": "泰北打拋豬便當(小辣)",
+                "price": "100"
+            },
+            {
+                "name": "泰醬烤魚",
+                "price": "120"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "22:30",
+                "end": "23:00"
+            },
+            "tue": {
+                "start": "22:30",
+                "end": "23:00"
+            },
+            "wed": {
+                "start": "22:30",
+                "end": "23:00"
+            },
+            "thu": {
+                "start": "22:30",
+                "end": "23:00"
+            },
+            "fri": {
+                "start": "22:30",
+                "end": "23:00"
+            },
+            "sat": {
+                "start": "22:30",
+                "end": "23:00"
+            },
+            "sun": {
+                "start": "22:30",
+                "end": "23:00"
+            }
+        }
+    },
+    {
+        "name": "juice-detour",
+        "position": {
+            "address": "台北市松山區民權東路三段160巷25號",
+            "latitude": 25.06,
+            "longitude": 121.547
+        },
+        "phone": "0906 511 651",
+        "store_description": "",
+        "order_description": "https://www.facebook.com/pg/juicedetourdrinkyourrainbow/shop/?rid=2030852323840428&rt=6",
+        "type": [
+            "飲料"
+        ],
+        "menu": [
+            {
+                "name": "yellow warrior",
+                "price": "95"
+            },
+            {
+                "name": "on fire活力火",
+                "price": "95"
+            },
+            {
+                "name": "hit girl超殺女",
+                "price": "95"
+            },
+            {
+                "name": "bloody hell我的老天爺",
+                "price": "95"
+            },
+            {
+                "name": "spectacular green神奇小綠人",
+                "price": "95"
+            },
+            {
+                "name": "gentle green紳士綠",
+                "price": "95"
+            },
+            {
+                "name": "absolutely green絕對綠",
+                "price": "95"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "16:30",
+                "end": "22:30"
+            },
+            "tue": {
+                "start": "16:30",
+                "end": "22:30"
+            },
+            "wed": {
+                "start": "16:30",
+                "end": "22:30"
+            },
+            "thu": {
+                "start": "16:30",
+                "end": "22:30"
+            },
+            "fri": {
+                "start": "16:30",
+                "end": "22:30"
+            },
+            "sat": {
+                "start": "16:30",
+                "end": "22:30"
+            },
+            "sun": {
+                "start": "16:30",
+                "end": "22:30"
+            }
+        }
+    },
+    {
+        "name": "邱太太",
+        "position": {
+            "address": "台北市中山區龍江路382號",
+            "latitude": 25.067,
+            "longitude": 121.541
+        },
+        "phone": "2508-0920",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "中式",
+            "甜點"
+        ],
+        "menu": [
+            {
+                "name": "紅豆湯芝麻湯圓",
+                "price": "75"
+            },
+            {
+                "name": "花生湯芝麻湯圓",
+                "price": "85"
+            },
+            {
+                "name": "紅豆花生湯芝麻湯圓",
+                "price": "85"
+            },
+            {
+                "name": "甜湯芝麻湯圓",
+                "price": "65"
+            },
+            {
+                "name": "紅豆湯小湯圓",
+                "price": "50"
+            },
+            {
+                "name": "花生湯小湯圓",
+                "price": "60"
+            },
+            {
+                "name": "紅豆花生湯小湯圓",
+                "price": "60"
+            },
+            {
+                "name": "甜湯小湯圓",
+                "price": "50"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "8:30",
+                "end": "18:00"
+            },
+            "tue": {
+                "start": "8:30",
+                "end": "18:00"
+            },
+            "wed": {
+                "start": "8:30",
+                "end": "18:00"
+            },
+            "thu": {
+                "start": "8:30",
+                "end": "18:00"
+            },
+            "fri": {
+                "start": "8:30",
+                "end": "18:00"
+            },
+            "sat": {
+                "start": "8:30",
+                "end": "18:00"
+            },
+            "sun": {
+                "start": "8:30",
+                "end": "18:00"
+            }
+        }
+    },
+    {
+        "name": "老蔡水煎包-復興店",
+        "position": {
+            "address": "10491台北市中山區復興北路82號",
+            "latitude": 25.051,
+            "longitude": 121.544
+        },
+        "phone": "02 2752 0777",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "小吃",
+            "中式"
+        ],
+        "menu": [
+            {
+                "name": "鮮肉水煎包",
+                "price": "16"
+            },
+            {
+                "name": "高麗菜水煎包",
+                "price": "16"
+            },
+            {
+                "name": "韭菜水煎包",
+                "price": "16"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "tue": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "wed": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "thu": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "fri": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "sat": {
+                "start": "21:00",
+                "end": "23:00"
+            },
+            "sun": {
+                "start": "21:00",
+                "end": "23:00"
+            }
+        }
+    },
+    {
+        "name": "廣大順",
+        "position": {
+            "address": "台北市大同區延平北路二段36巷4號",
+            "latitude": 25.055,
+            "longitude": 121.512
+        },
+        "phone": "2558 9109",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "中式",
+            "其他"
+        ],
+        "menu": [
+            {
+                "name": "原味肉乾",
+                "price": "200"
+            },
+            {
+                "name": "黑胡椒肉乾",
+                "price": "200"
+            },
+            {
+                "name": "原味肉紙",
+                "price": "270"
+            },
+            {
+                "name": "黑胡椒肉紙",
+                "price": "270"
+            },
+            {
+                "name": "肉條",
+                "price": "220"
+            },
+            {
+                "name": "牛肉乾",
+                "price": "300"
+            },
+            {
+                "name": "魷魚絲",
+                "price": "280"
+            },
+            {
+                "name": "魷魚網",
+                "price": "280"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "14:30",
+                "end": "18:00"
+            },
+            "tue": {
+                "start": "14:30",
+                "end": "18:00"
+            },
+            "wed": {
+                "start": "14:30",
+                "end": "18:00"
+            },
+            "thu": {
+                "start": "14:30",
+                "end": "18:00"
+            },
+            "fri": {
+                "start": "14:30",
+                "end": "18:00"
+            },
+            "sat": {
+                "start": "14:30",
+                "end": "18:00"
+            },
+            "sun": {
+                "start": "14:30",
+                "end": "18:00"
+            }
+        }
+    },
+    {
+        "name": "真味肉圓 (台北新明店)",
+        "position": {
+            "address": "台北市內湖區新明路467號",
+            "latitude": 25.054,
+            "longitude": 121.58
+        },
+        "phone": "02 2791 5757",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "小吃",
+            "中式"
+        ],
+        "menu": [
+            {
+                "name": "肉粽",
+                "price": "50"
+            },
+            {
+                "name": "清蒸肉圓",
+                "price": "40"
+            },
+            {
+                "name": "豬腸四神湯",
+                "price": "50"
+            },
+            {
+                "name": "豬肚四神湯",
+                "price": "60"
+            },
+            {
+                "name": "綜合四神湯",
+                "price": "60"
+            },
+            {
+                "name": "四神湯",
+                "price": "40"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "10:00",
+                "end": "15:00"
+            },
+            "tue": {
+                "start": "10:00",
+                "end": "15:00"
+            },
+            "wed": {
+                "start": "10:00",
+                "end": "15:00"
+            },
+            "thu": {
+                "start": "10:00",
+                "end": "15:00"
+            },
+            "fri": {
+                "start": "10:00",
+                "end": "15:00"
+            },
+            "sat": {
+                "start": "10:00",
+                "end": "15:00"
+            },
+            "sun": {
+                "start": "10:00",
+                "end": "15:00"
+            }
+        }
+    },
+    {
+        "name": "珍蜜便當2020更新",
+        "position": {
+            "address": "台北市八德路三段2號",
+            "latitude": 25.048,
+            "longitude": 121.549
+        },
+        "phone": "25773463",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "中式",
+            "便當"
+        ],
+        "menu": [
+            {
+                "name": "蔥油雞飯",
+                "price": "140"
+            },
+            {
+                "name": "炸雞腿飯",
+                "price": "120"
+            },
+            {
+                "name": "炸大排骨飯",
+                "price": "120"
+            },
+            {
+                "name": "小排香腸飯",
+                "price": "120"
+            },
+            {
+                "name": "扣肉香腸飯",
+                "price": "120"
+            },
+            {
+                "name": "火腿蛋炒飯",
+                "price": "110"
+            },
+            {
+                "name": "炸蝦飯",
+                "price": "120"
+            },
+            {
+                "name": "香腸飯",
+                "price": "100"
+            },
+            {
+                "name": "海鮮飯",
+                "price": "120"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "12:30",
+                "end": "13:00"
+            },
+            "tue": {
+                "start": "12:30",
+                "end": "13:00"
+            },
+            "wed": {
+                "start": "12:30",
+                "end": "13:00"
+            },
+            "thu": {
+                "start": "12:30",
+                "end": "13:00"
+            },
+            "fri": {
+                "start": "12:30",
+                "end": "13:00"
+            },
+            "sat": {
+                "start": "12:30",
+                "end": "13:00"
+            },
+            "sun": {
+                "start": "12:30",
+                "end": "13:00"
+            }
+        }
+    },
+    {
+        "name": "GABA 元気の源！嘎吧！",
+        "position": {
+            "address": "台北市中山區中原街119號",
+            "latitude": 25.062,
+            "longitude": 121.529
+        },
+        "phone": "02 2536 5055",
+        "store_description": "",
+        "order_description": "",
+        "type": [
+            "小吃"
+        ],
+        "menu": [
+            {
+                "name": "和風鮪魚",
+                "price": "50"
+            },
+            {
+                "name": "北海道鮭魚",
+                "price": "60"
+            },
+            {
+                "name": "茶香牛蒡",
+                "price": "45"
+            },
+            {
+                "name": "瀨戶內海鹽",
+                "price": "35"
+            },
+            {
+                "name": "開胃乾梅",
+                "price": "45"
+            },
+            {
+                "name": "醬汁柴魚",
+                "price": "50"
+            },
+            {
+                "name": "高纖菇菇",
+                "price": "55"
+            },
+            {
+                "name": "照燒雞",
+                "price": "60"
+            }
+        ],
+        "business_time": {
+            "mon": {
+                "start": "19:00",
+                "end": "23:30"
+            },
+            "tue": {
+                "start": "19:00",
+                "end": "23:30"
+            },
+            "wed": {
+                "start": "19:00",
+                "end": "23:30"
+            },
+            "thu": {
+                "start": "19:00",
+                "end": "23:30"
+            },
+            "fri": {
+                "start": "19:00",
+                "end": "23:30"
+            },
+            "sat": {
+                "start": "19:00",
+                "end": "23:30"
+            },
+            "sun": {
+                "start": "19:00",
+                "end": "23:30"
+            }
+        }
+    }
+]
