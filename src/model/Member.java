@@ -18,14 +18,14 @@ public class Member extends User {
 
 	}
 
-	public Member(String username, String password, String address, String email, String name) {
-		super(username, password, address, email, name);
+	public Member(String username, String password, String address, String phone, String email, String name) {
+		super(username, password, address, phone, email, name);
 		this.is_vip = false;
 		this.vip_expire_date = null;	
 	}
 	
-	public Member(String username, String password, String address, String email, String name, Date vip_expire_date) {
-		super(username, password, address, email, name);
+	public Member(String username, String password, String address, String phone,String email, String name, Date vip_expire_date) {
+		super(username, password, address, phone, email, name);
 		this.is_vip = false;
 		this.vip_expire_date = vip_expire_date;	
 	}

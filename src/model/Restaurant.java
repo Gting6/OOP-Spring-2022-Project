@@ -1,28 +1,33 @@
 package model;
 
-import java.sql.Array;
 import java.sql.SQLException;
-import java.util.Dictionary;
 import java.util.HashMap;
 
 import sql.DBService;
 
 public class Restaurant extends User{
 	
+	
+	private String latitude;
+	private String longitude;
+	private String store_description;
+	private String order_despcription;
+	private String type;
+	
 	// TODO coupon list
 	// TODO json data
 	// TODO products list
 	// TODO OrderHandler waiting doing done queue
 	
-	HashMap<String, Integer> products;
+	private HashMap<String, Integer> products;
 	DBService dbService = new DBService();
 	
 	public Restaurant() {
 		// TODO Init
 	}
 	
-	public Restaurant(String username, String password, String address, String email, String name) {
-		super(username, password, address, email, name);
+	public Restaurant(String username, String password, String address, String phone, String email, String name) {
+		super(username, password, address, phone, email, name);
 	}
 	
 	public void setToDB() {

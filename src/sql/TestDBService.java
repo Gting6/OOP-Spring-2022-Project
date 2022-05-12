@@ -19,12 +19,12 @@ public class TestDBService {
 		long m = 60*60*1000;
 		Timestamp later = new Timestamp(l+m);
 		
-		Member member = new Member("member","123","twn","123@abc","yoyo");
+		Member member = new Member("member","123","twn", "09xxxxxxxx","123@abc","yoyo");
 		member.setToDB();
 
 //		Restaurant restaurant = new Restaurant("restaurant","123","tpe","456@abc","yuyu");
 //		restaurant.setToDB();
-		DeliveryMan deliveryman = new DeliveryMan("deliveryman","123","khh","789@abc","yaya");
+		DeliveryMan deliveryman = new DeliveryMan("deliveryman","123","khh", "09xxxxxxxx","789@abc","yaya");
 		deliveryman.setToDB();
 //		Order oor = new Order(123,now,later,"member","deliveryman","restaurant");
 //		oor.setToDB();
