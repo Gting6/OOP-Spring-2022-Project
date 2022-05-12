@@ -21,6 +21,7 @@ public class TestDBService {
 		
 		Member member = new Member("member","123","twn","123@abc","yoyo");
 		member.setToDB();
+
 //		Restaurant restaurant = new Restaurant("restaurant","123","tpe","456@abc","yuyu");
 //		restaurant.setToDB();
 		DeliveryMan deliveryman = new DeliveryMan("deliveryman","123","khh","789@abc","yaya");
@@ -47,6 +48,7 @@ public class TestDBService {
 		for(String t : types) {
 			System.out.println("types are" + t);
 		}
+
 	}
 
 }

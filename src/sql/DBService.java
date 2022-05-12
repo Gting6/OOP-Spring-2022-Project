@@ -120,6 +120,7 @@ public class DBService {
 	
 	
 //	we assume to parse the products into a dictionary type
+
 	public void createProducts(HashMap<String, Integer> products, String restaurant_username) throws SQLException {
 	
 		try {
@@ -137,7 +138,9 @@ public class DBService {
 					System.out.print("Products Created");
 				}
 				else {
+          
 					System.out.print("Products Creation Failed");
+
 				}
 			}	
 		}
@@ -146,6 +149,7 @@ public class DBService {
 		}
 	}
 	
+
 
 //	public void createRestaurant(Restaurant restaurant) throws SQLException {
 //		
@@ -263,6 +267,7 @@ public class DBService {
 		return null;
 	}
 	
+
 	public String[] getRestaurant(String restaurant_username) throws SQLException {
 		
 		try {
@@ -273,6 +278,7 @@ public class DBService {
 			stmt.setString(1, restaurant_username);
 			
 			ResultSet res = stmt.executeQuery();
+
 			String[] s = new String[10];
 			
 			if(res.next()) {
@@ -290,6 +296,7 @@ public class DBService {
 				
 			}
 			return s;
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -380,6 +387,7 @@ public class DBService {
 		}
 		return null;
 	}
+
 
 	public void createRestaurant(String uuid, String password, String email, String name, String pos_addr,
 			String latitude, String longitude, String phone, String store_description, String order_description) {
@@ -515,4 +523,5 @@ public class DBService {
 		}
 		return null;
 	}
+
 }
