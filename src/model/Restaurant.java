@@ -30,6 +30,15 @@ public class Restaurant extends User{
 		super(username, password, address, phone, email, name);
 	}
 	
+	public Restaurant(String [] s) {
+		super(s[0], s[1], s[4], s[7],s[2], s[3]);
+		this.latitude = s[5];
+		this.longitude = s[6];
+		this.store_description = s[8];
+		this.order_despcription = s[9];
+		
+	}
+	
 	public void setToDB() {
 
 //		since we have add new stuff in json to fill all the blanks, the restaurant needs to be reset to fulfill the new form of input
@@ -51,14 +60,14 @@ public class Restaurant extends User{
 	}
 
 
-//	fix it after model changed
-	public Restaurant getRestaurantInfo() throws SQLException {
-		String[] s = dbService.getRestaurant(this.getUserName());
-		return null;
+////	fix it after model changed
+//	public Restaurant getRestaurantInfo() throws SQLException {
+//		String[] s = dbService.getRestaurant(this.getUserName());
+//		return new Restaurant(s);
+//
+//		// call output
+//	}
 
-		// call output
-	}
-	
 	public HashMap<String, Integer> getProducts() throws SQLException {
 		// TODO Return Products list
 		return dbService.getProducts(this.getUserName());
