@@ -12,8 +12,8 @@ public class DeliveryMan extends User {
 		
 	}
 	
-	public DeliveryMan(String username, String password, String address, String email, String name) {
-		super(username, password, address, email, name);
+	public DeliveryMan(String username, String password, String address, String phone, String email, String name) {
+		super(username, password, address, phone, email, name);
 	}
 	
 	public void setToDB() {

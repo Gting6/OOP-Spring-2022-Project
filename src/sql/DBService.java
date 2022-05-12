@@ -64,13 +64,14 @@ public class DBService {
 		
 		try {
 			Connection conn = DBConnection.getConnection();
-			PreparedStatement stmt = conn.prepareStatement("insert into deliverymen values(?,?,?,?,?)"); 
+			PreparedStatement stmt = conn.prepareStatement("insert into deliverymen values(?,?,?,?,?,?)"); 
 			
 			stmt.setString(1, deliveryman.getUserName());
 			stmt.setString(2, deliveryman.getPassword());
 			stmt.setString(3, deliveryman.getAddress());
-			stmt.setString(4, deliveryman.getEmail());
-			stmt.setString(5, deliveryman.getName());
+			stmt.setString(4, deliveryman.getPhone());
+			stmt.setString(5, deliveryman.getEmail());
+			stmt.setString(6, deliveryman.getName());
 			
 			int res = stmt.executeUpdate();
 			
@@ -95,12 +96,12 @@ public class DBService {
 			Connection conn = DBConnection.getConnection();
 			PreparedStatement stmt = conn.prepareStatement("insert into orders values(?,?,?,?,?,?)"); 
 			
-			stmt.setInt(1, order.getOrder_id_());
-			stmt.setObject(2, order.getCreate_time_());		// need to change to date time??
-			stmt.setObject(3, order.getArrival_time_());		// no need telephone change to address is better
-			stmt.setString(4, order.getRestaurant_name_());
-			stmt.setString(5, order.getConsumer_name_());
-			stmt.setString(6, order.getDeliveryman_name_());
+			stmt.setInt(1, order.getId());
+			stmt.setObject(2, order.getCreate_time());		// need to change to date time??
+			stmt.setObject(3, order.getArrival_time());		// no need telephone change to address is better
+			stmt.setString(4, order.getRestaurant_name());
+			stmt.setString(5, order.getConsumer_name());
+			stmt.setString(6, order.getDeliveryman_name());
 			
 			int res = stmt.executeUpdate();
 			
@@ -184,14 +185,15 @@ public class DBService {
 		
 		try {
 			Connection conn = DBConnection.getConnection();
-			PreparedStatement stmt = conn.prepareStatement("INSERT INTO members values(?,?,?,?,?,?)"); 
+			PreparedStatement stmt = conn.prepareStatement("INSERT INTO members values(?,?,?,?,?,?,?)"); 
 
 			stmt.setString(1, member.getUserName());
 			stmt.setString(2, member.getPassword());
 			stmt.setString(3, member.getAddress());		// no need telephone change to address is better
-			stmt.setString(4, member.getEmail());
-			stmt.setString(5, member.getName());
-			stmt.setDate(6, member.getVIP_expire_date());
+			stmt.setString(4, member.getPhone());
+			stmt.setString(5, member.getEmail());
+			stmt.setString(6, member.getName());
+			stmt.setDate(7, member.getVIP_expire_date());
 			
 			int res = stmt.executeUpdate();
 			
@@ -254,7 +256,7 @@ public class DBService {
 			
 			if(res.next()) {
 				System.out.print("Find!");
-				return new Member(res.getString("username"), res.getString("password"), res.getString("address"), res.getString("email"), res.getString("name"), res.getDate("vip_expire_date"));		// need recreate or just send these 2 as json file?
+				return new Member(res.getString("username"), res.getString("password"), res.getString("address"), res.getString("phone"), res.getString("email"), res.getString("name"), res.getDate("vip_expire_date"));		// need recreate or just send these 2 as json file?
 			}
 			else {
 				System.out.print("NotFind!");
@@ -373,7 +375,7 @@ public class DBService {
 				LocalDateTime c_bar = (LocalDateTime) res.getObject("arrival_time");
 				Timestamp d = Timestamp.valueOf(c);
 				Timestamp d_bar = Timestamp.valueOf(c_bar);
-				return new Order(res.getInt("id"), d, d_bar, res.getString("member_name"), 
+				return new Order(res.getInt("id"), res.getInt("price"),d, d_bar, res.getString("member_name"), 
 						res.getString("deliveryman_name"), res.getString("restaurant_name"));
 //				might add cookie or something else??
 			}

@@ -41,6 +41,7 @@ public class DBCreation {
 	                   "(username varchar(255) primary key, " +
 	                   " password varchar(255), " + 
 	                   " address varchar(255), " + 
+	                   " phone varchar(255), " +
 	                   " email varchar(255), " + 
 	                   " name varchar(255)," +
 	                   " vip_expire_date Date default null" +
@@ -84,6 +85,7 @@ public class DBCreation {
 	                   "(username varchar(255) primary key, " +
 	                   " password varchar(255), " + 
 	                   " address varchar(255), " + 
+	                   " phone varchar(255), " +
 	                   " email varchar(255), " + 
 	                   " name varchar(255) " +
 	                   ")";

@@ -166,11 +166,12 @@ public class LoginController extends Controller implements Initializable {
 			passwordTf.getText();
 			confirmTf.getText();
 
+			// TODO [FX] need add the Tf of address
+			String address = "abc";
+			// TODO [FX](done) need add the Tf of phoneNumber
+			String phone = phoneTf.getText();
 			// TODO [FX](done) need add the Tf of email
 			String email = emailTf.getText();
-
-			// TODO [FX](done) need add the Tf of phoneNumber
-			String address = phoneTf.getText();
 
 			// TODO [FX](done) need add the Tf of name
 			String name = nameTf.getText();
@@ -217,7 +218,7 @@ public class LoginController extends Controller implements Initializable {
 					break;
 				}
 
-				Member member = new Member(usernameTf.getText(), passwordTf.getText(), email, address, name);
+				Member member = new Member(usernameTf.getText(), passwordTf.getText(),address, phone, email, name);
 				if (!model.checkMemberInWhenRegister(member.getUserName(), member.getPassword())) {
 					model.addMember(member);
 					// TODO (done) [FX] Success, show sign-up success, and give a button to back to

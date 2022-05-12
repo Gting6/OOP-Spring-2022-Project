@@ -1,28 +1,42 @@
 package model;
 
-import java.sql.Array;
 import java.sql.SQLException;
-import java.util.Dictionary;
 import java.util.HashMap;
 
 import sql.DBService;
 
 public class Restaurant extends User{
 	
+	
+	private String latitude;
+	private String longitude;
+	private String store_description;
+	private String order_despcription;
+	private String type;
+	
 	// TODO coupon list
 	// TODO json data
 	// TODO products list
 	// TODO OrderHandler waiting doing done queue
 	
-	HashMap<String, Integer> products;
+	private HashMap<String, Integer> products;
 	DBService dbService = new DBService();
 	
 	public Restaurant() {
 		// TODO Init
 	}
 	
-	public Restaurant(String username, String password, String address, String email, String name) {
-		super(username, password, address, email, name);
+	public Restaurant(String username, String password, String address, String phone, String email, String name) {
+		super(username, password, address, phone, email, name);
+	}
+	
+	public Restaurant(String [] s) {
+		super(s[0], s[1], s[4], s[7],s[2], s[3]);
+		this.latitude = s[5];
+		this.longitude = s[6];
+		this.store_description = s[8];
+		this.order_despcription = s[9];
+		
 	}
 	
 	public void setToDB() {
@@ -46,14 +60,14 @@ public class Restaurant extends User{
 	}
 
 
-//	fix it after model changed
-	public Restaurant getRestaurantInfo() throws SQLException {
-		String[] s = dbService.getRestaurant(this.getUserName());
-		return null;
+////	fix it after model changed
+//	public Restaurant getRestaurantInfo() throws SQLException {
+//		String[] s = dbService.getRestaurant(this.getUserName());
+//		return new Restaurant(s);
+//
+//		// call output
+//	}
 
-		// call output
-	}
-	
 	public HashMap<String, Integer> getProducts() throws SQLException {
 		// TODO Return Products list
 		return dbService.getProducts(this.getUserName());
