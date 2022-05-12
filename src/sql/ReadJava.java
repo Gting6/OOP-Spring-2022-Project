@@ -24,7 +24,8 @@ public class ReadJava {
 		Gson gson = new Gson();
 
 		try {
-			Reader reader = Files.newBufferedReader(Paths.get("C:/Users/JS/Desktop/OOP/stores_detail.json"));
+//			Reader reader = Files.newBufferedReader(Paths.get("C:/Users/JS/Desktop/OOP/stores_detail.json"));
+			Reader reader = Files.newBufferedReader(Paths.get("../../stores_detail.json"));
 		    // convert JSON file to map
 		    JsonArray jo = gson.fromJson(reader, JsonArray.class);
 
