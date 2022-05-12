@@ -120,17 +120,17 @@ public class DBService {
 	
 	
 //	we assume to parse the products into a dictionary type
-	public void createProducts(Dictionary<String, Integer> products, String restaurant_username) throws SQLException {
+
+	public void createProducts(HashMap<String, Integer> products, String restaurant_username) throws SQLException {
 	
 		try {
 			Connection conn = DBConnection.getConnection();
-			PreparedStatement stmt = conn.prepareStatement("insert into orders values(?,?,?)"); 
+			PreparedStatement stmt = conn.prepareStatement("insert into products values(?,?,?)"); 
 			
-			Enumeration<String> enu = products.keys();
-			while(enu.hasMoreElements()) {
+			for(String product_name : products.keySet()) {
 				stmt.setString(1, restaurant_username);
-				stmt.setString(2, (String) enu.nextElement());		
-				stmt.setString(3, products.get(enu).toString());
+				stmt.setString(2, product_name);		
+				stmt.setInt(3, products.get(product_name));
 				
 				int res = stmt.executeUpdate();
 				
@@ -138,7 +138,9 @@ public class DBService {
 					System.out.print("Products Created");
 				}
 				else {
-					System.out.print("User Creation Failed");
+          
+					System.out.print("Products Creation Failed");
+
 				}
 			}	
 		}
@@ -148,33 +150,34 @@ public class DBService {
 	}
 	
 
-	public void createRestaurant(Restaurant restaurant) throws SQLException {
-		
-		try {
-			Connection conn = DBConnection.getConnection();
-			PreparedStatement stmt = conn.prepareStatement("insert into restaurants values(?,?,?,?,?)"); 
-			
-			stmt.setString(1, restaurant.getUserName());
-			stmt.setString(2, restaurant.getPassword());
-			stmt.setString(3, restaurant.getAddress());		// no need telephone change to address is better
-			stmt.setString(4, restaurant.getEmail());
-			stmt.setString(5, restaurant.getName());
-			
-			int res = stmt.executeUpdate();
-			
-			if(res == 1) {
-			
-				System.out.print("Restaurant Created");
-//				might add cookie or something else??
-			}
-			else {
-				System.out.print("Restaurant Creation Failed");
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
+//	public void createRestaurant(Restaurant restaurant) throws SQLException {
+//		
+//		try {
+//			Connection conn = DBConnection.getConnection();
+//			PreparedStatement stmt = conn.prepareStatement("insert into restaurants values(?,?,?,?,?)"); 
+//			
+//			stmt.setString(1, restaurant.getUserName());
+//			stmt.setString(2, restaurant.getPassword());
+//			stmt.setString(3, restaurant.getAddress());		// no need telephone change to address is better
+//			stmt.setString(4, restaurant.getEmail());
+//			stmt.setString(5, restaurant.getName());
+//			
+//			int res = stmt.executeUpdate();
+//			
+//			if(res == 1) {
+//			
+//				System.out.print("Restaurant Created");
+////				might add cookie or something else??
+//			}
+//			else {
+//				System.out.print("Restaurant Creation Failed");
+//			}
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	
 	public void createMember(Member member) throws SQLException {
@@ -264,7 +267,8 @@ public class DBService {
 		return null;
 	}
 	
-	public Restaurant getRestaurant(String restaurant_username) throws SQLException {
+
+	public String[] getRestaurant(String restaurant_username) throws SQLException {
 		
 		try {
 			Connection conn = DBConnection.getConnection();
@@ -274,17 +278,25 @@ public class DBService {
 			stmt.setString(1, restaurant_username);
 			
 			ResultSet res = stmt.executeQuery();
+
+			String[] s = new String[10];
 			
 			if(res.next()) {
-			
-				System.out.print("Restaurant Found");
-				return new Restaurant(res.getString("username"), res.getString("password"),res.getString("address"),res.getString("email"), res.getString("name"));		// need recreate or just send these 2 as json file?
-//				might add cookie or something else??
+				
+				s[0] = res.getString("username");
+				s[1] = res.getString("password");
+				s[2] = res.getString("email");
+				s[3] = res.getString("name");
+				s[4] = res.getString("pos_addr");
+				s[5] = res.getString("latitude");
+				s[6] = res.getString("longitude");
+				s[7] = res.getString("phone");
+				s[8] = res.getString("store_description");
+				s[9] = res.getString("order_description");
+				
 			}
-			else {
-				System.out.print("Login Failed, Cannot find Account");
-				return null;
-			}
+			return s;
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -375,4 +387,141 @@ public class DBService {
 		}
 		return null;
 	}
+
+
+	public void createRestaurant(String uuid, String password, String email, String name, String pos_addr,
+			String latitude, String longitude, String phone, String store_description, String order_description) {
+		// TODO Auto-generated method stub
+		try {
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("insert into restaurants values(?,?,?,?,?,?,?,?,?,?)"); 
+			
+			stmt.setString(1, uuid);
+			stmt.setString(2, password);
+			stmt.setString(3, email);
+			stmt.setString(4, name);
+			stmt.setString(5, pos_addr);
+			stmt.setString(6, latitude);
+			stmt.setString(7, longitude);
+			stmt.setString(8, phone);
+			stmt.setString(9, store_description);
+			stmt.setString(10, order_description);			
+			int res = stmt.executeUpdate();
+			
+			if(res == 1) {
+			
+				System.out.print("Restaurant From Json Created");
+//				might add cookie or something else??
+			}
+			else {
+				System.out.print("Restaurant Creation From Json Failed");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void createTypeRestaurants(String[] type, String uuid) {
+		// TODO Auto-generated method stub
+		try{
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("insert into type_restaurants values(?,?)"); 
+			
+			for(String t : type) {
+				stmt.setString(1, uuid);
+				stmt.setString(2, t);
+				stmt.executeUpdate();
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public String[] getTypeRestaurant(String id) throws SQLException {
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+//			role stands for his identity
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM type_restaurants WHERE restaurant_name=?"); 
+			
+			stmt.setString(1, id);
+			
+			ResultSet res = stmt.executeQuery();
+			
+			int index = 0;
+			while(res.next()) {
+				index ++;
+			}
+			String[] s = new String[index];
+			System.out.println(index);
+			index = 0;
+			res = stmt.executeQuery();
+			while(res.next()) {
+				s[index] = res.getString("type");
+				index ++;
+			}
+			
+			return s;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void createBusinessTime(String[] business_time, String uuid) {
+		// TODO Auto-generated method stub
+		try{
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("insert into business_times values(?,?,?,?)"); 
+			
+			int date = 2;
+			for(String bt : business_time) {
+				stmt.setString(1, uuid);
+				stmt.setInt(2, date/2);
+				if(date % 2 == 0)
+					stmt.setString(3, "start_time");
+				else
+					stmt.setString(3, "end_time");
+				stmt.setString(4, bt);
+				stmt.executeUpdate();
+				date ++;
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	public String[] getBusinessTime(String id) throws SQLException {
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+//			role stands for his identity
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM business_times WHERE restaurant_name=?"); 
+			stmt.setString(1, id);
+			
+			ResultSet res = stmt.executeQuery();
+		
+			String[] s = new String[14];
+			
+			int index = 0;
+			while(res.next()) {
+				
+				s[index] = res.getString("time");
+				index ++;
+
+			}
+			
+			return s;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

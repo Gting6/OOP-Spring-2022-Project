@@ -26,12 +26,18 @@ public class Restaurant extends User{
 	}
 	
 	public void setToDB() {
-		try {
-			dbService.createRestaurant(this);
-		} catch (SQLException e) {
+
+//		since we have add new stuff in json to fill all the blanks, the restaurant needs to be reset to fulfill the new form of input
+//		
+//		try {
+//			
+//		dbService.createRestaurant(this);
+//			
+		//		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//			e.printStackTrace();
+//		}
+
 	}
 	
 	public Restaurant(String Json) {
@@ -39,8 +45,12 @@ public class Restaurant extends User{
 //		do create restaurant and create products
 	}
 
+
+//	fix it after model changed
 	public Restaurant getRestaurantInfo() throws SQLException {
-		return dbService.getRestaurant(this.getUserName());
+		String[] s = dbService.getRestaurant(this.getUserName());
+		return null;
+
 		// call output
 	}
 	
