@@ -20,7 +20,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Member;
+import model.DeliveryMan;
 import model.Model;
+import model.Restaurant;
 import model.UserType;
 import view.LoginView;
 
@@ -118,8 +120,7 @@ public class LoginController extends Controller implements Initializable {
 			String pattern = "[0-9a-zA-Z]+";
 
 			while (true) {
-				if (!Pattern.matches(pattern, usernameTf.getText())
-						|| !Pattern.matches(pattern, passwordTf.getText())) {
+				if (!Pattern.matches(pattern, passwordTf.getText())) {
 					// TODO (done) change the errormsg
 					setWrongLb("Error pattern in username or password");
 					wrongLb.setVisible(true);
@@ -129,12 +130,22 @@ public class LoginController extends Controller implements Initializable {
 
 				if (model.checkMemberLoginIn(usernameTf.getText(), passwordTf.getText())) {
 					switchScene(ViewEnum.MEMBER, event, usernameTf.getText());
-					System.out.println("Login success");
-				} else {
+					System.out.println("Login success as member");
+				} 
+				else if (model.checkDeliverManrLoginIn(usernameTf.getText(), passwordTf.getText())) {
+					switchScene(ViewEnum.DELIVER, event, usernameTf.getText());
+					System.out.println("Login success as Deliver");
+				}
+				else if (model.checkRestaurantLoginIn(usernameTf.getText(), passwordTf.getText())) {
+					switchScene(ViewEnum.RESTAURANT, event, model.getRestaurant(usernameTf.getText()).getName());
+					System.out.println("Login success as Restaurant");
+				}
+				else {
 					setWrongLb("Login Fail");
 					wrongLb.setVisible(true);
 				}
-
+				
+				
 				break;
 
 				// TODO [BackEnd] check restaurant and deliver
@@ -177,6 +188,9 @@ public class LoginController extends Controller implements Initializable {
 			String name = nameTf.getText();
 
 			String pattern = "[0-9a-zA-Z]+";
+			
+			String phonePattern = "09[0-9]{8}";
+			String emailPattern = "^\\w{1,63}@[a-zA-Z0-9]{2,63}\\.[a-zA-Z]{2,63}(\\.[a-zA-Z]{2,63})?$";
 
 			System.out.println(passwordTf.getText());
 			System.out.println(confirmTf.getText());
@@ -209,6 +223,18 @@ public class LoginController extends Controller implements Initializable {
 					wrongLb.setVisible(true);
 					break;
 				}
+				
+				if (!Pattern.matches(phonePattern, phone)) {
+					setWrongLb("Error pattern in phone");
+					wrongLb.setVisible(true);
+					break;
+				}
+				
+				if (!Pattern.matches(emailPattern, email)) {
+					setWrongLb("Error pattern in email");
+					wrongLb.setVisible(true);
+					break;
+				}
 
 				if (!passwordTf.getText().equals(confirmTf.getText())) {
 					// TODO [Fx](done) The string in wrongLb can be change to the string mentioned
@@ -217,20 +243,41 @@ public class LoginController extends Controller implements Initializable {
 					wrongLb.setVisible(true);
 					break;
 				}
-
-				Member member = new Member(usernameTf.getText(), passwordTf.getText(),address, phone, email, name);
-				if (!model.checkMemberInWhenRegister(member.getUserName(), member.getPassword())) {
-					model.addMember(member);
-					// TODO (done) [FX] Success, show sign-up success, and give a button to back to
-					// login
-					// page.
-					switchScene(ViewEnum.SIGNUPSUCCESS, event, member.getUserName());
-					System.out.println(model.checkMemberInWhenRegister(member.getUserName(), member.getPassword()));
-					// switchScene(ViewEnum.MEMBER, event, member.getUserName());
-				} else {
-					// TODO (done) [Fx] The string in wrongLb can be change to the string mentioned
-					// below.
-					setWrongLb("Fail to register");
+				if (usertype == UserType.Member) {
+					Member member = new Member(usernameTf.getText(), passwordTf.getText(),address, phone, email, name);
+					if (!model.checkMemberInWhenRegister(member.getUserName(), member.getPassword()) && !model.checkDeliverManWhenRegister(member.getUserName())) {
+						model.addMember(member);
+						// TODO (done) [FX] Success, show sign-up success, and give a button to back to
+						// login
+						// page.
+						switchScene(ViewEnum.SIGNUPSUCCESS, event, member.getUserName());
+						System.out.println(model.checkMemberInWhenRegister(member.getUserName(), member.getPassword()));
+						// switchScene(ViewEnum.MEMBER, event, member.getUserName());
+					} else {
+						// TODO (done) [Fx] The string in wrongLb can be change to the string mentioned
+						// below.
+						setWrongLb("Fail to register member");
+						wrongLb.setVisible(true);
+					}
+					break;
+				}
+				
+				if (usertype == UserType.Deliver) {
+					DeliveryMan deliveryman= new DeliveryMan(usernameTf.getText(), passwordTf.getText(),address, phone, email, name);
+					if (!model.checkDeliverManWhenRegister(deliveryman.getUserName()) && !model.checkMemberInWhenRegister(deliveryman.getUserName(), deliveryman.getPassword())) {
+						model.addDeliverMan(deliveryman);
+						switchScene(ViewEnum.SIGNUPSUCCESS, event, deliveryman.getUserName());
+						System.out.println(model.checkDeliverManWhenRegister(deliveryman.getUserName()));
+					}
+					else {
+						setWrongLb("Fail to register deliveryman");
+						wrongLb.setVisible(true);
+					}
+					break;
+				}
+				
+				if (usertype == UserType.Restaurant) {
+					setWrongLb("Not allow Restaurant to register now");
 					wrongLb.setVisible(true);
 				}
 				break;

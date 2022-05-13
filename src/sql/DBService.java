@@ -77,7 +77,7 @@ public class DBService {
 			
 			if(res == 1) {
 			
-				System.out.print("Member Created");
+				System.out.print("DeliveryMan Created");
 //				might add cookie or something else??
 			}
 			else {
@@ -306,31 +306,41 @@ public class DBService {
 		return null;
 	}
 	
-//	public DeliveryMan getDeliveryMan(String DM_name) throws SQLException {
-//		
-//		try {
-//			Connection conn = DBConnection.getConnection();
-////			role stands for his identity
-//			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM deliverymans WHERE name=?"); 
-//			
-//			stmt.setString(1, DM_name);
-//			
-//			ResultSet res = stmt.executeQuery();
-//			
-//			if(res) {
-//			
-//				System.out.print("Login Success");
+	public String[] getDeliveryMan(String DM_name) throws SQLException {
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+//			role stands for his identity
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM deliverymen WHERE username=?"); 
+			
+			stmt.setString(1, DM_name);
+			
+			ResultSet res = stmt.executeQuery();
+			String[] s = new String[6];
+			if(res.next()) {
+			
+				System.out.print("DeliveryMan Find!");
+				System.out.println(res.getString("username"));
+				s[0] = res.getString("username");
+				s[1] = res.getString("password");
+				s[2] = res.getString("address");
+				s[3] = res.getString("phone");
+				s[4] = res.getString("email");
+				s[5] = res.getString("name");
+				return s;
 //				return DeliveryMan(res.getString("name"));		// need recreate or just send sth as json file?
-////				might add cookie or something else??
-//			}
-//			else {
-//				System.out.print("Cannot find DeliveryMan");
-//			}
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+//				might add cookie or something else??
+			}
+			else {
+				System.out.print("Cannot find DeliveryMan");
+				return null;
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	
 	public HashMap<String, Integer> getProducts(String restaurant_username) throws SQLException {

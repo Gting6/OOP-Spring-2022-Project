@@ -31,20 +31,24 @@ public class Model {
 			e.printStackTrace();
 		}
 	}
+	
+	public void addDeliverMan(DeliveryMan deliveryman) {
+		try {
+			this.DBService.createDeliveryMan(deliveryman);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
 
 	public void addRestaurant() {
 
 	}
-
-	public void addDeliveryMen() {
-
-	}
-
+	
+	// TODO Don't need to pass the password?
 	public boolean checkMemberInWhenRegister(String username, String password) {
 		try {
-			if (this.DBService.getMember(username, password) != null) {
-				return true;
-			}
+			return this.DBService.getMember(username, password) != null;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,9 +65,49 @@ public class Model {
 			e.printStackTrace();
 		}
 		return false;
-
+	}
+	
+	public boolean checkDeliverManWhenRegister(String username) {
+		try {
+			return this.DBService.getDeliveryMan(username) != null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;		
 	}
 
+	public boolean checkDeliverManrLoginIn(String username, String password) {
+
+		try {
+			return this.DBService.loginDB("deliverymen", username, password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean checkRestaurantLoginIn(String username, String password) {
+
+		try {
+			return this.DBService.loginDB("restaurants", username, password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public Restaurant getRestaurant(String username) {
+		try {
+			return new Restaurant(this.DBService.getRestaurant(username));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 //	public void addUser(User usr) {
 //		// 可能可以寫個status enum判斷
 //		// 偷懶用output

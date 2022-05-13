@@ -26,6 +26,11 @@ public class Restaurant extends User{
 		// TODO Init
 	}
 	
+	public Restaurant(String username) {
+		super(username);
+		// TODO Init
+	}
+	
 	public Restaurant(String username, String password, String address, String phone, String email, String name) {
 		super(username, password, address, phone, email, name);
 	}
@@ -36,7 +41,6 @@ public class Restaurant extends User{
 		this.longitude = s[6];
 		this.store_description = s[8];
 		this.order_despcription = s[9];
-		
 	}
 	
 	public void setToDB() {
@@ -54,10 +58,10 @@ public class Restaurant extends User{
 
 	}
 	
-	public Restaurant(String Json) {
-		// TODO Read the json init
-//		do create restaurant and create products
-	}
+//	public Restaurant(String Json) {
+//		// TODO Read the json init
+////		do create restaurant and create products
+//	}
 
 
 ////	fix it after model changed
