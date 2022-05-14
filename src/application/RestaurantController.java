@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -108,9 +109,26 @@ public class RestaurantController extends Controller implements Initializable{
 		System.out.println();
 	}
 
-	public void pressOrderBtn() {
+	public void pressOrderBtn() throws SQLException {
 		status = RestaurantView.Order;
 		render();
+		System.out.println(this.username);
+		Restaurant restaurant = new Restaurant(this.username);
+		// Maybe Store Description and order Description can be handle in this?
+		HashMap<String, Integer> restaurantProduct = restaurant.getProducts();
+		
+		if (restaurantProduct != null) {
+			// TODO [FX] handle the info fx.
+			System.out.println("Products List: ");
+
+			for (String key : restaurantProduct.keySet()) 
+				System.out.println(key + ": $" + restaurantProduct.get(key));
+
+		}else {
+			System.out.println("some error occur, getting null");
+		}
+		System.out.println();
+		
 	}
 	
 	public void pressDiscountBtn() {

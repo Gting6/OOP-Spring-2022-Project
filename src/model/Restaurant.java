@@ -15,8 +15,8 @@ public class Restaurant extends User{
 	private String[] types;
 	
 	// TODO coupon list
+	// TODO Business time
 	// TODO json data
-	// TODO products list
 	// TODO OrderHandler waiting doing done queue
 	
 	private HashMap<String, Integer> products;
