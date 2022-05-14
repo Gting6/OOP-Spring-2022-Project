@@ -12,6 +12,10 @@ public class DeliveryMan extends User {
 		
 	}
 	
+	public DeliveryMan(String username) {
+		super(username);
+	}
+	
 	public DeliveryMan(String username, String password, String address, String phone, String email, String name) {
 		super(username, password, address, phone, email, name);
 	}
@@ -27,6 +31,17 @@ public class DeliveryMan extends User {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public DeliveryMan getDeliveryManInfo() throws SQLException {
+		// TODO view page
+		try {
+			return new DeliveryMan(dbService.getDeliveryMan(this.getUserName()));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }
