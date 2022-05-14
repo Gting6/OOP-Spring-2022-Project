@@ -137,7 +137,7 @@ public class LoginController extends Controller implements Initializable {
 					System.out.println("Login success as Deliver");
 				}
 				else if (model.checkRestaurantLoginIn(usernameTf.getText(), passwordTf.getText())) {
-					switchScene(ViewEnum.RESTAURANT, event, model.getRestaurant(usernameTf.getText()).getName());
+					switchScene(ViewEnum.RESTAURANT, event, usernameTf.getText());
 					System.out.println("Login success as Restaurant");
 				}
 				else {

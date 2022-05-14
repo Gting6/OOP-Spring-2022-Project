@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import model.Restaurant;
 import view.MemberView;
 import view.RestaurantView;
 
@@ -72,9 +74,38 @@ public class RestaurantController extends Controller implements Initializable{
 		}
 	}
 		
-	public void pressInfoBtn() {
+	public void pressInfoBtn() throws SQLException {
 		status = RestaurantView.Info;
 		render();
+		
+		System.out.println(this.username);
+		Restaurant restaurant = new Restaurant(this.username);
+		// Maybe can be refactor
+		Restaurant restaurantInfo = restaurant.getRestaurantInfo();
+		if (restaurantInfo != null) {
+			// TODO [FX] handle the info fx.
+			System.out.println();
+			System.out.println("Username: " + restaurantInfo.getUserName());
+			System.out.println("Address: " + restaurantInfo.getAddress());
+			System.out.println("Phone: " + restaurantInfo.getPhone());
+			System.out.println("Email: " + restaurantInfo.getEmail());
+			System.out.println("Name: " + restaurantInfo.getName());
+			System.out.println("Latitude: " + restaurantInfo.getLatitude());
+			System.out.println("Longitude: " + restaurantInfo.getLongitude());
+			System.out.println("Store Description: " + restaurantInfo.getStore_description());
+			System.out.println("Order Description: " + restaurantInfo.getOrder_despcription());
+
+			String [] types = restaurantInfo.getTypes();
+			System.out.println("Type: ");
+
+			for (String type : types) {
+				System.out.println(type);
+			}
+
+		}else {
+			System.out.println("some error occur, getting null");
+		}
+		System.out.println();
 	}
 
 	public void pressOrderBtn() {
