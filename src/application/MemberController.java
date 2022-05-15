@@ -1,7 +1,9 @@
 package application;
 
 import java.io.IOException;
+
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -9,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import model.Member;
 import view.MemberView;
 
 public class MemberController extends Controller implements Initializable{
@@ -84,9 +87,31 @@ public class MemberController extends Controller implements Initializable{
 		render();
 	}
 	
-	public void pressInfoBtn() {
+	public void pressInfoBtn() throws SQLException {
 		status = MemberView.Info;
 		render();
+		Member member = new Member(this.username);
+		// Maybe can be refactor
+		Member memberInfo = member.getMemberInfo();
+		if (memberInfo != null) {
+			// TODO [FX] handle the info fx.
+			System.out.println();
+			System.out.println("Username: " + memberInfo.getUserName());
+			System.out.println("Address: " + memberInfo.getAddress());
+			System.out.println("Phone: " + memberInfo.getPhone());
+			System.out.println("Email: " + memberInfo.getEmail());
+			System.out.println("Name: " + memberInfo.getName());
+			if (memberInfo.getVIP_expire_date() == null) {
+				// Maybe think a good expression for vip date.
+				System.out.println("Vip Expired date: ----");
+			}
+			else {
+				System.out.println("Vip Expired date: " + memberInfo.getVIP_expire_date());
+			}
+		}else {
+			System.out.println("some error occur, getting null");
+		}
+		System.out.println();
 	}
 
 	public void pressOrderBtn() {

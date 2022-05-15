@@ -269,6 +269,32 @@ public class DBService {
 		return null;
 	}
 	
+	public Member getMember(String username) throws SQLException {
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+//			role stands for his identity
+//			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username=? AND userpassword=?"); 
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM members WHERE username=?"); 
+			
+			stmt.setString(1, username);
+			
+			ResultSet res = stmt.executeQuery();
+			
+			if(res.next()) {
+				System.out.print("Find!");
+				return new Member(res.getString("username"), res.getString("password"), res.getString("address"), res.getString("phone"), res.getString("email"), res.getString("name"), res.getDate("vip_expire_date"));		// need recreate or just send these 2 as json file?
+			}
+			else {
+				System.out.print("NotFind!");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 	public String[] getRestaurant(String restaurant_username) throws SQLException {
 		
