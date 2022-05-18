@@ -12,11 +12,11 @@ public class Restaurant extends User{
 	private String longitude;
 	private String store_description;
 	private String order_despcription;
-	private String type;
+	private String[] types;
 	
 	// TODO coupon list
+	// TODO Business time
 	// TODO json data
-	// TODO products list
 	// TODO OrderHandler waiting doing done queue
 	
 	private HashMap<String, Integer> products;
@@ -37,10 +37,10 @@ public class Restaurant extends User{
 	
 	public Restaurant(String [] s) {
 		super(s[0], s[1], s[4], s[7],s[2], s[3]);
-		this.latitude = s[5];
-		this.longitude = s[6];
-		this.store_description = s[8];
-		this.order_despcription = s[9];
+		this.setLatitude(s[5]);
+		this.setLongitude(s[6]);
+		this.setStore_description(s[8]);
+		this.setOrder_despcription(s[9]);
 	}
 	
 	public void setToDB() {
@@ -56,6 +56,19 @@ public class Restaurant extends User{
 //			e.printStackTrace();
 //		}
 
+	}
+
+	public Restaurant getRestaurantInfo() throws SQLException {
+		// TODO view page
+		try {
+			Restaurant tmp = new Restaurant(dbService.getRestaurant(this.getUserName()));
+			tmp.setTypes(dbService.getTypeRestaurant(this.getUserName()));
+			return tmp;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 //	public Restaurant(String Json) {
@@ -79,6 +92,46 @@ public class Restaurant extends User{
 	
 	public void checkOrders(){
 		// TODO Return Order status
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getStore_description() {
+		return store_description;
+	}
+
+	public void setStore_description(String store_description) {
+		this.store_description = store_description;
+	}
+	
+	public String getOrder_despcription() {
+		return order_despcription;
+	}
+
+	public void setOrder_despcription(String order_despcription) {
+		this.order_despcription = order_despcription;
+	}
+
+	public String[] getTypes() {
+		return types;
+	}
+
+	public void setTypes(String[] types) {
+		this.types = types;
 	}
 
 }
