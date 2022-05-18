@@ -1,27 +1,252 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-	prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.SignupSuccessController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SignupSuccessController">
 	<children>
-		<Label layoutX="35.0" layoutY="51.0" text="Sign Up Success"
-			textFill="#116cf5">
-			<font>
-				<Font size="37.0" />
-			</font>
-		</Label>
-		<Button fx:id="backBtn" layoutX="69.0" layoutY="249.0"
-			mnemonicParsing="false" text="Back to login" onAction="#pressBtn" />
-		<Label fx:id="welcomeLb" layoutX="69.0" layoutY="148.0"
-			prefHeight="39.0" prefWidth="461.0" text="Welcome, " />
-	</children>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="880.0">
+         <children>
+            <VBox prefHeight="600.0" prefWidth="432.0" styleClass="left-side-background" stylesheets="@style.css">
+               <children>
+                  <ImageView fitHeight="279.0" fitWidth="239.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imgs/icon.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="90.0" top="100.0" />
+                     </VBox.margin>
+                  </ImageView>
+            		<Label prefHeight="69.0" prefWidth="274.0" text="FOOTOPIA" textAlignment="CENTER">
+            			<font>
+            				<Font name="Candara Bold" size="58.0" />
+            			</font>
+                     <VBox.margin>
+                        <Insets left="70.0" right="20.0" top="60.0" />
+                     </VBox.margin>
+            		</Label>
+                  <Label alignment="CENTER" prefHeight="69.0" prefWidth="403.0" text="All you can eat!" textFill="#9a6060">
+                     <font>
+                        <Font name="Calibri Bold" size="31.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="600.0" prefWidth="491.0">
+               <children>
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css" VBox.vgrow="NEVER">
+                     <children>
+                        <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="8.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgs/user.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Pane>
+                        <TextField fx:id="usernameTf" prefHeight="51.0" prefWidth="320.0" promptText="Username" styleClass="transparent">
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="60.0" top="30.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                     <children>
+                        <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="9.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgs/padlock.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Pane>
+                        <TextField fx:id="passwordTf" prefHeight="51.0" prefWidth="320.0" promptText="Password" styleClass="transparent">
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="60.0" top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                     <children>
+                        <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="37.0" fitWidth="43.0" layoutX="10.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgs/check-mark.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Pane>
+                        <TextField fx:id="confirmTf" prefHeight="51.0" prefWidth="320.0" promptText="Confirm Passord" styleClass="transparent">
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="60.0" top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                     <children>
+                        <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="45.0" fitWidth="43.0" layoutX="6.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgs/id-card.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Pane>
+                        <TextField fx:id="nameTf" prefHeight="51.0" prefWidth="320.0" promptText="Your Name" styleClass="transparent">
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="60.0" top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                     <children>
+                        <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="8.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgs/smartphone.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Pane>
+                        <TextField fx:id="phoneTf" prefHeight="51.0" prefWidth="320.0" promptText="Phone Number" styleClass="transparent">
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="60.0" top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                     <children>
+                        <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="39.0" fitWidth="43.0" layoutX="7.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgs/mail.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Pane>
+                        <TextField fx:id="emailTf" prefHeight="51.0" prefWidth="320.0" promptText="Email" styleClass="transparent">
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="60.0" top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                     <children>
+                        <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="39.0" fitWidth="43.0" layoutX="9.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgs/home-address.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Pane>
+                        <TextField fx:id="addressTf" prefHeight="51.0" prefWidth="320.0" promptText="Address" styleClass="transparent">
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="60.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="390.0" styleClass="border" stylesheets="@style.css">
+                     <children>
+                        <ComboBox fx:id="typeCombo" prefHeight="39.0" prefWidth="390.0" styleClass="transparent" stylesheets="@style.css">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="60.0" top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Label fx:id="wrongLb" alignment="CENTER" prefHeight="27.0" prefWidth="390.0" text="Error Message" textFill="#e80f0f">
+                     <VBox.margin>
+                        <Insets left="60.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="backBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBackBtn" prefHeight="50.0" prefWidth="190.0" styleClass="left-side-background" stylesheets="@style.css" text="Go Back" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="60.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="confirmBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressConfirmBtn" prefHeight="50.0" prefWidth="190.0" styleClass="left-side-background" stylesheets="@style.css" text="Confirm" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="9.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+</children>
 </AnchorPane>

@@ -1,5 +1,5 @@
 package view;
 
 public enum LoginView {
-	Login, SignUp
+	SignUp, Success
 }
