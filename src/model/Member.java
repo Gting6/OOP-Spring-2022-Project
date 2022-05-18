@@ -17,6 +17,10 @@ public class Member extends User {
 	public Member() {
 
 	}
+	
+	public Member(String username) {
+		super(username);
+	}
 
 	public Member(String username, String password, String address, String phone, String email, String name) {
 		super(username, password, address, phone, email, name);
@@ -47,7 +51,13 @@ public class Member extends User {
 
 	public Member getMemberInfo() throws SQLException {
 		// TODO view page
-		return dbService.getMember(this.getUserName(), this.getPassword());
+		try {
+			return dbService.getMember(this.getUserName());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void searchMemberDetail() {

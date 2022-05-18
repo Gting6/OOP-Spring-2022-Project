@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import model.DeliveryMan;
 import view.DeliverView;
 import view.MemberView;
 
@@ -64,9 +66,24 @@ public class DeliverController extends Controller implements Initializable{
 		}
 	}
 		
-	public void pressInfoBtn() {
+	public void pressInfoBtn() throws SQLException {
 		status = DeliverView.Info;
 		render();
+		DeliveryMan deliveryman = new DeliveryMan(this.username);
+		// Maybe can be refactor
+		DeliveryMan deliverymanInfo = deliveryman.getDeliveryManInfo();
+		if (deliverymanInfo != null) {
+			// TODO [FX] handle the info fx.
+			System.out.println();
+			System.out.println("Username: " + deliverymanInfo.getUserName());
+			System.out.println("Address: " + deliverymanInfo.getAddress());
+			System.out.println("Phone: " + deliverymanInfo.getPhone());
+			System.out.println("Email: " + deliverymanInfo.getEmail());
+			System.out.println("Name: " + deliverymanInfo.getName());
+		}else {
+			System.out.println("some error occur, getting null");
+		}
+		System.out.println();
 	}
 
 	public void pressOrderBtn() {
