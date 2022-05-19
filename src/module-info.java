@@ -5,6 +5,7 @@ module OOP {
 	requires java.sql;
 	requires com.google.gson;
 	requires javafx.base;
-	
+	requires okhttp3;
+	requires java.net.http;
 	opens application to javafx.graphics, javafx.fxml;
 }

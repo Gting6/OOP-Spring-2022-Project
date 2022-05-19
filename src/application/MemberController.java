@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -12,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import model.Member;
+import model.Model;
+import model.Restaurant;
 import view.MemberView;
 
 public class MemberController extends Controller implements Initializable{
@@ -85,6 +88,14 @@ public class MemberController extends Controller implements Initializable{
 	public void pressSearchBtn() {
 		status = MemberView.Search;
 		render();
+		Model model = new Model();
+		
+		// Search By Distance given location in Eng, maybe test chinese
+		Map <Restaurant, Integer> result = model.SearchRestaurantByDistance(username);
+		// min second or Hr
+		result.forEach((key, value)->{System.out.println(key.getName() + "time: " + value/60 +" (min)");});
+		
+		
 	}
 	
 	public void pressInfoBtn() throws SQLException {

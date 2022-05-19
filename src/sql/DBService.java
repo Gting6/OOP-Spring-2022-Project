@@ -331,6 +331,41 @@ public class DBService {
 		}
 		return null;
 	}
+
+	public String[][] getAllRestaurant() throws SQLException {
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+//			role stands for his identity
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM restaurants"); 
+						
+			ResultSet res = stmt.executeQuery();
+			
+			// Maybe can be more space
+			String[][] s = new String[29][10];
+			int count = 0;
+			while(res.next()) {
+//				System.out.println(res.getString("name"));
+				s[count][0] = res.getString("username");
+				s[count][1] = res.getString("password");
+				s[count][2] = res.getString("email");
+				s[count][3] = res.getString("name");
+				s[count][4] = res.getString("pos_addr");
+				s[count][5] = res.getString("latitude");
+				s[count][6] = res.getString("longitude");
+				s[count][7] = res.getString("phone");
+				s[count][8] = res.getString("store_description");
+				s[count][9] = res.getString("order_description");
+				count++;
+			}
+			return s;
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	public String[] getDeliveryMan(String DM_name) throws SQLException {
 		
