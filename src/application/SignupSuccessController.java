@@ -101,7 +101,7 @@ public class SignupSuccessController extends Controller implements Initializable
 		confirmTf.getText();
 
 		// TODO [FX] need add the Tf of address
-		String address = "abc";
+		String address = addressTf.getText();
 		// TODO [FX](done) need add the Tf of phoneNumber
 		String phone = phoneTf.getText();
 		// TODO [FX](done) need add the Tf of email

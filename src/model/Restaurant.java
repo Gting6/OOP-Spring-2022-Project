@@ -42,7 +42,7 @@ public class Restaurant extends User{
 		this.setStore_description(s[8]);
 		this.setOrder_despcription(s[9]);
 	}
-	
+		
 	public void setToDB() {
 
 //		since we have add new stuff in json to fill all the blanks, the restaurant needs to be reset to fulfill the new form of input
