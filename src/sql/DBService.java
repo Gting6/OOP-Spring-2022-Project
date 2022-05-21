@@ -2,6 +2,7 @@ package sql;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -365,6 +366,76 @@ public class DBService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public ArrayList<String[]> searchRestaurantByName(String name) throws SQLException{
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement stmt = conn.prepareStatement("SELECT * from restaurants WHERE (lower(name) LIKE '%" + name + "%')");
+
+			ResultSet res = stmt.executeQuery();
+			
+			// Maybe can be more space
+			ArrayList<String[]> al = new ArrayList<String[]>();
+			
+			while(res.next()) {
+				String[] s = new String[10];
+				s[0] = res.getString("username");
+				s[1] = res.getString("password");
+				s[2] = res.getString("email");
+				s[3] = res.getString("name");
+				s[4] = res.getString("pos_addr");
+				s[5] = res.getString("latitude");
+				s[6] = res.getString("longitude");
+				s[7] = res.getString("phone");
+				s[8] = res.getString("store_description");
+				s[9] = res.getString("order_description");
+				al.add(s);
+			}
+			
+			return al;
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;		
+	}
+	
+	public ArrayList<String[]> searchRestaurantByType(String type) throws SQLException{
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement stmt = conn.prepareStatement("select * from restaurants where username in (select restaurant_name from type_restaurants WHERE type = \"" + type + "\")");
+
+			ResultSet res = stmt.executeQuery();
+			
+			// Maybe can be more space
+			ArrayList<String[]> al = new ArrayList<String[]>();
+			
+			while(res.next()) {
+				String[] s = new String[10];
+				s[0] = res.getString("username");
+				s[1] = res.getString("password");
+				s[2] = res.getString("email");
+				s[3] = res.getString("name");
+				s[4] = res.getString("pos_addr");
+				s[5] = res.getString("latitude");
+				s[6] = res.getString("longitude");
+				s[7] = res.getString("phone");
+				s[8] = res.getString("store_description");
+				s[9] = res.getString("order_description");
+				al.add(s);
+			}
+			
+			return al;
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;		
 	}
 	
 	public String[] getDeliveryMan(String DM_name) throws SQLException {

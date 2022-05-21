@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -90,10 +91,37 @@ public class MemberController extends Controller implements Initializable{
 		render();
 		Model model = new Model();
 		
-		// Search By Distance given location in Eng, maybe test chinese
-		Map <Restaurant, Integer> result = model.SearchRestaurantByDistance(username);
-		// min second or Hr
-		result.forEach((key, value)->{System.out.println(key.getName() + "time: " + value/60 +" (min)");});
+		int searchBy = 1;
+		
+		if (searchBy == 0) {
+			// Search By Distance given location in Eng, maybe test chinese
+			Map <Restaurant, Integer> result = model.SearchRestaurantByDistance(username);
+			// min second or Hr
+			result.forEach((key, value)->{System.out.println(key.getName() + "time: " + value/60 +" (min)");});
+		}
+		else if (searchBy == 1) {
+			// Search By Name
+			// SELECT * from restaurants WHERE (lower(name) LIKE '%古早味%');
+			String input = "古早味";
+			ArrayList<Restaurant> result_name = model.SearchRestaurantByName(input);
+			if (result_name != null) result_name.forEach((rest)->{System.out.println(rest.getName());});
+		}
+		else if (searchBy == 2){
+			// Search By type
+			String input = "便當";
+			ArrayList<Restaurant> result_type = model.SearchRestaurantByType(input);
+			// select name from restaurants where username in (select restaurant_name from type_restaurants WHERE type = "便當");
+			if (result_type != null) result_type.forEach((rest)->{System.out.println(rest.getName());});
+		}
+		else if (searchBy == 3) {
+			// Search By coupon
+		}
+		else {
+			
+		}
+
+		
+
 		
 		
 	}

@@ -203,6 +203,52 @@ public class Model {
 //		}
 //	}
 
+	public ArrayList<Restaurant> SearchRestaurantByName(String input) {
+		// TODO Auto-generated method stub
+		try {
+			
+			ArrayList<String[]> ret = this.DBService.searchRestaurantByName(input);
+			if (ret.size() == 0) {
+				return null;
+			}
+
+			ArrayList<Restaurant> restaurants = new ArrayList();
+
+			for (String[] e : ret) {
+				restaurants.add(new Restaurant(e));
+			}
+			return restaurants;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ArrayList<Restaurant> SearchRestaurantByType(String input) {
+		// TODO Auto-generated method stub
+		try {
+			
+			ArrayList<String[]> ret = this.DBService.searchRestaurantByType(input);
+			if (ret.size() == 0) {
+				return null;
+			}
+
+			ArrayList<Restaurant> restaurants = new ArrayList();
+
+			for (String[] e : ret) {
+				restaurants.add(new Restaurant(e));
+			}
+			return restaurants;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 //	public boolean searchUserByUserName(String username) {
 //		return Users.containsKey(username);
 //	}
