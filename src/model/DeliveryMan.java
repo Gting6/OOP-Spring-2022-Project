@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import sql.DBService;
 
@@ -42,6 +43,38 @@ public class DeliveryMan extends User {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public ArrayList<String> getOrders() {
+//		add google search distance in the future
+		ArrayList<String> orders_can_deliver = new ArrayList<>();
+		try {
+			orders_can_deliver = dbService.getOrdersDeliveryman();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return orders_can_deliver;
+	}
+	
+	public Order getSingleOrder(String order_id) {
+		Order order = null;
+		try {
+			order = dbService.getOrder(order_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return order;
+	}
+	
+	public void pickUpOrder(String order_id) {
+		try {
+			dbService.assignDeliveryman(this.getUserName(), order_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

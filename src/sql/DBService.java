@@ -95,24 +95,27 @@ public class DBService {
 		
 		try {
 			Connection conn = DBConnection.getConnection();
-			PreparedStatement stmt = conn.prepareStatement("insert into orders values(?,?,?,?,?,?)"); 
+			PreparedStatement stmt = conn.prepareStatement("insert into orders values(?,?,?,?,?,?,?,?,?)"); 
 			
-			stmt.setInt(1, order.getId());
-			stmt.setObject(2, order.getCreate_time());		// need to change to date time??
-			stmt.setObject(3, order.getArrival_time());		// no need telephone change to address is better
-			stmt.setString(4, order.getRestaurant_name());
-			stmt.setString(5, order.getConsumer_name());
-			stmt.setString(6, order.getDeliveryman_name());
+			stmt.setString(1, order.getId());
+			stmt.setInt(2, order.getStatus());
+			stmt.setObject(3, order.getCreate_time());		// need to change to date time??
+			stmt.setObject(4, order.getDeliver_time());
+			stmt.setObject(5, order.getArrival_time());		// no need telephone change to address is better
+			stmt.setObject(6, order.getFee());
+			stmt.setString(7, order.getConsumer_id());
+			stmt.setString(8, order.getRestaurant_id());
+			stmt.setString(9, order.getDeliveryman_id());
 			
 			int res = stmt.executeUpdate();
 			
 			if(res == 1) {
 			
-				System.out.print("Member Created");
+				System.out.print("Order Created");
 //				might add cookie or something else??
 			}
 			else {
-				System.out.print("User Creation Failed");
+				System.out.print("Order Creation Failed");
 			}
 		}
 		catch (Exception e) {
@@ -151,35 +154,32 @@ public class DBService {
 		}
 	}
 	
-
-
-//	public void createRestaurant(Restaurant restaurant) throws SQLException {
-//		
-//		try {
-//			Connection conn = DBConnection.getConnection();
-//			PreparedStatement stmt = conn.prepareStatement("insert into restaurants values(?,?,?,?,?)"); 
-//			
-//			stmt.setString(1, restaurant.getUserName());
-//			stmt.setString(2, restaurant.getPassword());
-//			stmt.setString(3, restaurant.getAddress());		// no need telephone change to address is better
-//			stmt.setString(4, restaurant.getEmail());
-//			stmt.setString(5, restaurant.getName());
-//			
-//			int res = stmt.executeUpdate();
-//			
-//			if(res == 1) {
-//			
-//				System.out.print("Restaurant Created");
-////				might add cookie or something else??
-//			}
-//			else {
-//				System.out.print("Restaurant Creation Failed");
-//			}
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public void createOrderItems(HashMap<String, Integer> products, String id) throws SQLException {
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("insert into order_items values(?,?,?)"); 
+			
+			for(String product_name : products.keySet()) {
+				stmt.setString(1, id);
+				stmt.setString(2, product_name);
+				stmt.setInt(3, products.get(product_name));
+				
+				int res = stmt.executeUpdate();
+				
+				if(res == 1) {
+					System.out.print("OrderItems Created");
+				}
+				else {
+          
+					System.out.print("OrderItems Creation Failed");
+				}
+			}	
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
 	
 	
 	public void createMember(Member member) throws SQLException {
@@ -308,7 +308,7 @@ public class DBService {
 			
 			ResultSet res = stmt.executeQuery();
 
-			String[] s = new String[10];
+			String[] s = new String[11];
 			
 			if(res.next()) {
 				
@@ -322,6 +322,7 @@ public class DBService {
 				s[7] = res.getString("phone");
 				s[8] = res.getString("store_description");
 				s[9] = res.getString("order_description");
+				s[10] = res.getString("coupon");
 				
 			}
 			return s;
@@ -492,21 +493,43 @@ public class DBService {
 		}
 		return products;
 	}
-	catch (Exception e) {
+		catch (Exception e) {
+			e.printStackTrace();
+	}
+		return null;
+	}
+	
+	public ArrayList<String> getOrderItems(String order_id) throws SQLException {
+		
+	try {
+		Connection conn = DBConnection.getConnection();
+//		role stands for his identity
+		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM order_items WHERE id=?"); 
+		
+		stmt.setString(1, order_id);
+		
+		ArrayList<String> items = new ArrayList<>();
+		ResultSet res = stmt.executeQuery();
+		
+		while(res.next()) {
+			items.add(res.getString("item"));
+		}
+		return items;
+	}catch (Exception e) {
 		e.printStackTrace();
 	}
-	return null;
-}
+		return null;
+	}
 	
 	
-	public Order getOrder(int id) throws SQLException {
+	public Order getOrder(String id) throws SQLException {
 		
 		try {
 			Connection conn = DBConnection.getConnection();
 //			role stands for his identity
 			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM orders WHERE id=?"); 
 			
-			stmt.setInt(1, id);
+			stmt.setString(1, id);
 			
 			ResultSet res = stmt.executeQuery();
 			
@@ -514,11 +537,13 @@ public class DBService {
 			
 				System.out.println("Order found");
 				LocalDateTime c =  (LocalDateTime) res.getObject("create_time");
+				LocalDateTime dt =  (LocalDateTime) res.getObject("deliver_time");
 				LocalDateTime c_bar = (LocalDateTime) res.getObject("arrival_time");
 				Timestamp d = Timestamp.valueOf(c);
 				Timestamp d_bar = Timestamp.valueOf(c_bar);
-				return new Order(res.getInt("id"), res.getInt("price"),d, d_bar, res.getString("member_name"), 
-						res.getString("deliveryman_name"), res.getString("restaurant_name"));
+				Timestamp deliver_time = Timestamp.valueOf(dt);
+				return new Order(res.getString("id"), res.getInt("status"), d, deliver_time, d_bar, res.getString("member_name"), 
+						res.getString("deliveryman_name"), res.getString("restaurant_name"), res.getInt("fee"));
 //				might add cookie or something else??
 			}
 			else {
@@ -534,11 +559,12 @@ public class DBService {
 
 
 	public void createRestaurant(String uuid, String password, String email, String name, String pos_addr,
-			String latitude, String longitude, String phone, String store_description, String order_description) {
+			String latitude, String longitude, String phone, String store_description, String order_description,
+			String coupon) {
 		// TODO Auto-generated method stub
 		try {
 			Connection conn = DBConnection.getConnection();
-			PreparedStatement stmt = conn.prepareStatement("insert into restaurants values(?,?,?,?,?,?,?,?,?,?)"); 
+			PreparedStatement stmt = conn.prepareStatement("insert into restaurants values(?,?,?,?,?,?,?,?,?,?,?)"); 
 			
 			stmt.setString(1, uuid);
 			stmt.setString(2, password);
@@ -549,7 +575,8 @@ public class DBService {
 			stmt.setString(7, longitude);
 			stmt.setString(8, phone);
 			stmt.setString(9, store_description);
-			stmt.setString(10, order_description);			
+			stmt.setString(10, order_description);
+			stmt.setString(11, coupon);
 			int res = stmt.executeUpdate();
 			
 			if(res == 1) {
@@ -666,6 +693,61 @@ public class DBService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public ArrayList<String> getOrdersRestaurant(String restaurant_name) throws SQLException {
+		
+		ArrayList<String> orders = new ArrayList<>();
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE restaurant_name=?"); 
+			query_orders.setString(1, restaurant_name);
+			ResultSet res = query_orders.executeQuery();
+			while(res.next()) {
+				orders.add(res.getString("id"));
+			}
+			return orders;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}	
+	
+	public ArrayList<String> getOrdersDeliveryman() throws SQLException {
+		
+		ArrayList<String> orders = new ArrayList<>();
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE deliveryman_name=?"); 
+			query_orders.setString(1, "");
+			ResultSet res = query_orders.executeQuery();
+			while(res.next()) {
+				orders.add(res.getString("id"));
+			}
+			return orders;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}	
+	
+	public void assignDeliveryman(String deliveryman_id, String order_id) throws SQLException {
+		try {
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement update_orders = conn.prepareStatement("UPDATE orders SET deliveryman_name=? WHERE id=?"); 
+			update_orders.setString(1, deliveryman_id);
+			update_orders.setString(2, order_id);
+			update_orders.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

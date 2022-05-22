@@ -57,7 +57,8 @@ public class DBCreation {
 					+ "longitude varchar(255),"
 					+ "phone varchar(255),"
 					+ "store_description varchar(255),"
-					+ "order_description varchar(255)"
+					+ "order_description varchar(255),"
+					+ "coupon varchar(255)"
 					+ ")";
 			
 			String create_table_products = "CREATE TABLE products " +
@@ -91,16 +92,23 @@ public class DBCreation {
 	                   ")";
 			
 			String create_table_order = "CREATE TABLE orders " +
-	                   "(id Int(20), " +			// can be varchar or int
+	                   "(id varchar(255) primary key, " +
+	                   " status int," +
 	                   " create_time datetime, " + 
-	                   " arrival_time datetime, " + 
-	                   " restaurant_name varchar(255), " + 
-	                   " foreign key(restaurant_name) references restaurants(username), " +
+	                   " deliver_time datetime," +
+	                   " arrival_time datetime, " +
+	                   " fee int," + 
 	                   " member_name varchar(255), " +
-	                   " foreign key(member_name) references members(username), " +
-	                   " deliveryman_name varchar(255), " +
-	                   " foreign key(deliveryman_name) references deliverymen(username)" +
+	                   " restaurant_name varchar(255), " + 
+	                   " deliveryman_name varchar(255) " +
 	                   ")";
+			
+			String create_table_order_items = "CREATE TABLE order_items " +
+	                   "( id varchar(255),"
+	                   + "foreign key(id) references orders(id),"
+	                   + "item varchar(255),"
+	                   + "number int"
+	                   + ")";
 			
 //			String create_table_restaurant_from_json = "CREATE TABLE restaurant_from_json "
 //					+ "(id varchar(255) primary key,"
@@ -123,6 +131,7 @@ public class DBCreation {
 			stmt.executeUpdate(create_table_order);
 			stmt.executeUpdate(create_table_type_restaurants);
 			stmt.executeUpdate(create_table_business_times);
+			stmt.executeUpdate(create_table_order_items);
 			stmt.close();
 		}
 		catch (SQLException e) {
