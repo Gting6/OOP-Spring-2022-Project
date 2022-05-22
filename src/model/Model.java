@@ -20,7 +20,7 @@ import com.google.gson.JsonParser;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import model.ResponseDetail;
+//import model.ResponseDetail;
 //import ResponseDataProcess.ResponseDetail;
 import sql.DBService;
 

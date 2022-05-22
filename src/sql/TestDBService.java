@@ -41,7 +41,7 @@ public class TestDBService {
 //		test assign deliveryman to order
 		DeliveryMan deliveryman = new DeliveryMan("deliveryman","123","khh", "09xxxxxxxx","789@abc","yaya");
 //		deliveryman.setToDB();
-		ArrayList<String> all_orders = deliveryman.getOrders();
+		ArrayList<String> all_orders = deliveryman.getNoDeliverymanOrders();
 		deliveryman.pickUpOrder(order.getId());
 //		now you can go to DB and see if deliveryman id is added to that order.
 		

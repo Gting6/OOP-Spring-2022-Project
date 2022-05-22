@@ -2,6 +2,8 @@ package model;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import sql.DBService;
@@ -30,8 +32,8 @@ public class Member extends User {
 	
 	public Member(String username, String password, String address, String phone,String email, String name, Date vip_expire_date) {
 		super(username, password, address, phone, email, name);
-		this.is_vip = false;
 		this.vip_expire_date = vip_expire_date;	
+		this.is_vip = getVIP();
 	}
 	
 	public void setToDB() {
@@ -66,7 +68,9 @@ public class Member extends User {
 
 	public boolean becomeVIP() throws SQLException {
 		// TODO
-		return dbService.setVIP(this.getUserName());
+		dbService.setVIP(this.getUserName());
+		this.is_vip = getVIP();
+		return this.is_vip;
 	}
 
 	// i think this function is no use now
@@ -111,21 +115,56 @@ public class Member extends User {
 		}
 		return order;
 	}
+	
+	public ArrayList<String> checkAllOrders() {
+		ArrayList<String> all_orders = new ArrayList<>();
+		try {
+			all_orders = dbService.getOrdersMember(this.getUserName());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return all_orders;
+	}
+	
+	public ArrayList<String> checkAllOrdersNotExpired() {
+		
+		ArrayList<String> not_expired_orders = new ArrayList<>();
+		
+		ArrayList<String> all_orders = checkAllOrders();
+		try {
+			for(String order_id : all_orders) {
+				Order order = dbService.getOrder(order_id);
+				Timestamp now = new Timestamp(System.currentTimeMillis());
+				if(order.getCreate_time().compareTo(now) < 0 && order.getDeliver_time().compareTo(now) > 0) {
+					not_expired_orders.add(order_id);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return not_expired_orders;
+	}
 
-	public boolean getVIP() throws SQLException {
-		// TODO Auto-generated method stub
+	public boolean getVIP() {
+		
+		boolean vip_check = false;
+		
 		Calendar c = Calendar.getInstance();
 		c.getTime();
 		Date today = new java.sql.Date(c.getTimeInMillis());
-		
-		Date expire_day = dbService.getVIPDate(this.getUserName());
-		
-		if(today.compareTo(expire_day) >= 0) {
-			this.is_vip = false;
+		Date expire_day;
+		try {
+			expire_day = dbService.getVIPDate(this.getUserName());
+			if(today.compareTo(expire_day) >= 0) {
+				vip_check = false;
+			}
+			else vip_check = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		else this.is_vip = true;
-
-		return this.is_vip;
+		return vip_check;
 	}
 
 	public Date getVIP_expire_date() throws SQLException {
