@@ -232,9 +232,11 @@ public class MemberController extends Controller implements Initializable {
 			// Search By Distance given location in Eng, maybe test chinese
 			Map<Restaurant, Integer> result = model.SearchRestaurantByDistance(username);
 			// min second or Hr
-			result.forEach((key, value) -> {
-				System.out.println(key.getName() + "time: " + value / 60 + " (min)");
-			});
+			if (result != null) {
+				result.forEach((key, value) -> {
+					System.out.println(key.getName() + "time: " + value / 60 + " (min)");
+				});
+			}
 		} else {
 			searchHelper(this.searchBy, model, input);
 		}

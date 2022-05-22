@@ -149,7 +149,6 @@ public class Model {
 			}
 
 			String[] findplaceurl = new String[29];
-			ResponseDetail[] responsedatas = new ResponseDetail[29];
 
 			Map <Restaurant, Integer> map = new HashMap<>();
 			
@@ -166,10 +165,12 @@ public class Model {
 				
 				HttpClient client = HttpClient.newHttpClient();
 				HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
-
-				Gson gson = new GsonBuilder().setLenient().create();
 				
 				JsonObject jp = new JsonParser().parse(response.body()).getAsJsonObject();
+				
+				if (response.body().contains("ZERO_RESULTS")) {
+					return null;
+				}
 				
 				Integer time = jp.getAsJsonArray("rows").get(0).getAsJsonObject().getAsJsonArray("elements").get(0).getAsJsonObject().getAsJsonObject("duration").get("value").getAsInt();
 				
