@@ -716,7 +716,7 @@ public class DBService {
 		return orders;
 	}	
 	
-	public ArrayList<String> getOrdersDeliveryman() throws SQLException {
+	public ArrayList<String> getOrdersNoDeliveryman() throws SQLException {
 		
 		ArrayList<String> orders = new ArrayList<>();
 		
@@ -736,6 +736,48 @@ public class DBService {
 		}
 		return orders;
 	}	
+	
+	public ArrayList<String> getOrdersDeliveryman(String Deliveryman_id) throws SQLException {
+		
+		ArrayList<String> orders = new ArrayList<>();
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE deliveryman_name=?"); 
+			query_orders.setString(1, Deliveryman_id);
+			ResultSet res = query_orders.executeQuery();
+			while(res.next()) {
+				orders.add(res.getString("id"));
+			}
+			return orders;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}
+	
+	public ArrayList<String> getOrdersMember(String member_id) throws SQLException {
+		
+		ArrayList<String> orders = new ArrayList<>();
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE member_name=?"); 
+			query_orders.setString(1, member_id);
+			ResultSet res = query_orders.executeQuery();
+			while(res.next()) {
+				orders.add(res.getString("id"));
+			}
+			return orders;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}
 	
 	public void assignDeliveryman(String deliveryman_id, String order_id) throws SQLException {
 		try {

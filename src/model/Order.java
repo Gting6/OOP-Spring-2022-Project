@@ -148,6 +148,16 @@ public class Order {
 			this.items.put((String) product.keySet().toArray()[0],1);
 	}
 	
+	public void removeFromCart(HashMap<String, Integer> product) {
+		if(this.items == null) {
+			return;
+			}
+		else if(this.items.containsKey((String) product.keySet().toArray()[0]) && this.items.get((String) product.keySet().toArray()[0]) > 1)
+			this.items.put((String) product.keySet().toArray()[0], this.items.get((String) product.keySet().toArray()[0])-1);
+		else if(this.items.containsKey((String) product.keySet().toArray()[0]) && this.items.get((String) product.keySet().toArray()[0]) == 1)
+			this.items.remove((String) product.keySet().toArray()[0]);
+	}
+	
 	public void calculateFee() {
 		
 		String[] rest_info;
