@@ -8,42 +8,45 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
 	<children>
-      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="880.0">
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="583.0">
          <children>
-            <VBox prefHeight="600.0" prefWidth="393.0" styleClass="left-side-background" stylesheets="@style.css">
+            <VBox minWidth="-Infinity" prefHeight="400.0" prefWidth="226.0" styleClass="left-side-background" stylesheets="@style.css">
                <children>
-                  <ImageView fitHeight="279.0" fitWidth="239.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="145.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../imgs/icon.png" />
                      </image>
                      <VBox.margin>
-                        <Insets left="90.0" top="100.0" />
+                        <Insets left="42.0" top="30.0" />
                      </VBox.margin>
                   </ImageView>
-            		<Label prefHeight="69.0" prefWidth="274.0" text="FOOTOPIA" textAlignment="CENTER">
+            		<Label prefHeight="54.0" prefWidth="172.0" text="FOOTOPIA" textAlignment="CENTER">
             			<font>
-            				<Font name="Candara Bold" size="58.0" />
+            				<Font name="Candara Bold" size="35.0" />
             			</font>
                      <VBox.margin>
-                        <Insets left="70.0" right="20.0" top="60.0" />
+                        <Insets left="30.0" top="55.0" />
                      </VBox.margin>
             		</Label>
-                  <Label alignment="CENTER" prefHeight="69.0" prefWidth="403.0" text="All you can eat!" textFill="#9a6060">
+                  <Label alignment="CENTER" prefHeight="43.0" prefWidth="198.0" text="All you can eat!" textFill="#9a6060">
                      <font>
-                        <Font name="Calibri Bold" size="31.0" />
+                        <Font name="Calibri Bold" size="22.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
                   </Label>
                </children>
             </VBox>
-            <VBox prefHeight="600.0" prefWidth="491.0">
+            <VBox prefHeight="400.0" prefWidth="422.0">
                <children>
-                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css" VBox.vgrow="NEVER">
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="278.0" styleClass="border" stylesheets="@style.css" VBox.vgrow="NEVER">
                      <children>
                         <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
                            <children>
-                              <ImageView fitHeight="39.0" fitWidth="43.0" layoutX="7.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="31.0" fitWidth="32.0" layoutX="7.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imgs/user.png" />
                                  </image>
@@ -53,21 +56,21 @@
                               <Insets />
                            </HBox.margin>
                         </Pane>
-                        <TextField fx:id="usernameTf" prefHeight="51.0" prefWidth="320.0" promptText="Username" styleClass="transparent">
+                        <TextField fx:id="usernameTf" prefHeight="49.0" prefWidth="232.0" promptText="Username" styleClass="transparent">
                            <HBox.margin>
                               <Insets top="3.0" />
                            </HBox.margin>
                         </TextField>
                      </children>
                      <VBox.margin>
-                        <Insets left="60.0" top="170.0" />
+                        <Insets left="60.0" top="60.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="59.0" prefWidth="278.0" styleClass="border" stylesheets="@style.css">
                      <children>
                         <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
                            <children>
-                              <ImageView fitHeight="45.0" fitWidth="43.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="31.0" fitWidth="42.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imgs/padlock.png" />
                                  </image>
@@ -77,7 +80,7 @@
                               <Insets />
                            </HBox.margin>
                         </Pane>
-                        <TextField fx:id="passwordTf" prefHeight="51.0" prefWidth="320.0" promptText="Password" styleClass="transparent">
+                        <TextField fx:id="passwordTf" prefHeight="51.0" prefWidth="233.0" promptText="Password" styleClass="transparent">
                            <HBox.margin>
                               <Insets top="3.0" />
                            </HBox.margin>
@@ -89,25 +92,28 @@
                   </HBox>
                   <Label fx:id="wrongLb" alignment="CENTER" text="Error Message" textFill="#d70909">
                      <VBox.margin>
-                        <Insets left="60.0" top="40.0" />
+                        <Insets left="60.0" top="30.0" />
                      </VBox.margin>
                      <font>
                         <Font size="21.0" />
-                     </font></Label>
-                  <Button fx:id="loginBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressLoginBtn" prefHeight="50.0" prefWidth="389.0" styleClass="left-side-background" stylesheets="@style.css" text="Login" textFill="WHITE">
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding></Label>
+                  <Button fx:id="loginBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressLoginBtn" prefHeight="25.0" prefWidth="232.0" styleClass="left-side-background" stylesheets="@style.css" text="Login" textFill="WHITE">
                      <VBox.margin>
-                        <Insets left="60.0" top="60.0" />
+                        <Insets left="80.0" top="10.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="Arial" size="26.0" />
+                        <Font name="Arial" size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="signupBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressSignupBtn" prefHeight="50.0" prefWidth="389.0" styleClass="left-side-background" stylesheets="@style.css" text="Sign Up" textFill="WHITE">
+                  <Button fx:id="signupBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressSignupBtn" prefHeight="2.0" prefWidth="233.0" styleClass="left-side-background" stylesheets="@style.css" text="Sign Up" textFill="WHITE">
                      <font>
-                        <Font name="Arial" size="26.0" />
+                        <Font name="Arial" size="22.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="60.0" top="10.0" />
+                        <Insets left="80.0" top="10.0" />
                      </VBox.margin>
                   </Button>
                </children>

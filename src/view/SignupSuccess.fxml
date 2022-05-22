@@ -8,42 +8,45 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SignupSuccessController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SignupSuccessController">
 	<children>
-      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="880.0">
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <VBox prefHeight="600.0" prefWidth="432.0" styleClass="left-side-background" stylesheets="@style.css">
+            <VBox minWidth="-Infinity" prefHeight="400.0" prefWidth="226.0" styleClass="left-side-background" stylesheets="@style.css">
                <children>
-                  <ImageView fitHeight="279.0" fitWidth="239.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="145.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../imgs/icon.png" />
                      </image>
                      <VBox.margin>
-                        <Insets left="90.0" top="100.0" />
+                        <Insets left="42.0" top="30.0" />
                      </VBox.margin>
                   </ImageView>
-            		<Label prefHeight="69.0" prefWidth="274.0" text="FOOTOPIA" textAlignment="CENTER">
-            			<font>
-            				<Font name="Candara Bold" size="58.0" />
-            			</font>
-                     <VBox.margin>
-                        <Insets left="70.0" right="20.0" top="60.0" />
-                     </VBox.margin>
-            		</Label>
-                  <Label alignment="CENTER" prefHeight="69.0" prefWidth="403.0" text="All you can eat!" textFill="#9a6060">
+                  <Label prefHeight="54.0" prefWidth="172.0" text="FOOTOPIA" textAlignment="CENTER">
                      <font>
-                        <Font name="Calibri Bold" size="31.0" />
+                        <Font name="Candara Bold" size="35.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets left="30.0" top="55.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="43.0" prefWidth="198.0" text="All you can eat!" textFill="#9a6060">
+                     <font>
+                        <Font name="Calibri Bold" size="22.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
                   </Label>
                </children>
             </VBox>
-            <VBox prefHeight="600.0" prefWidth="491.0">
+            <VBox prefHeight="470.0" prefWidth="406.0">
                <children>
-                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css" VBox.vgrow="NEVER">
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="292.0" styleClass="border" stylesheets="@style.css" VBox.vgrow="NEVER">
                      <children>
                         <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
                            <children>
-                              <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="8.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="8.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imgs/user.png" />
                                  </image>
@@ -53,21 +56,21 @@
                               <Insets />
                            </HBox.margin>
                         </Pane>
-                        <TextField fx:id="usernameTf" prefHeight="51.0" prefWidth="320.0" promptText="Username" styleClass="transparent">
+                        <TextField fx:id="usernameTf" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="245.0" promptText="Username" styleClass="transparent">
                            <HBox.margin>
-                              <Insets top="3.0" />
+                              <Insets />
                            </HBox.margin>
                         </TextField>
                      </children>
                      <VBox.margin>
-                        <Insets left="60.0" top="30.0" />
+                        <Insets left="60.0" top="15.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="46.0" prefWidth="292.0" styleClass="border" stylesheets="@style.css">
                      <children>
                         <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
                            <children>
-                              <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="9.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="9.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imgs/padlock.png" />
                                  </image>
@@ -77,21 +80,21 @@
                               <Insets />
                            </HBox.margin>
                         </Pane>
-                        <TextField fx:id="passwordTf" prefHeight="51.0" prefWidth="320.0" promptText="Password" styleClass="transparent">
+                        <TextField fx:id="passwordTf" minHeight="-Infinity" prefHeight="30.0" prefWidth="243.0" promptText="Password" styleClass="transparent">
                            <HBox.margin>
-                              <Insets top="3.0" />
+                              <Insets />
                            </HBox.margin>
                         </TextField>
                      </children>
                      <VBox.margin>
-                        <Insets left="60.0" top="15.0" />
+                        <Insets left="60.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="292.0" styleClass="border" stylesheets="@style.css">
                      <children>
                         <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
                            <children>
-                              <ImageView fitHeight="37.0" fitWidth="43.0" layoutX="10.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="10.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imgs/check-mark.png" />
                                  </image>
@@ -101,21 +104,21 @@
                               <Insets />
                            </HBox.margin>
                         </Pane>
-                        <TextField fx:id="confirmTf" prefHeight="51.0" prefWidth="320.0" promptText="Confirm Passord" styleClass="transparent">
+                        <TextField fx:id="confirmTf" minHeight="-Infinity" prefHeight="30.0" prefWidth="245.0" promptText="Confirm Passord" styleClass="transparent">
                            <HBox.margin>
-                              <Insets top="3.0" />
+                              <Insets />
                            </HBox.margin>
                         </TextField>
                      </children>
                      <VBox.margin>
-                        <Insets left="60.0" top="15.0" />
+                        <Insets left="60.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="292.0" styleClass="border" stylesheets="@style.css">
                      <children>
                         <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
                            <children>
-                              <ImageView fitHeight="45.0" fitWidth="43.0" layoutX="6.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="30.0" fitWidth="37.0" layoutX="10.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imgs/id-card.png" />
                                  </image>
@@ -125,21 +128,21 @@
                               <Insets />
                            </HBox.margin>
                         </Pane>
-                        <TextField fx:id="nameTf" prefHeight="51.0" prefWidth="320.0" promptText="Your Name" styleClass="transparent">
+                        <TextField fx:id="nameTf" minHeight="-Infinity" prefHeight="30.0" prefWidth="241.0" promptText="Your Name" styleClass="transparent">
                            <HBox.margin>
-                              <Insets top="3.0" />
+                              <Insets />
                            </HBox.margin>
                         </TextField>
                      </children>
                      <VBox.margin>
-                        <Insets left="60.0" top="15.0" />
+                        <Insets left="60.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="46.0" prefWidth="292.0" styleClass="border" stylesheets="@style.css">
                      <children>
                         <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
                            <children>
-                              <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="8.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="30.0" fitWidth="22.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imgs/smartphone.png" />
                                  </image>
@@ -149,21 +152,21 @@
                               <Insets />
                            </HBox.margin>
                         </Pane>
-                        <TextField fx:id="phoneTf" prefHeight="51.0" prefWidth="320.0" promptText="Phone Number" styleClass="transparent">
+                        <TextField fx:id="phoneTf" minHeight="-Infinity" prefHeight="30.0" prefWidth="243.0" promptText="Phone Number" styleClass="transparent">
                            <HBox.margin>
-                              <Insets top="3.0" />
+                              <Insets />
                            </HBox.margin>
                         </TextField>
                      </children>
                      <VBox.margin>
-                        <Insets left="60.0" top="15.0" />
+                        <Insets left="60.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="292.0" styleClass="border" stylesheets="@style.css">
                      <children>
                         <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
                            <children>
-                              <ImageView fitHeight="39.0" fitWidth="43.0" layoutX="7.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="37.0" fitWidth="22.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imgs/mail.png" />
                                  </image>
@@ -173,21 +176,21 @@
                               <Insets />
                            </HBox.margin>
                         </Pane>
-                        <TextField fx:id="emailTf" prefHeight="51.0" prefWidth="320.0" promptText="Email" styleClass="transparent">
+                        <TextField fx:id="emailTf" minHeight="-Infinity" prefHeight="30.0" prefWidth="243.0" promptText="Email" styleClass="transparent">
                            <HBox.margin>
-                              <Insets top="3.0" />
+                              <Insets />
                            </HBox.margin>
                         </TextField>
                      </children>
                      <VBox.margin>
-                        <Insets left="60.0" top="15.0" />
+                        <Insets left="60.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="389.0" styleClass="border" stylesheets="@style.css">
+                  <HBox alignment="TOP_CENTER" fillHeight="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="292.0" styleClass="border" stylesheets="@style.css">
                      <children>
                         <Pane prefHeight="56.0" prefWidth="58.0" styleClass="right-side-border" stylesheets="@style.css">
                            <children>
-                              <ImageView fitHeight="39.0" fitWidth="43.0" layoutX="9.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="22.0" fitWidth="30.0" layoutX="14.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imgs/home-address.png" />
                                  </image>
@@ -197,49 +200,49 @@
                               <Insets />
                            </HBox.margin>
                         </Pane>
-                        <TextField fx:id="addressTf" prefHeight="51.0" prefWidth="320.0" promptText="Address" styleClass="transparent">
+                        <TextField fx:id="addressTf" minHeight="-Infinity" prefHeight="30.0" prefWidth="247.0" promptText="Address" styleClass="transparent">
                            <HBox.margin>
-                              <Insets top="3.0" />
+                              <Insets />
                            </HBox.margin>
                         </TextField>
                      </children>
                      <VBox.margin>
-                        <Insets left="60.0" top="10.0" />
+                        <Insets left="60.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="390.0" styleClass="border" stylesheets="@style.css">
+                  <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="292.0" styleClass="border" stylesheets="@style.css">
                      <children>
-                        <ComboBox fx:id="typeCombo" prefHeight="39.0" prefWidth="390.0" styleClass="transparent" stylesheets="@style.css">
+                        <ComboBox fx:id="typeCombo" prefHeight="39.0" prefWidth="288.0" styleClass="transparent" stylesheets="@style.css">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </ComboBox>
                      </children>
                      <VBox.margin>
-                        <Insets left="60.0" top="15.0" />
+                        <Insets left="60.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <Label fx:id="wrongLb" alignment="CENTER" prefHeight="27.0" prefWidth="390.0" text="Error Message" textFill="#e80f0f">
+                  <Label fx:id="wrongLb" alignment="CENTER" prefHeight="27.0" prefWidth="241.0" text="Error Message" textFill="#e80f0f">
                      <VBox.margin>
-                        <Insets left="60.0" top="5.0" />
+                        <Insets top="5.0" />
                      </VBox.margin>
                   </Label>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="backBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBackBtn" prefHeight="50.0" prefWidth="190.0" styleClass="left-side-background" stylesheets="@style.css" text="Go Back" textFill="WHITE">
+                        <Button fx:id="backBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBackBtn" prefHeight="37.0" prefWidth="140.0" styleClass="left-side-background" stylesheets="@style.css" text="Back" textFill="WHITE">
                            <font>
-                              <Font name="Arial" size="26.0" />
+                              <Font name="Arial" size="20.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="60.0" top="10.0" />
+                              <Insets left="60.0" top="2.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="confirmBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressConfirmBtn" prefHeight="50.0" prefWidth="190.0" styleClass="left-side-background" stylesheets="@style.css" text="Confirm" textFill="WHITE">
+                        <Button fx:id="confirmBtn" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressConfirmBtn" prefHeight="36.0" prefWidth="146.0" styleClass="left-side-background" stylesheets="@style.css" text="Confirm" textFill="WHITE">
                            <font>
-                              <Font name="Arial" size="26.0" />
+                              <Font name="Arial" size="20.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="9.0" top="10.0" />
+                              <Insets left="9.0" top="2.0" />
                            </HBox.margin>
                         </Button>
                      </children>

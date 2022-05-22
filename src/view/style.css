@@ -4,15 +4,27 @@
 	-fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
+
+.left-side-member-background{
+	-fx-background-color: #DBE4E3;
+	-fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+
 .border{
 	-fx-border-color: #01BED2;
 	-fx-border-width: 1.5;
 }
 
 .button{
-    -fx-text-fill: #ffffff;
     cursor: pointer;
 }
+
+.left-side-member-button{
+	-fx-background-color: #ffffff;
+	-fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
 
 .button:hover{
     -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
