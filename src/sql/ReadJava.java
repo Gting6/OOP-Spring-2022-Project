@@ -24,8 +24,8 @@ public class ReadJava {
 		Gson gson = new Gson();
 
 		try {
-//			Reader reader = Files.newBufferedReader(Paths.get("C:/Users/JS/Desktop/OOP/stores_detail.json"));
-			Reader reader = Files.newBufferedReader(Paths.get("../../stores_detail.json"));
+			Reader reader = Files.newBufferedReader(Paths.get("C:/Users/JS/Desktop/OOP/stores_detail.json"));
+//			Reader reader = Files.newBufferedReader(Paths.get("../../stores_detail.json"));
 		    // convert JSON file to map
 		    JsonArray jo = gson.fromJson(reader, JsonArray.class);
 
@@ -84,7 +84,9 @@ public class ReadJava {
 		        String uuid = UUID.randomUUID().toString();
 		        String password = "0";
 		        String email = "test@123";
-		        dbs.createRestaurant(uuid, password, email, name, pos_addr, latitude, longitude, phone, store_description, order_description);
+		        String coupon = "";
+		        dbs.createRestaurant(uuid, password, email, name, pos_addr, latitude, 
+		        		longitude, phone, store_description, order_description, coupon);
 		        
 		        // type, menu, business time save at diff tables
 		        dbs.createTypeRestaurants(type, uuid);

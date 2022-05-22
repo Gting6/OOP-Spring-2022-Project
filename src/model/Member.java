@@ -69,8 +69,7 @@ public class Member extends User {
 		return dbService.setVIP(this.getUserName());
 	}
 
-	// status->string, �enum撖虫��
-	// ��ew 銝��rder by input 鈭� ��振, ParseOrder by UI 撠望隤芾�� 銝西���, 蝣箄����laceOrder�������
+	// i think this function is no use now
 	public void placeOrder(Order order) {
 		// push order in order list
 		// Order newOrder = new Order(this.is_vip_);
@@ -102,8 +101,15 @@ public class Member extends User {
 	}
 
 	// view�� ��迄����
-	public String checkOrderStatus(int no) {
-		return new String();
+	public Order checkOrderStatus(String order_id) {
+		Order order = null;
+		try {
+			order = dbService.getOrder(order_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return order;
 	}
 
 	public boolean getVIP() throws SQLException {

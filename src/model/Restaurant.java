@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import sql.DBService;
@@ -13,7 +15,7 @@ public class Restaurant extends User{
 	private String store_description;
 	private String order_despcription;
 	private String[] types;
-	
+	private String coupon;
 	// TODO coupon list
 	// TODO Business time
 	// TODO json data
@@ -90,8 +92,34 @@ public class Restaurant extends User{
 		return dbService.getProducts(this.getUserName());
 	}
 	
-	public void checkOrders(){
+	public ArrayList<String> checkOrders(){
 		// TODO Return Order status
+		ArrayList<String> valid_orders = new ArrayList<>();
+		try {
+			ArrayList<String> all_orders = dbService.getOrdersRestaurant(this.getUserName());
+			for(String order_id : all_orders) {
+				Order order = dbService.getOrder(order_id);
+				Timestamp now = new Timestamp(System.currentTimeMillis());
+				if(order.getCreate_time().compareTo(now) < 0 && order.getDeliver_time().compareTo(now) > 0) {
+					valid_orders.add(order_id);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return valid_orders;
+	}
+	
+	public ArrayList<String> checkItemPerOrder(String order_id) {
+		ArrayList<String> items = new ArrayList<>();
+		try {
+			items = dbService.getOrderItems(order_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return items;
 	}
 
 	public String getLatitude() {
@@ -132,6 +160,14 @@ public class Restaurant extends User{
 
 	public void setTypes(String[] types) {
 		this.types = types;
+	}
+
+	public String getCoupon() {
+		return coupon;
+	}
+
+	public void setCoupon(String coupon) {
+		this.coupon = coupon;
 	}
 
 }

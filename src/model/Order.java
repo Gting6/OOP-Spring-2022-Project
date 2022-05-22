@@ -2,23 +2,26 @@ package model;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.UUID;
 
 import sql.DBService;
 
 public class Order {
 
 	// OrderStatus
-	private int id;
-	// status
-	private String status; 
-	private int price;
+	private String id;
+	private int status;
 	private Timestamp create_time;
+	private Timestamp deliver_time;
 	private Timestamp arrival_time;
-	private String member_name;
-	private String deliveryman_name;
-	private String restaurant_name; // can be search by call static function
+	private String member_id;
+	private String deliveryman_id;
+	private String restaurant_id; // can be search by call static function
+	private HashMap<String, Integer> items;
 	// TODO Location?
-	private boolean is_vip_;
 	private int fee;
 	
 	DBService dbService = new DBService();
@@ -29,17 +32,29 @@ public class Order {
 		
 	}
 	
-	public Order(int id, int price,Timestamp create_time, Timestamp arrival_time, 
-			String member_name, String deliveryman_name, String restaurant_name) {
+	// An order is created when a customer clicked on the first item to the cart
+	// TODO Clear cart when buy things from another store
+	public Order(String member_id, String restaurant_id, HashMap<String, Integer> product) {
+		this.id = UUID.randomUUID().toString();
+		this.member_id = member_id;
+		this.restaurant_id = restaurant_id;
+		this.deliveryman_id = "";  // it should be designated only when the order is established
+		this.deliver_time = null;
+		this.items = new HashMap<>();
+		addToCart(product);
+	}
+	
+	public Order(String id, int status, Timestamp create_time, Timestamp deliver_time, Timestamp arrival_time, 
+			String member_id, String deliveryman_id, String restaurant_id, int fee) {
 		this.id = id;
-		this.status = "NEW";
-		this.price = price;
+		this.status = 0;  // 0 -> inserted; 1 -> deliveryman_designated
 		this.create_time = create_time;
+		this.deliver_time = deliver_time;
 		this.arrival_time = arrival_time;
-		this.member_name = member_name;
-		this.deliveryman_name = deliveryman_name;
-		this.restaurant_name = restaurant_name;
-		
+		this.member_id = member_id;
+		this.deliveryman_id = deliveryman_id;
+		this.restaurant_id = restaurant_id;
+		this.fee = fee;
 	}
 	
 	public void setToDB() {
@@ -51,44 +66,12 @@ public class Order {
 		}
 	}
 	
-	//give the deliveryman after established
-//	public Order(Member member, Restaurant restaurant) {
-//		this.is_vip_ = member.is_vip;
-//		if (!is_vip_) this.fee = 30;
-//	}
-	
-	public String getStatus() {
-		return this.status;
-	}
-	
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-	public int getPrice() {
-		return this.price;
-	}
-	
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	
-//	private void calculateCoinDistance(float distance) {
-//		
-//		this.price_ += distance; // design�ffunction
-//		if (!this.is_vip_) {
-//			this.price_ += this.fee;
-//		}
-//		
-//		// add food?
-//	}
-	
 	// getter and setter
-	public int getId() {
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -108,28 +91,28 @@ public class Order {
 		this.arrival_time = arrival_time;
 	}
 
-	public String getConsumer_name() {
-		return member_name;
+	public String getConsumer_id() {
+		return member_id;
 	}
 
-	public void setConsumer_name(String member_name) {
-		this.member_name = member_name;
+	public void setConsumer_id(String member_id) {
+		this.member_id = member_id;
 	}
 
-	public String getDeliveryman_name() {
-		return deliveryman_name;
+	public String getDeliveryman_id() {
+		return deliveryman_id;
 	}
 
-	public void setDeliveryman_name(String deliveryman_name) {
-		this.deliveryman_name = deliveryman_name;
+	public void setDeliveryman_id(String deliveryman_id) {
+		this.deliveryman_id = deliveryman_id;
 	}
 
-	public String getRestaurant_name() {
-		return restaurant_name;
+	public String getRestaurant_id() {
+		return restaurant_id;
 	}
 
-	public void setRestaurant_name(String restaurant_name) {
-		this.restaurant_name = restaurant_name;
+	public void setRestaurant_id(String restaurant_id) {
+		this.restaurant_id = restaurant_id;
 	}
 
 
@@ -142,5 +125,94 @@ public class Order {
 		}
 		return null;
 	}
+
+	public Timestamp getDeliver_time() {
+		return deliver_time;
+	}
+
+	public void setDeliver_time(Timestamp deliver_time) {
+		this.deliver_time = deliver_time;
+	}
+
+	public int getFee() {
+		return fee;
+	}
+		
+	public void addToCart(HashMap<String, Integer> product) {
+		if(this.items == null) {
+			System.out.println("HERE");
+			this.items.put((String) product.keySet().toArray()[0],1);		}
+		else if(this.items.containsKey((String) product.keySet().toArray()[0]))
+			this.items.put((String) product.keySet().toArray()[0], this.items.get((String) product.keySet().toArray()[0])+1);
+		else
+			this.items.put((String) product.keySet().toArray()[0],1);
+	}
 	
+	public void calculateFee() {
+		
+		String[] rest_info;
+		String coupon = "";
+		double discount = 1.0;
+		int total_price = 0;
+		int distance_fee = 0;
+		HashMap<String, Integer> products = new HashMap<>();
+		
+		try {
+			Member mem = dbService.getMember(this.member_id);
+			rest_info = dbService.getRestaurant(restaurant_id);
+			products = dbService.getProducts(restaurant_id);
+			coupon = rest_info[10];
+			
+			if(mem.is_vip) 
+				distance_fee = 0;
+			else distance_fee = 30; // change to result from google API
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for(String key : items.keySet()) {
+			System.out.println("key==========");
+			System.out.println(key);
+			total_price += items.get(key) * products.get(key);
+		}
+		
+		if(coupon != "") {
+//			parse the coupon info and change discount
+		}
+		
+		this.fee = (int) ((total_price + distance_fee) * discount);
+	}
+	
+	public void establishOrder() {
+		calculateFee();
+		Timestamp now = new Timestamp(Calendar.getInstance().getTimeInMillis());
+		long l = now.getTime();
+		long m = 30*60*1000;			// m should be calculated by googleMap API
+		long n = 15*60*1000;			// n should be calculated by googleMap API
+		Timestamp later = new Timestamp(l+m);
+		this.status = 0;
+		this.deliveryman_id = "";		// should be selected by googleMap API
+		this.deliver_time = new Timestamp(l+n);
+		this.create_time = now; 
+		this.arrival_time = later;
+		setToDB();
+		setItemsToDB();
+		
+	}
+
+	private void setItemsToDB() {
+		// TODO Auto-generated method stub
+		try {
+			dbService.createOrderItems(this.items, this.id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public int getStatus() {
+		// TODO Auto-generated method stub
+		return this.status;
+	}
 }
