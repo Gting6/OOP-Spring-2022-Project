@@ -157,7 +157,9 @@ public class Member extends User {
 		Date expire_day;
 		try {
 			expire_day = dbService.getVIPDate(this.getUserName());
-			if(today.compareTo(expire_day) >= 0) {
+			if(expire_day == null)
+				vip_check = false;
+			else if(today.compareTo(expire_day) >= 0) {
 				vip_check = false;
 			}
 			else vip_check = true;
