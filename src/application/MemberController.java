@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -281,7 +282,7 @@ public class MemberController extends Controller implements Initializable {
 		render();
 	}
 
-	public void pressOrderBtn() {
+	public void pressOrderBtn() throws SQLException {
 		status = MemberView.Order;
 		Label label13 = new Label("");
 		if (selectedRestaurant != null) {
@@ -292,9 +293,29 @@ public class MemberController extends Controller implements Initializable {
 		displayVb.getChildren().clear();
 		label13.setFont(new Font("Yu Gothic UI Semibold", 18));
 		displayVb.getChildren().add(label13);			
-    	
-
-		System.out.println(selectedRestaurant);	
+    			
+		Restaurant restaurant = new Restaurant();
+		restaurant.setName(selectedRestaurant);
+		// Maybe can be refactor
+		restaurant = restaurant.getRestaurantInfoByName();
+//		System.out.println(restaurantInfo.getName());
+		if (restaurant != null) {
+		
+			HashMap<String, Integer> restaurantProduct = restaurant.getProducts();
+			
+			if (restaurantProduct != null) {
+				// TODO [FX] handle the info fx.
+				System.out.println("Products List: ");
+	
+				for (String key : restaurantProduct.keySet()) 
+					System.out.println(key + ": $" + restaurantProduct.get(key));
+	
+			}else {
+				System.out.println("some error occur, getting null");
+			}
+			System.out.println();
+		}
+		
 		render();
 	}
 
