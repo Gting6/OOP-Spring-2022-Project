@@ -144,9 +144,9 @@ public class Model {
 				restaurants[i] = new Restaurant(ret[i]);
 			}
 
-			for (Restaurant r : restaurants) {
-				System.out.println(r.getName());
-			}
+//			for (Restaurant r : restaurants) {
+//				System.out.println(r.getName());
+//			}
 
 			String[] findplaceurl = new String[29];
 

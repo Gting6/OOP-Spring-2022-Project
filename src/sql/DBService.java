@@ -333,6 +333,43 @@ public class DBService {
 		}
 		return null;
 	}
+	
+	public String[] getRestaurantByName(String name) throws SQLException {
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+//			role stands for his identity
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM restaurants WHERE name=?"); 
+			
+			stmt.setString(1, name);
+			
+			ResultSet res = stmt.executeQuery();
+
+			String[] s = new String[11];
+			
+			if(res.next()) {
+				
+				s[0] = res.getString("username");
+				s[1] = res.getString("password");
+				s[2] = res.getString("email");
+				s[3] = res.getString("name");
+				s[4] = res.getString("pos_addr");
+				s[5] = res.getString("latitude");
+				s[6] = res.getString("longitude");
+				s[7] = res.getString("phone");
+				s[8] = res.getString("store_description");
+				s[9] = res.getString("order_description");
+				s[10] = res.getString("coupon");
+				
+			}
+			return s;
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public String[][] getAllRestaurant() throws SQLException {
 		
@@ -344,7 +381,7 @@ public class DBService {
 			ResultSet res = stmt.executeQuery();
 			
 			// Maybe can be more space
-			String[][] s = new String[29][10];
+			String[][] s = new String[29][11];
 			int count = 0;
 			while(res.next()) {
 //				System.out.println(res.getString("name"));
@@ -358,6 +395,7 @@ public class DBService {
 				s[count][7] = res.getString("phone");
 				s[count][8] = res.getString("store_description");
 				s[count][9] = res.getString("order_description");
+				s[count][10] = res.getString("coupon");
 				count++;
 			}
 			return s;
@@ -381,7 +419,7 @@ public class DBService {
 			ArrayList<String[]> al = new ArrayList<String[]>();
 			
 			while(res.next()) {
-				String[] s = new String[10];
+				String[] s = new String[11];
 				s[0] = res.getString("username");
 				s[1] = res.getString("password");
 				s[2] = res.getString("email");
@@ -392,6 +430,7 @@ public class DBService {
 				s[7] = res.getString("phone");
 				s[8] = res.getString("store_description");
 				s[9] = res.getString("order_description");
+				s[10] = res.getString("coupon");
 				al.add(s);
 			}
 			
@@ -416,7 +455,7 @@ public class DBService {
 			ArrayList<String[]> al = new ArrayList<String[]>();
 			
 			while(res.next()) {
-				String[] s = new String[10];
+				String[] s = new String[11];
 				s[0] = res.getString("username");
 				s[1] = res.getString("password");
 				s[2] = res.getString("email");
@@ -427,6 +466,7 @@ public class DBService {
 				s[7] = res.getString("phone");
 				s[8] = res.getString("store_description");
 				s[9] = res.getString("order_description");
+				s[10] = res.getString("coupon");
 				al.add(s);
 			}
 			

@@ -43,6 +43,7 @@ public class Restaurant extends User{
 		this.setLongitude(s[6]);
 		this.setStore_description(s[8]);
 		this.setOrder_despcription(s[9]);
+		this.setCoupon(s[10]);
 	}
 		
 	public void setToDB() {
@@ -73,6 +74,18 @@ public class Restaurant extends User{
 		return null;
 	}
 	
+	public Restaurant getRestaurantInfoByName() throws SQLException {
+		// TODO view page
+		try {
+			Restaurant tmp = new Restaurant(dbService.getRestaurantByName(this.getName()));
+			tmp.setTypes(dbService.getTypeRestaurant(this.getUserName()));
+			return tmp;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 //	public Restaurant(String Json) {
 //		// TODO Read the json init
 ////		do create restaurant and create products

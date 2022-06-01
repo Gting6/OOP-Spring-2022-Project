@@ -95,6 +95,7 @@ public class RestaurantController extends Controller implements Initializable{
 			System.out.println("Longitude: " + restaurantInfo.getLongitude());
 			System.out.println("Store Description: " + restaurantInfo.getStore_description());
 			System.out.println("Order Description: " + restaurantInfo.getOrder_despcription());
+			System.out.println("Coupon: " + restaurantInfo.getCoupon());
 
 			String [] types = restaurantInfo.getTypes();
 			System.out.println("Type: ");
@@ -131,9 +132,21 @@ public class RestaurantController extends Controller implements Initializable{
 		
 	}
 	
-	public void pressDiscountBtn() {
+	public void pressDiscountBtn() throws SQLException {
 		status = RestaurantView.Discount;
 		render();
+		
+		// TODO maybe setting coupon in DB later and show out the result
+		System.out.println(this.username);
+		Restaurant restaurant = new Restaurant(this.username);
+		Restaurant restaurantInfo = restaurant.getRestaurantInfo();
+		if (restaurantInfo != null) {
+			System.out.println("Coupon: " + restaurantInfo.getCoupon());
+		}else {
+			System.out.println("some error occur, getting null");
+		}
+		
+		System.out.println();
 	}
 		
 	@Override
