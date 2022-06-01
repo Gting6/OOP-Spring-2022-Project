@@ -10,33 +10,45 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import model.Restaurant;
 import view.MemberView;
 import view.RestaurantView;
 
-public class RestaurantController extends Controller implements Initializable{
+public class RestaurantController extends Controller implements Initializable {
 	@FXML
 	private Button logoutBtn;
-	
+
 	@FXML
 	private Label welcomeLb;
-	
-	@FXML
-	private Label displayLb;
-	
+
 	@FXML
 	private Button orderBtn;
-	
+
 	@FXML
-	private Button discountBtn;
-	
+	private Button couponBtn;
+
 	@FXML
 	private Button infoBtn;
-		
+
+	@FXML
+	private VBox displayVb;
+
+	@FXML
+	private Button productBtn;
+
+	private String tmp;
+	private Restaurant restaurant;
+	private Restaurant restaurantInfo;
+
+//	private String tmp = "";
+
 	private String username;
 	private RestaurantView status;
-
+//	private Restaurant restaurant;
 
 	public void logout(ActionEvent event) throws IOException {
 		switchScene(ViewEnum.LOGIN, event);
@@ -45,46 +57,75 @@ public class RestaurantController extends Controller implements Initializable{
 	@Override
 	protected void setUsernameLb(String s) {
 		username = s;
-		String tmp = "Hello, Restaurant " + s;
+		restaurant = new Restaurant(username);
+		try {
+			restaurantInfo = restaurant.getRestaurantInfo();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String tmp = "Hello " + restaurantInfo.getName();
 		welcomeLb.setText(tmp);
 	}
-	
+
 	@Override
 	protected void render() {
-		String tmp;
-		switch (status){
-		case Discount:
-			tmp = "Discount of " + username;
-			displayLb.setText(tmp);
-			displayLb.setVisible(true);
-			break;			
+		Label lb;
+		switch (status) {
+		case Coupon:
+			displayVb.getChildren().clear();
+			tmp = "";
+//			tmp = "Coupon of " + username;
+			break;
 		case Order:
-			tmp = "Order of " + username;
-			displayLb.setText(tmp);
-			displayLb.setVisible(true);
-			break;			
+			displayVb.getChildren().clear();
+			tmp = "";
+//			tmp = "Order of " + username;
+			break;
 		case Info:
-			tmp = "Info of " + username;
-			displayLb.setText(tmp);
-			displayLb.setVisible(true);
-			break;						
+			displayVb.getChildren().clear();
+			lb = new Label(tmp);
+			lb.setFont(new Font("Yu Gothic UI Semibold", 15));
+			displayVb.getChildren().add(lb);
+			tmp = "";
+
+//			tmp = "Info of " + username;
+			break;
+		case Product:
+			displayVb.getChildren().clear();
+			lb = new Label(tmp);
+			lb.setFont(new Font("Yu Gothic UI Semibold", 15));
+			displayVb.getChildren().add(lb);
+			tmp = "";
+//			tmp = "Product of " + username;
+			break;
+
 		default:
-			displayLb.setVisible(false);
-			displayLb.setText("");
+			displayVb.getChildren().clear();
+			tmp = "";
 			break;
 		}
 	}
-		
+
 	public void pressInfoBtn() throws SQLException {
 		status = RestaurantView.Info;
-		render();
-		
-		System.out.println(this.username);
-		Restaurant restaurant = new Restaurant(this.username);
 		// Maybe can be refactor
-		Restaurant restaurantInfo = restaurant.getRestaurantInfo();
 		if (restaurantInfo != null) {
 			// TODO [FX] handle the info fx.
+		
+			tmp = "Username: " + restaurantInfo.getUserName() + "\n";
+			if (restaurantInfo.getAddress().length() > 14) {
+				tmp += "Address: " + restaurantInfo.getAddress().substring(0, 14) + "\n";
+				tmp += restaurantInfo.getAddress().substring(14	, restaurantInfo.getAddress().length()) + "\n";
+			} else {
+				tmp += "Address: " + restaurantInfo.getAddress() + "\n";
+			}
+
+			tmp += "Phone: " + restaurantInfo.getPhone() + "\n";
+			tmp += "Email: " + restaurantInfo.getEmail() + "\n";
+			tmp += "Name: " + restaurantInfo.getName() + "\n";
+			tmp += "Type: ";
+						
 			System.out.println();
 			System.out.println("Username: " + restaurantInfo.getUserName());
 			System.out.println("Address: " + restaurantInfo.getAddress());
@@ -97,62 +138,78 @@ public class RestaurantController extends Controller implements Initializable{
 			System.out.println("Order Description: " + restaurantInfo.getOrder_despcription());
 			System.out.println("Coupon: " + restaurantInfo.getCoupon());
 
-			String [] types = restaurantInfo.getTypes();
+			String[] types = restaurantInfo.getTypes();
 			System.out.println("Type: ");
 
 			for (String type : types) {
+				tmp += " ";
+				tmp += type;
 				System.out.println(type);
 			}
+			tmp += "\n";
 
-		}else {
+		} else {
 			System.out.println("some error occur, getting null");
 		}
 		System.out.println();
+		render();
 	}
 
 	public void pressOrderBtn() throws SQLException {
 		status = RestaurantView.Order;
 		render();
-		System.out.println(this.username);
-		Restaurant restaurant = new Restaurant(this.username);
-		// Maybe Store Description and order Description can be handle in this?
-		HashMap<String, Integer> restaurantProduct = restaurant.getProducts();
-		
-		if (restaurantProduct != null) {
-			// TODO [FX] handle the info fx.
-			System.out.println("Products List: ");
+		System.out.println("Order in "+this.username);
 
-			for (String key : restaurantProduct.keySet()) 
-				System.out.println(key + ": $" + restaurantProduct.get(key));
-
-		}else {
-			System.out.println("some error occur, getting null");
-		}
-		System.out.println();
-		
 	}
-	
-	public void pressDiscountBtn() throws SQLException {
-		status = RestaurantView.Discount;
+
+	public void pressCouponBtn() throws SQLException {
+		status = RestaurantView.Coupon;
 		render();
-		
+
 		// TODO maybe setting coupon in DB later and show out the result
 		System.out.println(this.username);
 		Restaurant restaurant = new Restaurant(this.username);
 		Restaurant restaurantInfo = restaurant.getRestaurantInfo();
 		if (restaurantInfo != null) {
 			System.out.println("Coupon: " + restaurantInfo.getCoupon());
-		}else {
+		} else {
 			System.out.println("some error occur, getting null");
 		}
-		
+
 		System.out.println();
 	}
-		
+
+	public void pressProductBtn() throws SQLException {
+		status = RestaurantView.Product;
+		// Maybe Store Description and order Description can be handle in this?
+		HashMap<String, Integer> restaurantProduct = restaurant.getProducts();
+
+		if (restaurantProduct != null) {
+			// TODO [FX] handle the info fx.
+			System.out.println("Products List: ");
+
+			for (String key : restaurantProduct.keySet()) {
+				System.out.println(key + ": $" + restaurantProduct.get(key));
+				tmp += (key + ": $" + restaurantProduct.get(key) + "\n");
+			}
+				
+
+		} else {
+			System.out.println("some error occur, getting null");
+		}
+		System.out.println();
+
+		render();
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		status = RestaurantView.Default;
 		render();
+
+		System.out.println(this.username);
+//		restaurant = 
+
 	}
 }

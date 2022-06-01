@@ -61,6 +61,12 @@ public class MemberController extends Controller implements Initializable {
 	private Button searchTfBtn;
 
 	@FXML
+	private Button vipBtn;
+
+	@FXML
+	private Button vipConfirmBtn;
+	
+	@FXML
 	private Button orderBtn;
 
 	@FXML
@@ -71,18 +77,17 @@ public class MemberController extends Controller implements Initializable {
 	private String tmp = "";
 	private SearchBy searchBy = SearchBy.NAME;
 	private String selectedRestaurant;
-	
+
 	public void logout(ActionEvent event) throws IOException {
 		switchScene(ViewEnum.LOGIN, event);
 	}
-	
 
 //	public EventHandler<ActionEvent> setSelectedRestaurant(String s) {
 //		selectedRestaurant = s;
 //		
 //		return null;
 //	}
-	
+
 	@Override
 	protected void setUsernameLb(String s) {
 		username = s;
@@ -103,10 +108,13 @@ public class MemberController extends Controller implements Initializable {
 			nameBtn.setStyle("-fx-background-color: #ffffff");
 			typeBtn.setStyle("-fx-background-color: #ffffff");
 			distanceBtn.setStyle("-fx-background-color: #ffffff");
-
+			
+			vipBtn.setVisible(true);
+			vipConfirmBtn.setVisible(false);
+			
 			displayVb.getChildren().clear();
 			Label label13 = new Label(tmp);
-			label13.setFont(new Font("Agency FB", 24));
+			label13.setFont(new Font("Yu Gothic UI Semibold", 15));
 			displayVb.getChildren().add(label13);
 			searchBy = SearchBy.NAME;
 			break;
@@ -121,6 +129,8 @@ public class MemberController extends Controller implements Initializable {
 			typeBtn.setStyle("-fx-background-color: #ffffff");
 			distanceBtn.setStyle("-fx-background-color: #ffffff");
 			searchBy = SearchBy.NAME;
+			vipBtn.setVisible(false);
+			vipConfirmBtn.setVisible(false);
 			tmp = "Order of " + username;
 			break;
 		case Track:
@@ -131,6 +141,8 @@ public class MemberController extends Controller implements Initializable {
 			searchTfBtn.setDisable(true);
 			displayVb.getChildren().clear();
 			searchTf.setDisable(true);
+			vipBtn.setVisible(false);
+			vipConfirmBtn.setVisible(false);
 			searchBy = SearchBy.NAME;
 			nameBtn.setStyle("-fx-background-color: #ffffff");
 			typeBtn.setStyle("-fx-background-color: #ffffff");
@@ -148,11 +160,32 @@ public class MemberController extends Controller implements Initializable {
 			distanceBtn.setVisible(true);
 			nameBtn.setVisible(true);
 			typeBtn.setVisible(true);
-		
+			vipBtn.setVisible(false);
+			vipConfirmBtn.setVisible(false);
+
 			break;
 		default:
+			vipBtn.setVisible(false);
+			vipConfirmBtn.setVisible(false);
 			break;
 		}
+	}
+
+	public void pressVipConfirmBtn() {
+		// TODO: VIP Logic
+		vipBtn.setVisible(true);
+		vipConfirmBtn.setVisible(false);
+		vipBtn.setDisable(true);
+		System.out.println("Congrats! You become VIP");
+		render();
+	}
+
+	
+	public void pressVipBtn() {
+		// TODO: VIP Logic
+		vipBtn.setVisible(false);
+		vipConfirmBtn.setVisible(true);
+		
 	}
 
 	public void pressDistanceBtn() throws SQLException {
@@ -182,10 +215,10 @@ public class MemberController extends Controller implements Initializable {
 	private void searchHelper(SearchBy searchBy, Model model, String input) {
 		ArrayList<Restaurant> result = null;
 		Map<Restaurant, Integer> result2 = null;
-		Label label13; 
+		Label label13;
 		int limit = 10000;
 
-		switch (searchBy){
+		switch (searchBy) {
 		case NAME:
 			result = model.SearchRestaurantByName(input);
 			break;
@@ -197,29 +230,28 @@ public class MemberController extends Controller implements Initializable {
 			break;
 		default:
 			result = model.SearchRestaurantByName(input);
-			break;			
-		}	
+			break;
+		}
 
 		if (searchBy == SearchBy.DISTANCE) {
-			if (input == null) {
+			if (input == null || input.equals("")) {
 				limit = 10000;
-			}else {
-				try{
-		            limit = Integer.parseInt(input);
+			} else {
+				try {
+					limit = Integer.parseInt(input);
 //		            System.out.println(limit); // output = 25
-		        }
-		        catch (NumberFormatException ex){
-		            ex.printStackTrace();
-		        }
-				
+				} catch (NumberFormatException ex) {
+					ex.printStackTrace();
+				}
+
 			}
 			final int tmpLimit = limit; // Since for each require comparison with final argument
 			if (result2 != null) {
 				displayVb.getChildren().clear();
 				result2.forEach((rest, value) -> {
 					int time = value / 60;
-					if (time < tmpLimit){
-						String qq = rest.getName() +": " +Integer.toString(time) + " min";
+					if (time < tmpLimit) {
+						String qq = rest.getName() + ": " + Integer.toString(time) + " min";
 						System.out.println(qq);
 						Button label14 = new Button();
 						label14.setText(qq);
@@ -235,73 +267,64 @@ public class MemberController extends Controller implements Initializable {
 							e1.printStackTrace();
 						}
 						label14.setTextAlignment(TextAlignment.CENTER);
-						label14.setId(rest.getName().replaceAll("\\s+","%"));
-					    label14.setStyle("-fx-background-color: #f5e1a9; -fx-cursor: hand;");
-					    label14.setOnAction(e -> {
-					    	Button t;
-					    	if (selectedRestaurant != null) {
-						    	t = (Button) label14.getScene().lookup("#" + selectedRestaurant);
-						    	if (t!=null) {
-							    	t.setStyle("-fx-background-color: #f5e1a9; -fx-cursor: hand;");			    	
-					
-						    	}
-					    	}
-					    	selectedRestaurant = ((Button) (e.getSource())).getId();
-					    	
-					    	t = ((Button) e.getSource());
-					    	t.setStyle("-fx-background-color: #7ec6ed; -fx-cursor: hand;");;
-					    	
-					    	System.out.println(((Button) (e.getSource())).getId());
-					    });
-						
+						label14.setId(rest.getName().replaceAll("\\s+", "%"));
+						label14.setStyle("-fx-background-color: #f5e1a9; -fx-cursor: hand;");
+						label14.setOnAction(e -> {
+							Button t;
+							if (selectedRestaurant != null) {
+								t = (Button) label14.getScene().lookup("#" + selectedRestaurant);
+								if (t != null) {
+									t.setStyle("-fx-background-color: #f5e1a9; -fx-cursor: hand;");
+
+								}
+							}
+							selectedRestaurant = ((Button) (e.getSource())).getId();
+
+							t = ((Button) e.getSource());
+							t.setStyle("-fx-background-color: #7ec6ed; -fx-cursor: hand;");
+							;
+
+							System.out.println(((Button) (e.getSource())).getId());
+						});
 						displayVb.getChildren().add(label14);
-
 						System.out.println(rest.getName());
-						
-						
-						
-						
-						
 						System.out.println(rest.getName() + "time: " + value / 60 + " (min)");
-						
-						
-
-						
 					}
 //					System.out.println(time);
-				});				
-			}else {
+				});
+			} else {
 				displayVb.getChildren().clear();
 				label13 = new Label("No Result!");
 				label13.setFont(new Font("Yu Gothic UI Semibold", 18));
 				displayVb.getChildren().add(label13);
 			}
-		}else {
+		} else {
 			displayVb.getChildren().clear();
 			if (result != null)
 				result.forEach((rest) -> {
 					Button label14 = new Button(rest.getName());
 					label14.setFont(new Font("Yu Gothic UI Semibold", 18));
 					label14.setPrefWidth(270);
-					label14.setId(rest.getName().replaceAll("\\s+","%"));
-				    label14.setStyle("-fx-background-color: #f5e1a9; -fx-cursor: hand;");
-				    label14.setOnAction(e -> {
-				    	Button t;
-				    	if (selectedRestaurant != null) {
-					    	t = (Button) label14.getScene().lookup("#" + selectedRestaurant);
-					    	if (t!=null) {
-						    	t.setStyle("-fx-background-color: #f5e1a9; -fx-cursor: hand;");			    	
-				
-					    	}
-				    	}
-				    	selectedRestaurant = ((Button) (e.getSource())).getId();
-				    	
-				    	t = ((Button) e.getSource());
-				    	t.setStyle("-fx-background-color: #7ec6ed; -fx-cursor: hand;");;
-				    	
-				    	System.out.println(((Button) (e.getSource())).getId());
-				    });
-					
+					label14.setId(rest.getName().replaceAll("\\s+", "%"));
+					label14.setStyle("-fx-background-color: #f5e1a9; -fx-cursor: hand;");
+					label14.setOnAction(e -> {
+						Button t;
+						if (selectedRestaurant != null) {
+							t = (Button) label14.getScene().lookup("#" + selectedRestaurant);
+							if (t != null) {
+								t.setStyle("-fx-background-color: #f5e1a9; -fx-cursor: hand;");
+
+							}
+						}
+						selectedRestaurant = ((Button) (e.getSource())).getId();
+
+						t = ((Button) e.getSource());
+						t.setStyle("-fx-background-color: #7ec6ed; -fx-cursor: hand;");
+						;
+
+						System.out.println(((Button) (e.getSource())).getId());
+					});
+
 					displayVb.getChildren().add(label14);
 
 					System.out.println(rest.getName());
@@ -311,11 +334,11 @@ public class MemberController extends Controller implements Initializable {
 				label13 = new Label("No Result!");
 				label13.setFont(new Font("Yu Gothic UI Semibold", 18));
 				displayVb.getChildren().add(label13);
-			}			
+			}
 		}
 
 	}
-	
+
 	public void pressSearchTfBtn() throws SQLException {
 		Model model = new Model();
 		String input = searchTf.getText();
@@ -338,14 +361,13 @@ public class MemberController extends Controller implements Initializable {
 		if (memberInfo != null) {
 			// TODO [FX] handle the info fx.
 			tmp = "Username: " + memberInfo.getUserName() + "\n";
-			if (memberInfo.getAddress().length() > 8) {
-				tmp += "Address: " + memberInfo.getAddress().substring(0, 8) + "\n";				
-				tmp += memberInfo.getAddress().substring(8, memberInfo.getAddress().length()) + "\n";				
-			}
-			else {
+			if (memberInfo.getAddress().length() > 14) {
+				tmp += "Address: " + memberInfo.getAddress().substring(0, 14) + "\n";
+				tmp += memberInfo.getAddress().substring(14	, memberInfo.getAddress().length()) + "\n";
+			} else {
 				tmp += "Address: " + memberInfo.getAddress() + "\n";
 			}
-			
+
 			tmp += "Phone: " + memberInfo.getPhone() + "\n";
 			tmp += "Email: " + memberInfo.getEmail() + "\n";
 			tmp += "Name: " + memberInfo.getName() + "\n";
@@ -357,9 +379,13 @@ public class MemberController extends Controller implements Initializable {
 			System.out.println("Name: " + memberInfo.getName());
 			if (memberInfo.getVIP_expire_date() == null) {
 				// Maybe think a good expression for vip date.
+				tmp += "Vip Expired date: ----";
 				System.out.println("Vip Expired date: ----");
+				vipBtn.setDisable(false);
 			} else {
+				tmp += "Vip Expired date: " + memberInfo.getVIP_expire_date();
 				System.out.println("Vip Expired date: " + memberInfo.getVIP_expire_date());
+				vipBtn.setDisable(true);
 			}
 		} else {
 			System.out.println("some error occur, getting null");
@@ -378,30 +404,30 @@ public class MemberController extends Controller implements Initializable {
 		}
 		displayVb.getChildren().clear();
 		label13.setFont(new Font("Yu Gothic UI Semibold", 18));
-		displayVb.getChildren().add(label13);			
-    			
+		displayVb.getChildren().add(label13);
+
 		Restaurant restaurant = new Restaurant();
 		restaurant.setName(selectedRestaurant);
 		// Maybe can be refactor
 		restaurant = restaurant.getRestaurantInfoByName();
 //		System.out.println(restaurantInfo.getName());
 		if (restaurant != null) {
-		
+
 			HashMap<String, Integer> restaurantProduct = restaurant.getProducts();
-			
+
 			if (restaurantProduct != null) {
 				// TODO [FX] handle the info fx.
 				System.out.println("Products List: ");
-	
-				for (String key : restaurantProduct.keySet()) 
+
+				for (String key : restaurantProduct.keySet())
 					System.out.println(key + ": $" + restaurantProduct.get(key));
-	
-			}else {
+
+			} else {
 				System.out.println("some error occur, getting null");
 			}
 			System.out.println();
 		}
-		
+
 		render();
 	}
 
@@ -418,9 +444,9 @@ public class MemberController extends Controller implements Initializable {
 		displayVb.setSpacing(5);
 		render();
 	}
-	
-	private enum SearchBy{
-		DISTANCE, NAME, TYPE 
+
+	private enum SearchBy {
+		DISTANCE, NAME, TYPE
 	}
 
 }

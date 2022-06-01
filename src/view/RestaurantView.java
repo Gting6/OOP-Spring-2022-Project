@@ -1,5 +1,5 @@
 package view;
 
 public enum RestaurantView {
-	Default, Discount, Info, Order,
+	Default, Coupon, Info, Order, Product
 }
