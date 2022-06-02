@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import model.DeliveryMan;
 import view.DeliverView;
 import view.MemberView;
@@ -22,7 +24,7 @@ public class DeliverController extends Controller implements Initializable{
 	private Label welcomeLb;
 	
 	@FXML
-	private Label displayLb;
+	private VBox displayVb;
 	
 	@FXML
 	private Button orderBtn;
@@ -32,8 +34,11 @@ public class DeliverController extends Controller implements Initializable{
 	
 	private String username;
 	private DeliverView status;
-
-
+	private String tmp;
+	private DeliveryMan deliveryman;
+	private DeliveryMan deliverymanInfo;
+	
+	
 	public void logout(ActionEvent event) throws IOException {
 		switchScene(ViewEnum.LOGIN, event);
 	}
@@ -41,39 +46,49 @@ public class DeliverController extends Controller implements Initializable{
 	@Override
 	protected void setUsernameLb(String s) {
 		username = s;
-		String tmp = "Hello, Deliver " + s;
-		welcomeLb.setText(tmp);
+		deliveryman = new DeliveryMan(this.username);
+		// Maybe can be refactor
+		try {
+			deliverymanInfo = deliveryman.getDeliveryManInfo();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		welcomeLb.setText(("Hello, Deliver " + s));
 	}
 	
 	@Override
 	protected void render() {
-		String tmp;
+		Label lb;
 		switch (status){
 		case Info:
-			tmp = "Info of " + username;
-			displayLb.setText(tmp);
-			displayLb.setVisible(true);
+			displayVb.getChildren().clear();
+			lb = new Label(tmp);
+			lb.setFont(new Font("Yu Gothic UI Semibold", 15));
+			displayVb.getChildren().add(lb);
+			tmp = "";
 			break;			
 		case Order:
-			tmp = "Order of " + username;
-			displayLb.setText(tmp);
-			displayLb.setVisible(true);
+			displayVb.getChildren().clear();
+			tmp = "";
 			break;			
 		default:
-			displayLb.setVisible(false);
-			displayLb.setText("");
+			displayVb.getChildren().clear();
+			tmp = "";
 			break;
 		}
 	}
 		
 	public void pressInfoBtn() throws SQLException {
 		status = DeliverView.Info;
-		render();
-		DeliveryMan deliveryman = new DeliveryMan(this.username);
-		// Maybe can be refactor
-		DeliveryMan deliverymanInfo = deliveryman.getDeliveryManInfo();
 		if (deliverymanInfo != null) {
 			// TODO [FX] handle the info fx.
+			tmp = ("Username: " + deliverymanInfo.getUserName() + "\n");
+			tmp += ("Address: " + deliverymanInfo.getAddress() + "\n");
+			tmp += ("Phone: " + deliverymanInfo.getPhone() + "\n");
+			tmp += ("Email: " + deliverymanInfo.getEmail() + "\n");
+			tmp += ("Name: " + deliverymanInfo.getName() + "\n");
+			
 			System.out.println();
 			System.out.println("Username: " + deliverymanInfo.getUserName());
 			System.out.println("Address: " + deliverymanInfo.getAddress());
@@ -84,6 +99,7 @@ public class DeliverController extends Controller implements Initializable{
 			System.out.println("some error occur, getting null");
 		}
 		System.out.println();
+		render();
 	}
 
 	public void pressOrderBtn() {

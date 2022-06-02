@@ -1,36 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-	prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.DeliverController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DeliverController">
 	<children>
-		<Label fx:id="welcomeLb" layoutX="45.0" layoutY="46.0"
-			text="Member Page">
-			<font>
-				<Font size="35.0" />
-			</font>
-		</Label>
-		<Button fx:id="logoutBtn" layoutX="45.0" layoutY="338.0"
-			mnemonicParsing="false" onAction="#logout" text="Log out" />
-		<Button fx:id="infoBtn" layoutX="45.0" layoutY="161.0"
-			mnemonicParsing="false" onAction="#pressInfoBtn" prefHeight="39.0"
-			prefWidth="179.0" text="Basic Info" />
-		<Button fx:id="orderBtn" layoutX="45.0" layoutY="217.0"
-			mnemonicParsing="false" onAction="#pressOrderBtn" prefHeight="39.0"
-			prefWidth="179.0" text="Order" />
-		<Label fx:id="displayLb" alignment="CENTER" layoutX="306.0"
-			layoutY="88.0" prefHeight="236.0" prefWidth="274.0">
-			<font>
-				<Font size="30.0" />
-			</font>
-		</Label>
+      <HBox layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <VBox prefHeight="400.0" prefWidth="174.0" styleClass="left-side-member-background" stylesheets="@style.css">
+               <children>
+                  <HBox prefHeight="56.0" prefWidth="160.0">
+                     <children>
+                        <ImageView fitHeight="42.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imgs/icon.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" top="7.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="27.0" prefWidth="101.0" text="Footopia" textFill="#01bed2">
+                           <font>
+                              <Font name="Candara Bold" size="23.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" top="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="5.0" top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Button fx:id="infoBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressInfoBtn" prefHeight="38.0" prefWidth="118.0" styleClass="left-side-member-button" stylesheets="@style.css" text="Info">
+                     <font>
+                        <Font name="Arial" size="17.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imgs/user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="30.0" top="15.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="orderBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressOrderBtn" prefHeight="38.0" prefWidth="118.0" styleClass="left-side-member-button" stylesheets="@style.css" text="Order">
+                     <font>
+                        <Font name="Arial" size="17.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imgs/shopping-bag.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="30.0" top="15.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="logoutBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefHeight="29.0" prefWidth="118.0" styleClass="left-side-background" stylesheets="@style.css" text="Log out" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="30.0" top="156.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox prefHeight="400.0" prefWidth="426.0">
+               <children>
+                  <Label fx:id="welcomeLb" alignment="CENTER" prefHeight="64.0" prefWidth="427.0" text="Hello " textFill="#941c07">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Agency FB Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane prefHeight="289.0" prefWidth="326.0">
+                     <VBox.margin>
+                        <Insets left="55.0" right="45.0" top="15.0" />
+                     </VBox.margin>
+                     <content>
+                        <VBox fx:id="displayVb" prefHeight="273.0" prefWidth="480.0">
+                           <padding>
+                              <Insets left="8.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
 	</children>
 </AnchorPane>
