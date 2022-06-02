@@ -113,7 +113,7 @@
                <children>
                   <Label fx:id="welcomeLb" prefHeight="64.0" prefWidth="184.0" text="Hello Member Welcome To Footopia" textFill="#941c07">
                      <VBox.margin>
-                        <Insets left="120.0" top="15.0" />
+                        <Insets left="125.0" top="15.0" />
                      </VBox.margin>
                      <font>
                         <Font name="Agency FB Bold" size="24.0" />
@@ -182,7 +182,7 @@
                         <Insets left="55.0" right="70.0" top="8.0" />
                      </VBox.margin>
                      <content>
-                        <VBox fx:id="displayVb" prefHeight="200.0" prefWidth="297.0">
+                        <VBox fx:id="displayVb" prefHeight="200.0" prefWidth="358.0">
                            <padding>
                               <Insets left="8.0" top="5.0" />
                            </padding>
