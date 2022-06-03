@@ -109,6 +109,7 @@ public class MemberController extends Controller implements Initializable {
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
 			distanceBtn.setDisable(true);
+			couponBtn.setDisable(true);
 			searchTf.setText("");
 			searchTf.setDisable(true);
 			searchTfBtn.setDisable(true);
@@ -133,6 +134,7 @@ public class MemberController extends Controller implements Initializable {
 		case Order:
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
+			couponBtn.setDisable(true);
 			distanceBtn.setDisable(true);
 			searchTf.setText("");
 			searchTf.setDisable(true);
@@ -154,6 +156,7 @@ public class MemberController extends Controller implements Initializable {
 		case Track:
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
+			couponBtn.setDisable(true);
 			distanceBtn.setDisable(true);
 			searchTf.setText("");
 			searchTfBtn.setDisable(true);
@@ -173,6 +176,7 @@ public class MemberController extends Controller implements Initializable {
 			break;
 		case Search:
 			nameBtn.setDisable(false);
+			couponBtn.setDisable(false);
 			typeBtn.setDisable(false);
 			distanceBtn.setDisable(false);
 			searchTf.setText("");
