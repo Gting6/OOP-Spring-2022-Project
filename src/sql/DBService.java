@@ -31,7 +31,7 @@ public class DBService {
 			update_VIP.setString(2, username);
 			
 			update_VIP.executeUpdate();
-
+			conn.close();
 			return true;
 		}
 		catch (Exception e) {
@@ -50,9 +50,14 @@ public class DBService {
 			ResultSet res = query_vip_date.executeQuery();
 			
 			if(res.next()) {
-				return res.getDate("vip_expire_date");
+				Date vip_expire_date = res.getDate("vip_expire_date");
+				conn.close();
+				return vip_expire_date;
 			}
-			else return null;
+			else {
+				conn.close();
+				return null;
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -84,6 +89,7 @@ public class DBService {
 			else {
 				System.out.print("User Creation Failed");
 			}
+			conn.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -117,6 +123,7 @@ public class DBService {
 			else {
 				System.out.print("Order Creation Failed");
 			}
+			conn.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -148,6 +155,7 @@ public class DBService {
 
 				}
 			}	
+			conn.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -175,6 +183,7 @@ public class DBService {
 					System.out.print("OrderItems Creation Failed");
 				}
 			}	
+			conn.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -206,6 +215,7 @@ public class DBService {
 			else {
 				System.out.print("Member Creation Failed");
 			}
+			conn.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -229,10 +239,12 @@ public class DBService {
 			
 				System.out.print("Login Success");
 //				might add cookie or something else??
+				conn.close();
 				return true;
 			}
 			else {
 				System.out.print("Login Failed, Cannot find Account");
+				conn.close();
 				return false;
 			}
 		}
@@ -257,10 +269,13 @@ public class DBService {
 			
 			if(res.next()) {
 				System.out.print("Find!");
-				return new Member(res.getString("username"), res.getString("password"), res.getString("address"), res.getString("phone"), res.getString("email"), res.getString("name"), res.getDate("vip_expire_date"));		// need recreate or just send these 2 as json file?
+				Member member = new Member(res.getString("username"), res.getString("password"), res.getString("address"), res.getString("phone"), res.getString("email"), res.getString("name"), res.getDate("vip_expire_date"));		// need recreate or just send these 2 as json file?
+				conn.close();
+				return member;
 			}
 			else {
 				System.out.print("NotFind!");
+				conn.close();
 			}
 		}
 		catch (Exception e) {
@@ -284,10 +299,13 @@ public class DBService {
 			
 			if(res.next()) {
 				System.out.print("Find!");
-				return new Member(res.getString("username"), res.getString("password"), res.getString("address"), res.getString("phone"), res.getString("email"), res.getString("name"), res.getDate("vip_expire_date"));		// need recreate or just send these 2 as json file?
+				Member member = new Member(res.getString("username"), res.getString("password"), res.getString("address"), res.getString("phone"), res.getString("email"), res.getString("name"), res.getDate("vip_expire_date"));		// need recreate or just send these 2 as json file?
+				conn.close();
+				return member;
 			}
 			else {
 				System.out.print("NotFind!");
+				conn.close();
 			}
 		}
 		catch (Exception e) {
@@ -325,6 +343,7 @@ public class DBService {
 				s[10] = res.getString("coupon");
 				
 			}
+			conn.close();
 			return s;
 
 		}
@@ -362,6 +381,7 @@ public class DBService {
 				s[10] = res.getString("coupon");
 				
 			}
+			conn.close();
 			return s;
 
 		}
@@ -398,6 +418,7 @@ public class DBService {
 				s[count][10] = res.getString("coupon");
 				count++;
 			}
+			conn.close();
 			return s;
 
 		}
@@ -433,7 +454,7 @@ public class DBService {
 				s[10] = res.getString("coupon");
 				al.add(s);
 			}
-			
+			conn.close();
 			return al;
 
 		}
@@ -469,7 +490,7 @@ public class DBService {
 				s[10] = res.getString("coupon");
 				al.add(s);
 			}
-			
+			conn.close();
 			return al;
 
 		}
@@ -500,12 +521,14 @@ public class DBService {
 				s[3] = res.getString("phone");
 				s[4] = res.getString("email");
 				s[5] = res.getString("name");
+				conn.close();
 				return s;
 //				return DeliveryMan(res.getString("name"));		// need recreate or just send sth as json file?
 //				might add cookie or something else??
 			}
 			else {
 				System.out.print("Cannot find DeliveryMan");
+				conn.close();
 				return null;
 			}
 		}
@@ -531,6 +554,7 @@ public class DBService {
 		while(res.next()) {
 			products.put(res.getString("product_name"), res.getInt("price"));
 		}
+		conn.close();
 		return products;
 	}
 		catch (Exception e) {
@@ -554,6 +578,7 @@ public class DBService {
 		while(res.next()) {
 			items.add(res.getString("item"));
 		}
+		conn.close();
 		return items;
 	}catch (Exception e) {
 		e.printStackTrace();
@@ -582,12 +607,15 @@ public class DBService {
 				Timestamp d = Timestamp.valueOf(c);
 				Timestamp d_bar = Timestamp.valueOf(c_bar);
 				Timestamp deliver_time = Timestamp.valueOf(dt);
-				return new Order(res.getString("id"), res.getInt("status"), d, deliver_time, d_bar, res.getString("member_name"), 
+				Order order = new Order(res.getString("id"), res.getInt("status"), d, deliver_time, d_bar, res.getString("member_name"), 
 						res.getString("deliveryman_name"), res.getString("restaurant_name"), res.getInt("fee"));
+				conn.close();
+				return order;
 //				might add cookie or something else??
 			}
 			else {
 				System.out.println("Cannot find Order");
+				conn.close();
 				return null;
 			}
 		}
@@ -627,6 +655,7 @@ public class DBService {
 			else {
 				System.out.print("Restaurant Creation From Json Failed");
 			}
+			conn.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -644,6 +673,7 @@ public class DBService {
 				stmt.setString(2, t);
 				stmt.executeUpdate();
 			}
+			conn.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -674,7 +704,7 @@ public class DBService {
 				s[index] = res.getString("type");
 				index ++;
 			}
-			
+			conn.close();
 			return s;
 		}
 		catch (Exception e) {
@@ -701,6 +731,7 @@ public class DBService {
 				stmt.executeUpdate();
 				date ++;
 			}
+			conn.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -726,7 +757,7 @@ public class DBService {
 				index ++;
 
 			}
-			
+			conn.close();
 			return s;
 		}
 		catch (Exception e) {
@@ -748,6 +779,7 @@ public class DBService {
 			while(res.next()) {
 				orders.add(res.getString("id"));
 			}
+			conn.close();
 			return orders;
 		}
 		catch (Exception e) {
@@ -763,12 +795,13 @@ public class DBService {
 		try {
 			Connection conn = DBConnection.getConnection();
 			
-			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE deliveryman_name=?"); 
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE deliveryman_name=? and status=1"); 
 			query_orders.setString(1, "");
 			ResultSet res = query_orders.executeQuery();
 			while(res.next()) {
 				orders.add(res.getString("id"));
 			}
+			conn.close();
 			return orders;
 		}
 		catch (Exception e) {
@@ -790,6 +823,7 @@ public class DBService {
 			while(res.next()) {
 				orders.add(res.getString("id"));
 			}
+			conn.close();
 			return orders;
 		}
 		catch (Exception e) {
@@ -811,6 +845,7 @@ public class DBService {
 			while(res.next()) {
 				orders.add(res.getString("id"));
 			}
+			conn.close();
 			return orders;
 		}
 		catch (Exception e) {
@@ -826,10 +861,80 @@ public class DBService {
 			update_orders.setString(1, deliveryman_id);
 			update_orders.setString(2, order_id);
 			update_orders.executeUpdate();
+			conn.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	public void addCoupon(String restaurant_id, String coupon) {
+		try {
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement update_orders = conn.prepareStatement("UPDATE restaurants SET coupon=? WHERE username=?"); 
+			update_orders.setString(1, coupon);
+			update_orders.setString(2, restaurant_id);
+			update_orders.executeUpdate();
+			conn.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+
+	public String getCoupon(String restaurant_id) {
+		// TODO Auto-generated method stub
+		
+		String coupon = "";
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from restaurants WHERE username=?"); 
+			query_orders.setString(1, restaurant_id);
+			ResultSet res = query_orders.executeQuery();
+			while(res.next()) {
+				coupon = res.getString("coupon");
+			}
+			conn.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return coupon;
+	}
+	
+	public void setOrderStatus(int status, String order_id) {
+		try {
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement update_orders = conn.prepareStatement("UPDATE orders SET status=? WHERE id=?"); 
+			update_orders.setInt(1, status);
+			update_orders.setString(2, order_id);
+			update_orders.executeUpdate();
+			conn.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getOrderStatus(String order_id) {
+		
+		int status = -1;
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE id=?"); 
+			query_orders.setString(1, order_id);
+			ResultSet res = query_orders.executeQuery();
+			status = res.getInt(status);
+			conn.close();
+			return status;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
 }
