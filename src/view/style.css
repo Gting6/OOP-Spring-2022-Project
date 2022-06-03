@@ -16,6 +16,12 @@
 	-fx-border-width: 1.5;
 }
 
+.bor{
+	-fx-border-color: #01BED2;
+	-fx-border-width: 1.5;
+}
+
+
 .button{
     cursor: pointer;
 }
@@ -39,9 +45,13 @@
 
 .transparent{
 	-fx-background-color: rgba(0,0,0,0);
-}
+ }
 
 .right-side-border{
 	-fx-border-color: #01BED2;
 	-fx-border-width: 0 1.5 0 0;
+}
+
+.combo-box:hover{
+    -fx-cursor: hand;
 }
