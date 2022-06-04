@@ -189,6 +189,22 @@ public class Order {
 		
 		if(coupon != "") {
 //			parse the coupon info and change discount
+			if(coupon.equals(Restaurant.coupon_type.buy_200_get_90_percent_off.name())) {
+				if(total_price >= 200) {
+					total_price = (int) (total_price*0.9);
+				}
+			}
+			else if(coupon.equals(Restaurant.coupon_type.buy_300_get_80_percent_off.name())) {
+				if(total_price >= 300) {
+					total_price = (int) (total_price*0.8);
+				}
+			}
+			else if(coupon.equals(Restaurant.coupon_type.save_20_dollars.name())) {
+				total_price = total_price - 20;
+			}
+			else if(coupon.equals(Restaurant.coupon_type.save_30_dollars.name())) {
+				total_price = total_price - 30;
+			}
 		}
 		
 		this.fee = (int) ((total_price + distance_fee) * discount);
@@ -225,4 +241,21 @@ public class Order {
 		// TODO Auto-generated method stub
 		return this.status;
 	}
+	
+	public void setStatus() {
+		this.status += 1;
+		dbService.setOrderStatus(status, id);
+	}
+	
+	public String getRestaurantDescription() {
+		String s = "";
+		try {
+			s = dbService.getRestaurant(this.restaurant_id)[8];
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return s;
+	}
+	
 }

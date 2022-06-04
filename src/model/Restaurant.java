@@ -9,6 +9,10 @@ import sql.DBService;
 
 public class Restaurant extends User{
 	
+	public enum coupon_type {
+		buy_200_get_90_percent_off, buy_300_get_80_percent_off, save_20_dollars, save_30_dollars, none; 
+	};
+	
 	
 	private String latitude;
 	private String longitude;
@@ -176,11 +180,17 @@ public class Restaurant extends User{
 	}
 
 	public String getCoupon() {
-		return coupon;
+		return dbService.getCoupon(this.getUserName());
 	}
 
 	public void setCoupon(String coupon) {
 		this.coupon = coupon;
+		dbService.addCoupon(this.getUserName(), this.coupon);
+	}
+	
+	public void setOrderStatus(String order_id) {
+		int status = 1;
+		dbService.setOrderStatus(status, order_id);
 	}
 
 }
