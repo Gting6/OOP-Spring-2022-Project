@@ -250,6 +250,33 @@ public class Model {
 		return null;
 	}
 
+	public ArrayList<Restaurant> SearchRestaurantByCoupon(String input) {
+		// TODO Auto-generated method stub
+		try {
+			if (input.equals("滿200九折")) input = "buy_200_get_90_percent_off";
+			if (input.equals("滿300八折")) input = "buy_300_get_80_percent_off";
+			if (input.equals("省20")) input = "save_20_dollars";
+			if (input.equals("省30")) input = "save_30_dollars";
+
+			ArrayList<String[]> ret = this.DBService.searchRestaurantByCoupon(input);
+			
+			if (ret.size() == 0) {
+				return null;
+			}
+
+			ArrayList<Restaurant> restaurants = new ArrayList();
+
+			for (String[] e : ret) {
+				restaurants.add(new Restaurant(e));
+			}
+			return restaurants;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 //	public boolean searchUserByUserName(String username) {
 //		return Users.containsKey(username);
 //	}
