@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -49,7 +50,13 @@ public class MemberController extends Controller implements Initializable {
 	private Button distanceBtn;
 
 	@FXML
+	private Button couponBtn;
+
+	@FXML
 	private Button nameBtn;
+
+	@FXML
+	private ComboBox<String> searchCombo;
 
 	@FXML
 	private Button typeBtn;
@@ -102,13 +109,19 @@ public class MemberController extends Controller implements Initializable {
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
 			distanceBtn.setDisable(true);
+			couponBtn.setDisable(true);
 			searchTf.setText("");
 			searchTf.setDisable(true);
 			searchTfBtn.setDisable(true);
 			nameBtn.setStyle("-fx-background-color: #ffffff");
+			couponBtn.setStyle("-fx-background-color: #ffffff");
 			typeBtn.setStyle("-fx-background-color: #ffffff");
 			distanceBtn.setStyle("-fx-background-color: #ffffff");
-			
+
+//			searchCombo.getItems().setAll("", "Member", "Deliver", "Restaurant"); // set the options
+			searchCombo.setValue("");
+			searchCombo.setDisable(true);
+
 			vipBtn.setVisible(true);
 			vipConfirmBtn.setVisible(false);
 			
@@ -121,14 +134,21 @@ public class MemberController extends Controller implements Initializable {
 		case Order:
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
+			couponBtn.setDisable(true);
 			distanceBtn.setDisable(true);
 			searchTf.setText("");
 			searchTf.setDisable(true);
 			searchTfBtn.setDisable(true);
+			couponBtn.setStyle("-fx-background-color: #ffffff");
 			nameBtn.setStyle("-fx-background-color: #ffffff");
 			typeBtn.setStyle("-fx-background-color: #ffffff");
 			distanceBtn.setStyle("-fx-background-color: #ffffff");
 			searchBy = SearchBy.NAME;
+//			searchCombo.getItems().setAll("", "Member", "Deliver", "Restaurant"); // set the options			
+			searchCombo.setValue("");
+			searchCombo.setDisable(true);
+			
+			
 			vipBtn.setVisible(false);
 			vipConfirmBtn.setVisible(false);
 			tmp = "Order of " + username;
@@ -136,6 +156,7 @@ public class MemberController extends Controller implements Initializable {
 		case Track:
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
+			couponBtn.setDisable(true);
 			distanceBtn.setDisable(true);
 			searchTf.setText("");
 			searchTfBtn.setDisable(true);
@@ -143,7 +164,11 @@ public class MemberController extends Controller implements Initializable {
 			searchTf.setDisable(true);
 			vipBtn.setVisible(false);
 			vipConfirmBtn.setVisible(false);
+//			searchCombo.getItems().setAll("", "Member", "Deliver", "Restaurant"); // set the options
+			searchCombo.setValue("");
+			searchCombo.setDisable(true);
 			searchBy = SearchBy.NAME;
+			couponBtn.setStyle("-fx-background-color: #ffffff");
 			nameBtn.setStyle("-fx-background-color: #ffffff");
 			typeBtn.setStyle("-fx-background-color: #ffffff");
 			distanceBtn.setStyle("-fx-background-color: #ffffff");
@@ -151,6 +176,7 @@ public class MemberController extends Controller implements Initializable {
 			break;
 		case Search:
 			nameBtn.setDisable(false);
+			couponBtn.setDisable(false);
 			typeBtn.setDisable(false);
 			distanceBtn.setDisable(false);
 			searchTf.setText("");
@@ -162,13 +188,41 @@ public class MemberController extends Controller implements Initializable {
 			typeBtn.setVisible(true);
 			vipBtn.setVisible(false);
 			vipConfirmBtn.setVisible(false);
+//			searchCombo.getItems().setAll("", "Member", "Deliver", "Restaurant"); // set the options
+			if (searchBy == SearchBy.COUPON || searchBy == SearchBy.TYPE) {
+				searchTf.setDisable(true);
+				searchCombo.setDisable(false);				
+			}
+			else {
+				searchCombo.setValue("");
+				searchCombo.setDisable(true);				
+				searchTf.setDisable(false);
+			}
 
 			break;
 		default:
 			vipBtn.setVisible(false);
 			vipConfirmBtn.setVisible(false);
+//			searchCombo.getItems().setAll("", "Member", "Deliver", "Restaurant"); // set the options
+			searchCombo.setValue("");
+			searchCombo.setDisable(true);
 			break;
 		}
+	}
+
+	
+	public void pressCouponBtn() throws SQLException {
+		// TODO: Coupon Logic
+		this.searchBy = SearchBy.COUPON;
+		couponBtn.setStyle("-fx-background-color: #7ec6ed");
+		nameBtn.setStyle("-fx-background-color: #ffffff");
+		distanceBtn.setStyle("-fx-background-color: #ffffff");
+		typeBtn.setStyle("-fx-background-color: #ffffff");
+		searchCombo.getItems().setAll("九折", "八折", "七折"); // set the options
+		searchCombo.setValue("九折");
+		searchCombo.setDisable(false);
+		searchTf.setDisable(true);
+		pressSearchBtn();
 	}
 
 	public void pressVipConfirmBtn() {
@@ -192,15 +246,23 @@ public class MemberController extends Controller implements Initializable {
 		this.searchBy = SearchBy.DISTANCE;
 		distanceBtn.setStyle("-fx-background-color: #7ec6ed");
 		nameBtn.setStyle("-fx-background-color: #ffffff");
+		couponBtn.setStyle("-fx-background-color: #ffffff");
 		typeBtn.setStyle("-fx-background-color: #ffffff");
+		searchCombo.setValue("");
+		searchCombo.setDisable(true);
+		searchTf.setDisable(false);
 		pressSearchBtn();
 	}
 
 	public void pressNameBtn() throws SQLException {
 		this.searchBy = SearchBy.NAME;
 		nameBtn.setStyle("-fx-background-color: #7ec6ed");
+		couponBtn.setStyle("-fx-background-color: #ffffff");
 		distanceBtn.setStyle("-fx-background-color: #ffffff");
 		typeBtn.setStyle("-fx-background-color: #ffffff");
+		searchCombo.setValue("");
+		searchCombo.setDisable(true);
+		searchTf.setDisable(false);
 		pressSearchBtn();
 	}
 
@@ -208,7 +270,12 @@ public class MemberController extends Controller implements Initializable {
 		this.searchBy = SearchBy.TYPE;
 		typeBtn.setStyle("-fx-background-color: #7ec6ed");
 		distanceBtn.setStyle("-fx-background-color: #ffffff");
+		couponBtn.setStyle("-fx-background-color: #ffffff");
 		nameBtn.setStyle("-fx-background-color: #ffffff");
+		searchCombo.getItems().setAll("日式", "中式", "西式","麵食","便當","甜點", "小吃","餅類","飲料", "其他"); // set the options
+		searchCombo.setValue("日式");
+		searchCombo.setDisable(false);
+		searchTf.setDisable(true);
 		pressSearchBtn();
 	}
 
@@ -341,7 +408,12 @@ public class MemberController extends Controller implements Initializable {
 
 	public void pressSearchTfBtn() throws SQLException {
 		Model model = new Model();
-		String input = searchTf.getText();
+		String input = "";
+		if ((searchBy == SearchBy.NAME) || (searchBy == SearchBy.DISTANCE)) {
+			input = searchTf.getText();			
+		}else {
+			input = searchCombo.getValue();
+		}
 		searchHelper(this.searchBy, model, input);
 	}
 
@@ -442,11 +514,14 @@ public class MemberController extends Controller implements Initializable {
 		status = MemberView.Default;
 		searchBy = SearchBy.NAME;
 		displayVb.setSpacing(5);
+//		searchCombo.getItems().setAll("", "Member", "Deliver", "Restaurant"); // set the options
+		searchCombo.setValue("");
+		searchCombo.setDisable(true);
 		render();
 	}
 
 	private enum SearchBy {
-		DISTANCE, NAME, TYPE
+		DISTANCE, NAME, TYPE, COUPON
 	}
 
 }

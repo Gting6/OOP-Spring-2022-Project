@@ -121,7 +121,7 @@
                   </Label>
                   <HBox prefHeight="37.0" prefWidth="426.0">
                      <children>
-                        <Button fx:id="distanceBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressDistanceBtn" prefHeight="38.0" prefWidth="95.0" styleClass="left-side-member-button" stylesheets="@style.css" text="By Distance">
+                        <Button fx:id="distanceBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressDistanceBtn" prefHeight="38.0" prefWidth="68.0" styleClass="left-side-member-button" stylesheets="@style.css" text="Time">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -129,7 +129,7 @@
                               <Insets left="55.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="nameBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressNameBtn" prefHeight="38.0" prefWidth="95.0" styleClass="left-side-member-button" stylesheets="@style.css" text="By Name">
+                        <Button fx:id="nameBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressNameBtn" prefHeight="38.0" prefWidth="68.0" styleClass="left-side-member-button" stylesheets="@style.css" text="Name">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -137,7 +137,15 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="typeBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressTypeBtn" prefHeight="38.0" prefWidth="95.0" styleClass="left-side-member-button" stylesheets="@style.css" text="By Type">
+                        <Button fx:id="typeBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressTypeBtn" prefHeight="38.0" prefWidth="68.0" styleClass="left-side-member-button" stylesheets="@style.css" text="Type">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="couponBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressCouponBtn" prefHeight="38.0" prefWidth="68.0" styleClass="left-side-member-button" stylesheets="@style.css" text="Coupon">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -152,11 +160,23 @@
                   </HBox>
                   <HBox prefHeight="32.0" prefWidth="426.0">
                      <children>
-                        <TextField fx:id="searchTf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="259.0">
+                        <TextField fx:id="searchTf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="186.0">
                            <HBox.margin>
                               <Insets left="55.0" />
                            </HBox.margin>
                         </TextField>
+                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="28.0" prefWidth="68.0" style="-fx-border-color: #8f8e8b; -fx-border-width: 0.5 0.5 0.5 0.5;" stylesheets="@style.css">
+                           <children>
+                              <ComboBox fx:id="searchCombo" prefHeight="28.0" prefWidth="74.0" styleClass="transparent" stylesheets="@style.css">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </HBox>
                         <Button fx:id="searchTfBtn" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressSearchTfBtn" prefHeight="26.0" prefWidth="38.0" styleClass="left-side-member-button" stylesheets="@style.css">
                            <font>
                               <Font name="Arial" size="17.0" />
