@@ -214,7 +214,10 @@ public class Order {
 		calculateFee();
 		Timestamp now = new Timestamp(Calendar.getInstance().getTimeInMillis());
 		long l = now.getTime();
-		long m = 30*60*1000;			// m should be calculated by googleMap API
+		Model model = new Model();
+		long m = model.CalculateDistanceMemberRest(member_id, restaurant_id);
+		// n may be a long type?
+//		long m = 30*60*1000;			// m should be calculated by googleMap API
 		long n = 15*60*1000;			// n should be calculated by googleMap API
 		Timestamp later = new Timestamp(l+m);
 		this.status = 0;

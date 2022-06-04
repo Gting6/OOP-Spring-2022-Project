@@ -27,6 +27,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.Member;
 import model.Model;
+import model.Order;
 import model.Restaurant;
 import view.MemberView;
 
@@ -483,6 +484,10 @@ public class MemberController extends Controller implements Initializable {
 		// Maybe can be refactor
 		restaurant = restaurant.getRestaurantInfoByName();
 //		System.out.println(restaurantInfo.getName());
+		
+		// List all product
+		HashMap<String, HashMap<String, Integer>> OrderTable = new HashMap<String, HashMap<String, Integer>>();
+
 		if (restaurant != null) {
 
 			HashMap<String, Integer> restaurantProduct = restaurant.getProducts();
@@ -491,19 +496,66 @@ public class MemberController extends Controller implements Initializable {
 				// TODO [FX] handle the info fx.
 				System.out.println("Products List: ");
 
-				for (String key : restaurantProduct.keySet())
+				for (String key : restaurantProduct.keySet()) {
 					System.out.println(key + ": $" + restaurantProduct.get(key));
+					HashMap<String, Integer> tmp = new HashMap<String, Integer>();
+					tmp.put(key, restaurantProduct.get(key));
+					OrderTable.put(key, tmp);
+				}
 
 			} else {
 				System.out.println("some error occur, getting null");
 			}
 			System.out.println();
 		}
-
+		
+		// TODO : [FX] Order handle section
+		Order order = null;
+		for (String product : OrderTable.keySet()) {
+			System.out.println(product + ": $" + OrderTable.get(product).get(product));
+			// + button
+//			if (order == null) {
+//				order = new Order(this.username, restaurant.getUserName(), OrderTable.get(product));
+//			}
+//			else {
+//				order.addToCart(OrderTable.get(product));
+//			}
+			// - button
+//			order.removeFromCart(OrderTable.get(product));
+			
+		}
+		// + button for 滷肉飯
+		if (order == null) {
+		order = new Order(this.username, restaurant.getUserName(), OrderTable.get("滷肉飯"));
+		}
+		else {
+			order.addToCart(OrderTable.get("滷肉飯"));
+		}
+		
+		// -button
+//		order.removeFromCart(OrderTable.get(productname));
+		
+		// + button for 雞排飯
+		if (order == null) {
+		order = new Order(this.username, restaurant.getUserName(), OrderTable.get("雞排飯"));
+		}
+		else {
+			order.addToCart(OrderTable.get("雞排飯"));
+		}
+		// - button ...
+		
+		// press submit button
+		// search fee
+		order.establishOrder();
+		Member member = new Member(this.username);
+		Order checkorder = member.checkOrderStatus(order.getId());
+		System.out.println("Order Fee is " + checkorder.getFee());
+		
 		render();
 	}
 
 	public void pressTrackBtn() {
+		// List all orders
 		status = MemberView.Track;
 		render();
 	}
