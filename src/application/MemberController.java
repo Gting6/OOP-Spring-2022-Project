@@ -524,12 +524,12 @@ public class MemberController extends Controller implements Initializable {
 //			order.removeFromCart(OrderTable.get(product));
 			
 		}
-		// + button for 滷肉飯
+//		 + button for 滷肉飯
 		if (order == null) {
-		order = new Order(this.username, restaurant.getUserName(), OrderTable.get("滷肉飯"));
+		order = new Order(this.username, restaurant.getUserName(), OrderTable.get("魯肉飯"));
 		}
 		else {
-			order.addToCart(OrderTable.get("滷肉飯"));
+			order.addToCart(OrderTable.get("魯肉飯"));
 		}
 		
 		// -button
@@ -545,7 +545,7 @@ public class MemberController extends Controller implements Initializable {
 		// - button ...
 		
 		// press submit button
-		// search fee
+//		 search fee
 		order.establishOrder();
 		Member member = new Member(this.username);
 		Order checkorder = member.checkOrderStatus(order.getId());
