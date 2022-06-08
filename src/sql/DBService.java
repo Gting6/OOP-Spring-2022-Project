@@ -500,6 +500,44 @@ public class DBService {
 		return null;		
 	}
 	
+	public ArrayList<String[]> searchRestaurantByCoupon(String coupon) throws SQLException{
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement stmt = conn.prepareStatement("select * from restaurants where coupon = ?");
+			
+			stmt.setString(1, coupon);
+
+			ResultSet res = stmt.executeQuery();
+			
+			// Maybe can be more space
+			ArrayList<String[]> al = new ArrayList<String[]>();
+			
+			while(res.next()) {
+				String[] s = new String[11];
+				s[0] = res.getString("username");
+				s[1] = res.getString("password");
+				s[2] = res.getString("email");
+				s[3] = res.getString("name");
+				s[4] = res.getString("pos_addr");
+				s[5] = res.getString("latitude");
+				s[6] = res.getString("longitude");
+				s[7] = res.getString("phone");
+				s[8] = res.getString("store_description");
+				s[9] = res.getString("order_description");
+				s[10] = res.getString("coupon");
+				al.add(s);
+			}
+			conn.close();
+			return al;
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;		
+	}
+	
 	public String[] getDeliveryMan(String DM_name) throws SQLException {
 		
 		try {

@@ -218,8 +218,10 @@ public class MemberController extends Controller implements Initializable {
 		nameBtn.setStyle("-fx-background-color: #ffffff");
 		distanceBtn.setStyle("-fx-background-color: #ffffff");
 		typeBtn.setStyle("-fx-background-color: #ffffff");
-		searchCombo.getItems().setAll("九折", "八折", "七折"); // set the options
-		searchCombo.setValue("九折");
+//		searchCombo.getItems().setAll("九折", "八折", "七折"); // set the options
+//		searchCombo.setValue("九折");
+		searchCombo.getItems().setAll("滿200九折", "滿300八折", "省20", "省30"); // set the options
+		searchCombo.setValue("滿200九折");
 		searchCombo.setDisable(false);
 		searchTf.setDisable(true);
 		pressSearchBtn();
@@ -302,6 +304,9 @@ public class MemberController extends Controller implements Initializable {
 			break;
 		case DISTANCE:
 			result2 = model.SearchRestaurantByDistance(username);
+			break;
+		case COUPON:
+			result = model.SearchRestaurantByCoupon(input);
 			break;
 		default:
 			result = model.SearchRestaurantByName(input);
