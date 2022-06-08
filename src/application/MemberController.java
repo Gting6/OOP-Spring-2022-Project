@@ -230,7 +230,15 @@ public class MemberController extends Controller implements Initializable {
 		vipBtn.setVisible(true);
 		vipConfirmBtn.setVisible(false);
 		vipBtn.setDisable(true);
-		System.out.println("Congrats! You become VIP");
+		Member member = new Member(this.username);
+		try {
+			member.becomeVIP();
+			System.out.println("Congrats! You become VIP");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Fail to become Vip");
+		}
 		render();
 	}
 
