@@ -1,5 +1,5 @@
 package view;
 
 public enum DeliverView {
-	Default, Info, Order
+	Default, Info, Order, MyOrder
 }
