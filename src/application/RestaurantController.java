@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -14,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import model.Order;
 import model.Restaurant;
 import view.MemberView;
 import view.RestaurantView;
@@ -158,7 +160,36 @@ public class RestaurantController extends Controller implements Initializable {
 	public void pressOrderBtn() throws SQLException {
 		status = RestaurantView.Order;
 		render();
+		
+		try {
 		System.out.println("Order in "+this.username);
+		
+		
+		ArrayList<String> order_ids = restaurantInfo.checkOrders();
+		
+		// List all valid order
+		order_ids.forEach(order -> System.out.println(order));
+		
+		
+		// choose one order
+		
+		Order order_detail = restaurantInfo.checkOrderDetail(order_ids.get(0));
+		ArrayList<ArrayList<String>>  order_items = restaurantInfo.checkItemValuePerOrder(order_ids.get(0));
+		
+		System.out.println(order_detail.getId());
+		order_items.forEach(orderitem -> System.out.println(orderitem.get(0) + " * " + orderitem.get(1)));
+		
+		// if the restaurant want to accept the order
+		restaurantInfo.setOrderStatus(order_ids.get(0));
+		
+		} catch (Exception e) {
+			System.out.println("order not found or expire");
+		}
+		
+		
+		
+		
+		
 
 	}
 

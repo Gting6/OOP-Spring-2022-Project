@@ -138,6 +138,28 @@ public class Restaurant extends User{
 		}
 		return items;
 	}
+	
+	public Order checkOrderDetail(String order_id){
+		Order order = null;
+		try {
+			order = dbService.getOrder(order_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return order;
+	}
+	
+	public ArrayList<ArrayList<String>> checkItemValuePerOrder(String order_id) {
+		ArrayList<ArrayList<String>> items = new ArrayList<ArrayList<String>>();
+		try {
+			items = dbService.getOrderItemsDetail(order_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return items;
+	}
 
 	public String getLatitude() {
 		return latitude;

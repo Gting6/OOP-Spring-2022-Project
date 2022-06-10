@@ -32,6 +32,15 @@ public class Order {
 		
 	}
 	
+	public Order(String member_id, String restaurant_id) {
+		this.id = UUID.randomUUID().toString();
+		this.member_id = member_id;
+		this.restaurant_id = restaurant_id;
+		this.deliveryman_id = "";  // it should be designated only when the order is established
+		this.deliver_time = null;
+		this.items = new HashMap<>();
+	}
+	
 	// An order is created when a customer clicked on the first item to the cart
 	// TODO Clear cart when buy things from another store
 	public Order(String member_id, String restaurant_id, HashMap<String, Integer> product) {
@@ -166,7 +175,7 @@ public class Order {
 		int total_price = 0;
 		int distance_fee = 0;
 		HashMap<String, Integer> products = new HashMap<>();
-		
+
 		try {
 			Member mem = dbService.getMember(this.member_id);
 			rest_info = dbService.getRestaurant(restaurant_id);
@@ -175,7 +184,15 @@ public class Order {
 			
 			if(mem.is_vip) 
 				distance_fee = 0;
-			else distance_fee = 30; // change to result from google API
+			else {
+				Model model = new Model();
+				long distance = model.CalculateDistanceMemberRest(member_id, restaurant_id) / 60;
+				System.out.println(distance);
+				if (distance > 30) {
+					distance_fee = (int) distance;
+				}
+				else distance_fee = 30; // change to result from google API
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -200,31 +217,51 @@ public class Order {
 				}
 			}
 			else if(coupon.equals(Restaurant.coupon_type.save_20_dollars.name())) {
-				total_price = total_price - 20;
+				total_price = total_price > 20 ? total_price - 20 : 0;
 			}
 			else if(coupon.equals(Restaurant.coupon_type.save_30_dollars.name())) {
-				total_price = total_price - 30;
+				total_price = total_price > 30 ? total_price - 30 : 0;
 			}
 		}
 		
-		this.fee = (int) ((total_price + distance_fee) * discount);
+		this.fee = (int) (total_price * discount) + distance_fee;
+	}
+	
+	public void showOrder() {
+		calculateFee();
+		Timestamp now = new Timestamp(Calendar.getInstance().getTimeInMillis());
+		long l = now.getTime() + 3600*8*1000;
+		now = new Timestamp(l);
+		long n = 15*60*1000;			// n should be calculated by googleMap API
+		Model model = new Model();
+		long m = model.CalculateDistanceMemberRest(member_id, restaurant_id)*1000;
+		// n may be a long type?
+//		long m = 30*60*1000;			// m should be calculated by googleMap API
+		Timestamp later = new Timestamp(l+n+m);
+		this.status = 0;
+		this.deliveryman_id = "";		// should be selected by googleMap API
+		this.deliver_time = new Timestamp(l+n);// may be a number?
+		this.create_time = now; 
+		this.arrival_time = later;
 	}
 	
 	public void establishOrder() {
-		calculateFee();
-		Timestamp now = new Timestamp(Calendar.getInstance().getTimeInMillis());
-		long l = now.getTime();
-		long m = 30*60*1000;			// m should be calculated by googleMap API
-		long n = 15*60*1000;			// n should be calculated by googleMap API
-		Timestamp later = new Timestamp(l+m);
-		this.status = 0;
-		this.deliveryman_id = "";		// should be selected by googleMap API
-		this.deliver_time = new Timestamp(l+n);
-		this.create_time = now; 
-		this.arrival_time = later;
+//		calculateFee();
+//		Timestamp now = new Timestamp(Calendar.getInstance().getTimeInMillis());
+//		long l = now.getTime();
+//		long n = 15*60*1000;			// n should be calculated by googleMap API
+//		Model model = new Model();
+//		long m = model.CalculateDistanceMemberRest(member_id, restaurant_id);
+//		// n may be a long type?
+////		long m = 30*60*1000;			// m should be calculated by googleMap API
+//		Timestamp later = new Timestamp(l+m);
+//		this.status = 0;
+//		this.deliveryman_id = "";		// should be selected by googleMap API
+//		this.deliver_time = new Timestamp(l+n);
+//		this.create_time = now; 
+//		this.arrival_time = later;
 		setToDB();
 		setItemsToDB();
-		
 	}
 
 	private void setItemsToDB() {

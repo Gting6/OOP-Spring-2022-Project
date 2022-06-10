@@ -131,6 +131,83 @@ public class Model {
 		return null;
 	}
 
+	public Integer CalculateDistanceDeliveryRest(String deliveryman, String r_id) {
+		try {
+			String[] restaurantString = this.DBService.getRestaurant(r_id);
+			Restaurant restaurant = new Restaurant(restaurantString);
+
+			// can be refactor
+			String[] deliveryString = this.DBService.getDeliveryMan(deliveryman);
+			DeliveryMan deliverymanOb = new DeliveryMan(deliveryString);
+			String deliverymanAddress = deliverymanOb.getAddress().replace(" ", "%20");
+
+			String findplaceurl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + deliverymanAddress
+					+ "&destinations=" + restaurant.getLatitude() + "," + restaurant.getLongitude()
+					+ "&key=" + apikey;
+
+			HttpRequest request = HttpRequest.newBuilder()
+					  .uri(new URI(findplaceurl))
+					  .GET()
+					  .build();
+
+			HttpClient client = HttpClient.newHttpClient();
+			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+
+			JsonObject jp = new JsonParser().parse(response.body()).getAsJsonObject();
+
+			if (response.body().contains("ZERO_RESULTS")) {
+				return null;
+			}
+
+			System.out.println(response.body());
+			Integer time = jp.getAsJsonArray("rows").get(0).getAsJsonObject().getAsJsonArray("elements").get(0).getAsJsonObject().getAsJsonObject("duration").get("value").getAsInt();
+			System.out.println(time);
+			return time;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	public Integer CalculateDistanceMemberRest(String username, String r_id) {
+		try {
+			String[] restaurantString = this.DBService.getRestaurant(r_id);
+			Restaurant restaurant = new Restaurant(restaurantString);
+
+			String userAddress = this.DBService.getMember(username).getAddress().replace(" ", "%20");
+
+			String findplaceurl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + userAddress
+					+ "&destinations=" + restaurant.getLatitude() + "," + restaurant.getLongitude()
+					+ "&key=" + apikey;
+
+			HttpRequest request = HttpRequest.newBuilder()
+					  .uri(new URI(findplaceurl))
+					  .GET()
+					  .build();
+
+			HttpClient client = HttpClient.newHttpClient();
+			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+
+			JsonObject jp = new JsonParser().parse(response.body()).getAsJsonObject();
+
+			if (response.body().contains("ZERO_RESULTS")) {
+				return null;
+			}
+
+			System.out.println(response.body());
+			Integer time = jp.getAsJsonArray("rows").get(0).getAsJsonObject().getAsJsonArray("elements").get(0).getAsJsonObject().getAsJsonObject("duration").get("value").getAsInt();
+			System.out.println(time);
+			return time;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
 	public Map <Restaurant, Integer> SearchRestaurantByDistance(String username) {
 
 		try {
