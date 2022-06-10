@@ -175,24 +175,13 @@ public class Order {
 		int total_price = 0;
 		int distance_fee = 0;
 		HashMap<String, Integer> products = new HashMap<>();
-
+		Member mem = null;
 		try {
-			Member mem = dbService.getMember(this.member_id);
+			mem = dbService.getMember(this.member_id);
 			rest_info = dbService.getRestaurant(restaurant_id);
 			products = dbService.getProducts(restaurant_id);
 			coupon = rest_info[10];
-			
-			if(mem.is_vip) 
-				distance_fee = 0;
-			else {
-				Model model = new Model();
-				long distance = model.CalculateDistanceMemberRest(member_id, restaurant_id) / 60;
-				System.out.println(distance);
-				if (distance > 30) {
-					distance_fee = (int) distance;
-				}
-				else distance_fee = 30; // change to result from google API
-			}
+			coupon = dbService.getCoupon(restaurant_id);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -222,6 +211,23 @@ public class Order {
 			else if(coupon.equals(Restaurant.coupon_type.save_30_dollars.name())) {
 				total_price = total_price > 30 ? total_price - 30 : 0;
 			}
+		}
+		
+		try {
+			if (total_price > 100 && mem.is_vip) {
+				distance_fee = 0;
+			}
+			else {
+				Model model = new Model();
+				long distance = model.CalculateDistanceMemberRest(member_id, restaurant_id) / 60;
+				System.out.println(distance);
+				if (distance > 30) {
+					distance_fee = (int) distance;
+				}
+				else distance_fee = 30; // change to result from google API
+			}
+		} catch (Exception e) {
+			System.out.println("Member not found!");
 		}
 		
 		this.fee = (int) (total_price * discount) + distance_fee;
