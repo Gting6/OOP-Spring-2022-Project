@@ -109,7 +109,7 @@ public class Order {
 	}
 
 	public String getDeliveryman_id() {
-		return deliveryman_id;
+		return deliveryman_id.equals("")? "None": deliveryman_id;
 	}
 
 	public void setDeliveryman_id(String deliveryman_id) {
@@ -306,7 +306,7 @@ public class Order {
 	public String getStatusToString() {
 		// TODO Auto-generated method stub
 		if(this.status == 0)
-			return "This order is yet checked by restaurant";
+			return "This order is not yet checked by restaurant";
 		else if(this.status == 1)
 			return "Restaurant preparing the order...";
 		else if(this.status == 2)
@@ -327,9 +327,9 @@ public class Order {
 			e.printStackTrace();
 		}
 		for(String key: items.keySet()) {
-			s += "item name: " + key + " x" + items.get(key) + ",";
+			s += "" + key + " x" + items.get(key) + ",";
 		}
-		return s;
+		return s.substring(0,s.length() - 1);
 	}
 	
 }

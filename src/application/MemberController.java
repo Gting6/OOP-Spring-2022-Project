@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -91,6 +95,9 @@ public class MemberController extends Controller implements Initializable {
 	private String selectedRestaurant;
 	private Integer count = 0;
 	private int tmpCount = 0; // for dynamically alter displayVb's height
+	private int tmpCount2 = 0; // for dynamically alter displayVb's width
+	
+	
 	
 	public void logout(ActionEvent event) throws IOException {
 		switchScene(ViewEnum.LOGIN, event);
@@ -114,6 +121,7 @@ public class MemberController extends Controller implements Initializable {
 		switch (status) {
 		case Info:
 			displayVb.setPrefHeight(250);
+			displayVb.setPrefWidth(275);
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
 			distanceBtn.setDisable(true);
@@ -142,6 +150,7 @@ public class MemberController extends Controller implements Initializable {
 			break;
 		case Order:
 			displayVb.setPrefHeight(250);
+			displayVb.setPrefWidth(275);
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
 			couponBtn.setDisable(true);
@@ -166,6 +175,7 @@ public class MemberController extends Controller implements Initializable {
 			break;
 		case Track:
 			displayVb.setPrefHeight(250);
+			displayVb.setPrefWidth(800);
 			goBtn.setVisible(false);
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
@@ -189,6 +199,7 @@ public class MemberController extends Controller implements Initializable {
 			break;
 		case Search:
 			displayVb.setPrefHeight(250);
+			displayVb.setPrefWidth(275);
 			goBtn.setVisible(false);
 			nameBtn.setDisable(false);
 			couponBtn.setDisable(false);
@@ -217,6 +228,7 @@ public class MemberController extends Controller implements Initializable {
 			break;
 		default:
 			displayVb.setPrefHeight(250);
+			displayVb.setPrefWidth(275);
 			vipBtn.setVisible(false);
 			goBtn.setVisible(false);
 			vipConfirmBtn.setVisible(false);
@@ -687,7 +699,12 @@ public class MemberController extends Controller implements Initializable {
 		status = MemberView.Track;
 		Member member = new Member(this.username);
 		// Maybe can be refactor
-		
+		render();
+		displayVb.getChildren().clear();
+		displayVb.setPrefWidth(900);
+		tmpCount2 = 0;
+	    TableView<Order> tableView = new TableView<Order>();
+
 		// Get all order_id
 		ArrayList<String> order_ids = member.checkAllOrders();
 		
@@ -698,43 +715,59 @@ public class MemberController extends Controller implements Initializable {
 		// Get all order object by order_id
 		ArrayList<Order> orders = new ArrayList<Order>();
 		order_ids.forEach(order -> orders.add(member.checkOrderStatus(order)));
+				
+	    TableColumn<Order, String> restaurantColumn = new TableColumn<>("Restaurant");
+	    restaurantColumn.setCellValueFactory(new PropertyValueFactory<>("restaurant_name"));
+		tableView.getColumns().add(restaurantColumn);
 		
-//		// Show out all orderID
-//		orders.forEach(order->{
-//			System.out.println("-----------order------------");
-//			System.out.println(order.getId());
-//		});
-		
-		// choose one id you want and show detail
-		try {
-			String orderSearchOne = "89483890-186e-4316-a596-f4688b77855d";
-			Order orderOne = member.checkOrderStatus(orderSearchOne);
-			System.out.println(orderOne.getId());
-			System.out.println(orderOne.getStatus());
-			System.out.println(orderOne.getConsumer_id());
-			System.out.println(orderOne.getDeliveryman_id());
-			System.out.println(orderOne.getRestaurant_id());
-			System.out.println(orderOne.getCreate_time());
-			System.out.println(orderOne.getDeliver_time());
-			System.out.println(orderOne.getArrival_time());
-		} catch(Exception e) {
-			System.out.println("order not found");
-		}
+		TableColumn<Order, String> deliveryManColumn = new TableColumn<>("Delivery");
+	    deliveryManColumn.setCellValueFactory(new PropertyValueFactory<>("deliveryman_id"));
+		tableView.getColumns().add(deliveryManColumn);
+	    
+		TableColumn<Order, Timestamp> createTimeColumn = new TableColumn<>("Create Time");
+		createTimeColumn.setCellValueFactory(new PropertyValueFactory<>("create_time"));
+		tableView.getColumns().add(createTimeColumn);
 
+
+		TableColumn<Order, Timestamp> deliverTimeColumn = new TableColumn<>("Deliver Time");
+		deliverTimeColumn.setCellValueFactory(new PropertyValueFactory<>("deliver_time"));
+		tableView.getColumns().add(deliverTimeColumn);
+		
+		TableColumn<Order, Timestamp> arrivalTimeColumn = new TableColumn<>("Arrival Time");
+		arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<>("arrival_time"));
+		tableView.getColumns().add(arrivalTimeColumn);
+
+		TableColumn<Order, String> statusColumn = new TableColumn<>("Status");
+	    statusColumn.setCellValueFactory(new PropertyValueFactory<>("statusToString"));
+		tableView.getColumns().add(statusColumn);
+		
+		TableColumn<Order, String> detailColumn = new TableColumn<>("Details");
+		detailColumn.setCellValueFactory(new PropertyValueFactory<>("items"));
+		tableView.getColumns().add(detailColumn);
+		
 		// show all detail
-//		orders.forEach(order->{
-//			System.out.println(order.getId());
-//			System.out.println(order.getStatus());
-//			System.out.println(order.getConsumer_id());
-//			System.out.println(order.getDeliveryman_id());
-//			System.out.println(order.getRestaurant_id());
-//			System.out.println(order.getCreate_time());
-//			System.out.println(order.getDeliver_time());
-//			System.out.println(order.getArrival_time());
-//		});
+		orders.forEach(order->{
+			tableView.getItems().add(order);
+			System.out.println("---------------------");
+			tmpCount2 = max(tmpCount2, 800+order.getItems().length() * 10);
+			System.out.println(order.getId());
+			System.out.println(order.getStatus());
+			System.out.println(order.getConsumer_id());
+			System.out.println(order.getDeliveryman_id());
+			System.out.println(order.getRestaurant_id());
+			System.out.println(order.getCreate_time());
+			System.out.println(order.getDeliver_time());
+			System.out.println(order.getArrival_time());
+		});
+		displayVb.setPrefWidth(tmpCount2);
+		displayVb.getChildren().add(tableView);
 
 		
-		render();
+	}
+
+	private int max(int tmpCount22, int i) {
+		// TODO Auto-generated method stub
+		return (tmpCount22 > i)? tmpCount22: i;
 	}
 
 	@Override
