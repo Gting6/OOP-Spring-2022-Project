@@ -837,7 +837,7 @@ public class DBService {
 		try {
 			Connection conn = DBConnection.getConnection();
 			
-			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE restaurant_name=?"); 
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE restaurant_name=? order by create_time"); 
 			query_orders.setString(1, restaurant_name);
 			ResultSet res = query_orders.executeQuery();
 			while(res.next()) {
@@ -859,7 +859,7 @@ public class DBService {
 		try {
 			Connection conn = DBConnection.getConnection();
 			
-			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE deliveryman_name=? and status=1"); 
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE deliveryman_name=? and status=1 order by create_time"); 
 			query_orders.setString(1, "");
 			ResultSet res = query_orders.executeQuery();
 			while(res.next()) {
@@ -881,7 +881,7 @@ public class DBService {
 		try {
 			Connection conn = DBConnection.getConnection();
 			
-			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE deliveryman_name=?"); 
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE deliveryman_name=? order by create_time"); 
 			query_orders.setString(1, Deliveryman_id);
 			ResultSet res = query_orders.executeQuery();
 			while(res.next()) {
@@ -903,7 +903,7 @@ public class DBService {
 		try {
 			Connection conn = DBConnection.getConnection();
 			
-			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE member_name=?"); 
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE member_name=? order by create_time"); 
 			query_orders.setString(1, member_id);
 			ResultSet res = query_orders.executeQuery();
 			while(res.next()) {

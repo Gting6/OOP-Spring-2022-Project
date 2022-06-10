@@ -128,6 +128,16 @@ public class Restaurant extends User{
 		return valid_orders;
 	}
 	
+	public void setOrderStatusTakeOrder(String order_id) {
+		int status = 1;
+		dbService.setOrderStatus(status, order_id);
+	}
+	
+	public void setOrderStatusFinishOrder(String order_id) {
+		int status = 2;
+		dbService.setOrderStatus(status, order_id);
+	}
+	
 	public ArrayList<String> checkItemPerOrder(String order_id) {
 		ArrayList<String> items = new ArrayList<>();
 		try {
@@ -211,16 +221,16 @@ public class Restaurant extends User{
 	
 	public void setCouponInDB(String coupon) {
 		switch (coupon) {
-		case "æ»¿200ä¹æŠ˜":
+		case "º¡200¤E§é":
 			this.coupon = "buy_200_get_90_percent_off";
 			break;
-		case "æ»¿300å…«æŠ˜":
+		case "º¡300¤K§é":
 			this.coupon = "buy_300_get_80_percent_off";
 			break;
-		case "çœ20":
+		case "¬Ù20":
 			this.coupon = "save_20_dollars";
 			break;
-		case "çœ30":
+		case "¬Ù30":
 			this.coupon = "save_30_dollars";
 			break;
 		default :

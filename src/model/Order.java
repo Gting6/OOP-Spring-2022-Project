@@ -318,7 +318,9 @@ public class Order {
 		else if(this.status == 2)
 			return "Ready To Deliver";
 		else if(this.status == 3)
-			return "Has Arrived!";
+			return "Order being delivered";
+		else if(this.status == 4)
+			return "Has Arrived";
 		return "";		
 	}
 	
