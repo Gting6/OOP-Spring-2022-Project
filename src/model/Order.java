@@ -295,4 +295,41 @@ public class Order {
 		return s;
 	}
 	
+	public String getRestaurant_name() {
+		return dbService.getThisOrderRestaurantName(this.restaurant_id);
+	}
+	
+	public String getDeliveryman_name() {
+		return dbService.getThisOrderDeliverymanName(this.deliveryman_id);
+	}
+	
+	public String getStatusToString() {
+		// TODO Auto-generated method stub
+		if(this.status == 0)
+			return "This order is yet checked by restaurant";
+		else if(this.status == 1)
+			return "Restaurant preparing the order...";
+		else if(this.status == 2)
+			return "Ready To Deliver";
+		else if(this.status == 3)
+			return "Has Arrived!";
+		return "";		
+	}
+	
+	public String getItems() {
+		
+		String s = "";
+		HashMap<String, String> items = new HashMap<>();
+		try {
+			items = dbService.getAllOrderItems(this.id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(String key: items.keySet()) {
+			s += "item name: " + key + " x" + items.get(key) + ",";
+		}
+		return s;
+	}
+	
 }

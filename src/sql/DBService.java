@@ -1001,4 +1001,71 @@ public class DBService {
 		}
 		return status;
 	}
+	
+	public String getThisOrderRestaurantName(String restaurant_id) {
+		
+		String restaurant_name = "";
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from restaurants WHERE username=?"); 
+			query_orders.setString(1, restaurant_id);
+			ResultSet res = query_orders.executeQuery();
+			if(res.next()) {
+				restaurant_name = res.getString("name");
+			}
+			conn.close();
+			return restaurant_name;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return restaurant_name;
+	}	
+	
+	public String getThisOrderDeliverymanName(String deliveryman_id) {
+		
+		String deliveryman = "";
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from deliverymen WHERE username=?"); 
+			query_orders.setString(1, deliveryman_id);
+			ResultSet res = query_orders.executeQuery();
+			if(res.next()) {
+				deliveryman = res.getString("name");
+			}
+			conn.close();
+			return deliveryman;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deliveryman;
+	}	
+	
+	public HashMap<String, String> getAllOrderItems(String order_id) throws SQLException {
+		
+	try {
+		Connection conn = DBConnection.getConnection();
+//		role stands for his identity
+		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM order_items WHERE id=?"); 
+		
+		stmt.setString(1, order_id);
+		
+		ResultSet res = stmt.executeQuery();
+		HashMap<String, String> items = new HashMap<>();
+		
+		while(res.next()) {
+			items.put(res.getString("item"), res.getString("number"));
+		}
+		conn.close();
+		return items;
+	}catch (Exception e) {
+		e.printStackTrace();
+	}
+		return null;
+	}
 }
