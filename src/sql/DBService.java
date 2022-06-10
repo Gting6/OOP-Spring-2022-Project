@@ -623,6 +623,32 @@ public class DBService {
 	}
 		return null;
 	}
+
+	public ArrayList<ArrayList<String>> getOrderItemsDetail(String order_id) throws SQLException {
+		
+	try {
+		Connection conn = DBConnection.getConnection();
+//		role stands for his identity
+		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM order_items WHERE id=?"); 
+		
+		stmt.setString(1, order_id);
+		
+		ResultSet res = stmt.executeQuery();
+		ArrayList<ArrayList<String>> items = new ArrayList<ArrayList<String>>();
+		
+		while(res.next()) {
+			ArrayList<String> item = new ArrayList<>();
+			item.add(res.getString("item"));
+			item.add(res.getString("number"));
+			items.add(item);
+		}
+		conn.close();
+		return items;
+	}catch (Exception e) {
+		e.printStackTrace();
+	}
+		return null;
+	}
 	
 	
 	public Order getOrder(String id) throws SQLException {

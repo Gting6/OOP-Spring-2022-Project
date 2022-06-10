@@ -28,6 +28,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.Member;
 import model.Model;
+import model.Order;
 import model.Restaurant;
 import view.MemberView;
 
@@ -231,6 +232,9 @@ public class MemberController extends Controller implements Initializable {
 			Restaurant restaurant = new Restaurant();
 			restaurant.setName(selectedRestaurant.replaceAll("%", " "));
 			restaurant = restaurant.getRestaurantInfoByName();
+			String restaurantName = restaurant.getUserName();
+			Order order = new Order(this.username, restaurantName);
+			
 			HashMap<String, Integer> restaurantProduct = restaurant.getProducts();
 			tmp = "Your order: \n";
 			restaurantProduct.forEach((rest, value) -> {
@@ -242,7 +246,20 @@ public class MemberController extends Controller implements Initializable {
 					tmpCount += 1;
 				}
 				// [MING] please modify the cart logic here, thx.
+				
+				System.out.println(rest);
+				System.out.println(tmpCom.getValue());
+				System.out.println(value);
+				for (int i = 0; i < tmpCom.getValue(); i++) {
+					HashMap<String, Integer> tmp = new HashMap<String, Integer>();
+					tmp.put(rest, value);
+					order.addToCart(tmp);
+				}
+				
 			});
+			
+			order.showOrder();
+			System.out.println("Order with Fee is " + order.getFee());
 			if (count == 0) {
 				System.out.println("You should at least select one item!");
 				displayVb.getChildren().clear();
@@ -250,7 +267,9 @@ public class MemberController extends Controller implements Initializable {
 				tmp.setFont(new Font("Yu Gothic UI Semibold", 16));
 				displayVb.getChildren().add(tmp);
 			} else {
-				System.out.println("Success! you need to pay $" + count.toString());
+				System.out.println("order without fee is" + count.toString());
+				System.out.println("Success! you need to pay $" + order.getFee());
+
 				displayVb.getChildren().clear();
 				tmp += "----------------------------------\n";
 				tmp += "$:" + count.toString() + "\n";
@@ -262,6 +281,11 @@ public class MemberController extends Controller implements Initializable {
 				btn1.setStyle("-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 0.2 0.2 0.2 0.2; -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1); -fx-cursor: hand");
 				btn1.setOnAction(e -> {
 					displayVb.getChildren().clear();
+					order.establishOrder();
+					Member member = new Member(this.username);
+					Order checkorder = member.checkOrderStatus(order.getId());
+					System.out.println("You have pay for " + checkorder.getFee());
+
 					tmp = "Success, please go to \"track\" to \ncheck your order!";
 					Label tmpLb2 = new Label(tmp);
 					tmp = "";
@@ -661,6 +685,55 @@ public class MemberController extends Controller implements Initializable {
 
 	public void pressTrackBtn() {
 		status = MemberView.Track;
+		Member member = new Member(this.username);
+		// Maybe can be refactor
+		
+		// Get all order_id
+		ArrayList<String> order_ids = member.checkAllOrders();
+		
+		
+		// Show all order_id
+		order_ids.forEach(order -> System.out.println(order));
+		
+		// Get all order object by order_id
+		ArrayList<Order> orders = new ArrayList<Order>();
+		order_ids.forEach(order -> orders.add(member.checkOrderStatus(order)));
+		
+//		// Show out all orderID
+//		orders.forEach(order->{
+//			System.out.println("-----------order------------");
+//			System.out.println(order.getId());
+//		});
+		
+		// choose one id you want and show detail
+		try {
+			String orderSearchOne = "89483890-186e-4316-a596-f4688b77855d";
+			Order orderOne = member.checkOrderStatus(orderSearchOne);
+			System.out.println(orderOne.getId());
+			System.out.println(orderOne.getStatus());
+			System.out.println(orderOne.getConsumer_id());
+			System.out.println(orderOne.getDeliveryman_id());
+			System.out.println(orderOne.getRestaurant_id());
+			System.out.println(orderOne.getCreate_time());
+			System.out.println(orderOne.getDeliver_time());
+			System.out.println(orderOne.getArrival_time());
+		} catch(Exception e) {
+			System.out.println("order not found");
+		}
+
+		// show all detail
+//		orders.forEach(order->{
+//			System.out.println(order.getId());
+//			System.out.println(order.getStatus());
+//			System.out.println(order.getConsumer_id());
+//			System.out.println(order.getDeliveryman_id());
+//			System.out.println(order.getRestaurant_id());
+//			System.out.println(order.getCreate_time());
+//			System.out.println(order.getDeliver_time());
+//			System.out.println(order.getArrival_time());
+//		});
+
+		
 		render();
 	}
 
