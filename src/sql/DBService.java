@@ -1045,4 +1045,27 @@ public class DBService {
 		}
 		return deliveryman;
 	}	
+	
+	public HashMap<String, String> getAllOrderItems(String order_id) throws SQLException {
+		
+	try {
+		Connection conn = DBConnection.getConnection();
+//		role stands for his identity
+		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM order_items WHERE id=?"); 
+		
+		stmt.setString(1, order_id);
+		
+		ResultSet res = stmt.executeQuery();
+		HashMap<String, String> items = new HashMap<>();
+		
+		while(res.next()) {
+			items.put(res.getString("item"), res.getString("number"));
+		}
+		conn.close();
+		return items;
+	}catch (Exception e) {
+		e.printStackTrace();
+	}
+		return null;
+	}
 }
