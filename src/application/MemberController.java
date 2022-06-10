@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -50,6 +51,9 @@ public class MemberController extends Controller implements Initializable {
 	private Button distanceBtn;
 
 	@FXML
+	private Button goBtn;
+	
+	@FXML
 	private Button couponBtn;
 
 	@FXML
@@ -73,8 +77,8 @@ public class MemberController extends Controller implements Initializable {
 	@FXML
 	private Button vipConfirmBtn;
 	
-	@FXML
-	private Button orderBtn;
+//	@FXML
+//	private Button orderBtn;
 
 	@FXML
 	private VBox displayVb;
@@ -84,7 +88,9 @@ public class MemberController extends Controller implements Initializable {
 	private String tmp = "";
 	private SearchBy searchBy = SearchBy.NAME;
 	private String selectedRestaurant;
-
+	private Integer count = 0;
+	private int tmpCount = 0; // for dynamically alter displayVb's height
+	
 	public void logout(ActionEvent event) throws IOException {
 		switchScene(ViewEnum.LOGIN, event);
 	}
@@ -106,6 +112,7 @@ public class MemberController extends Controller implements Initializable {
 	protected void render() {
 		switch (status) {
 		case Info:
+			displayVb.setPrefHeight(250);
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
 			distanceBtn.setDisable(true);
@@ -130,8 +137,10 @@ public class MemberController extends Controller implements Initializable {
 			label13.setFont(new Font("Yu Gothic UI Semibold", 15));
 			displayVb.getChildren().add(label13);
 			searchBy = SearchBy.NAME;
+			goBtn.setVisible(false);
 			break;
 		case Order:
+			displayVb.setPrefHeight(250);
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
 			couponBtn.setDisable(true);
@@ -147,13 +156,16 @@ public class MemberController extends Controller implements Initializable {
 //			searchCombo.getItems().setAll("", "Member", "Deliver", "Restaurant"); // set the options			
 			searchCombo.setValue("");
 			searchCombo.setDisable(true);
-			
+			goBtn.setVisible(false);
+
 			
 			vipBtn.setVisible(false);
 			vipConfirmBtn.setVisible(false);
 			tmp = "Order of " + username;
 			break;
 		case Track:
+			displayVb.setPrefHeight(250);
+			goBtn.setVisible(false);
 			nameBtn.setDisable(true);
 			typeBtn.setDisable(true);
 			couponBtn.setDisable(true);
@@ -175,6 +187,8 @@ public class MemberController extends Controller implements Initializable {
 			tmp = "Track of " + username;
 			break;
 		case Search:
+			displayVb.setPrefHeight(250);
+			goBtn.setVisible(false);
 			nameBtn.setDisable(false);
 			couponBtn.setDisable(false);
 			typeBtn.setDisable(false);
@@ -201,7 +215,9 @@ public class MemberController extends Controller implements Initializable {
 
 			break;
 		default:
+			displayVb.setPrefHeight(250);
 			vipBtn.setVisible(false);
+			goBtn.setVisible(false);
 			vipConfirmBtn.setVisible(false);
 //			searchCombo.getItems().setAll("", "Member", "Deliver", "Restaurant"); // set the options
 			searchCombo.setValue("");
@@ -210,6 +226,149 @@ public class MemberController extends Controller implements Initializable {
 		}
 	}
 
+	public void pressAddToCartBtn(Scene scene) {
+		try {
+			Restaurant restaurant = new Restaurant();
+			restaurant.setName(selectedRestaurant.replaceAll("%", " "));
+			restaurant = restaurant.getRestaurantInfoByName();
+			HashMap<String, Integer> restaurantProduct = restaurant.getProducts();
+			tmp = "Your order: \n";
+			restaurantProduct.forEach((rest, value) -> {
+				ComboBox<Integer> tmpCom = (ComboBox<Integer>) scene.lookup("#" + rest);
+				System.out.println("Add to Cart " + rest + " x " + tmpCom.getValue());		
+				count += tmpCom.getValue() * value;
+				if (tmpCom.getValue() > 0) {
+					tmp += rest + " x " + tmpCom.getValue().toString() + "\n";
+					tmpCount += 1;
+				}
+				// [MING] please modify the cart logic here, thx.
+			});
+			if (count == 0) {
+				System.out.println("You should at least select one item!");
+				displayVb.getChildren().clear();
+				Label tmp = new Label("You should at least select one item");
+				tmp.setFont(new Font("Yu Gothic UI Semibold", 16));
+				displayVb.getChildren().add(tmp);
+			} else {
+				System.out.println("Success! you need to pay $" + count.toString());
+				displayVb.getChildren().clear();
+				tmp += "----------------------------------\n";
+				tmp += "$:" + count.toString() + "\n";
+				Label tmpLb = new Label(tmp);
+				tmp = "";
+				tmpLb.setFont(new Font("Yu Gothic UI Semibold", 16));
+				HBox hb = new HBox(8);
+				Button btn1 = new Button("Pay");
+				btn1.setStyle("-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 0.2 0.2 0.2 0.2; -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1); -fx-cursor: hand");
+				btn1.setOnAction(e -> {
+					displayVb.getChildren().clear();
+					tmp = "Success, please go to \"track\" to \ncheck your order!";
+					Label tmpLb2 = new Label(tmp);
+					tmp = "";
+					tmpLb2.setFont(new Font("Yu Gothic UI Semibold", 16));
+					displayVb.getChildren().add(tmpLb2);
+				});
+
+				Button btn2 = new Button("Cancel");
+				btn2.setStyle("-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 0.2 0.2 0.2 0.2; -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1); -fx-cursor: hand");
+				btn2.setOnAction(e -> {
+					displayVb.getChildren().clear();
+					tmp = "Order canceled, please search \nrestaurant again!";
+					Label tmpLb3 = new Label(tmp);
+					tmp = "";
+					tmpLb3.setFont(new Font("Yu Gothic UI Semibold", 16));
+					displayVb.getChildren().add(tmpLb3);
+				});
+				hb.getChildren().addAll(btn1, btn2);
+				displayVb.setPrefHeight(150 + tmpCount * 30);
+				tmpCount = 0;
+				displayVb.getChildren().add(tmpLb);
+				displayVb.getChildren().add(hb);
+			}
+			count = 0;
+		} catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+	}
+	
+	public void pressGoBtn() throws SQLException {
+		Restaurant restaurant = new Restaurant();
+		restaurant.setName(selectedRestaurant.replaceAll("%", " "));
+		System.out.println("Go!" + selectedRestaurant.replaceAll("%", "\\s+"));
+		// Maybe can be refactor
+		restaurant = restaurant.getRestaurantInfoByName();
+		HashMap<String, Integer> restaurantProduct = null;
+		//		System.out.println(restaurantInfo.getName());
+		if (restaurant != null) {
+
+			restaurantProduct = restaurant.getProducts();
+
+			if (restaurantProduct != null) {
+				// TODO [FX] handle the info fx.
+				System.out.println("Products List: ");
+
+				for (String key : restaurantProduct.keySet())
+					System.out.println(key + ": $" + restaurantProduct.get(key));
+
+			} else {
+				System.out.println("some error occur, getting null");
+			}
+			System.out.println();
+		}
+
+		
+		if (restaurantProduct != null) {
+			displayVb.getChildren().clear();
+			restaurantProduct.forEach((rest, value) -> {
+				System.out.println(rest + " " + value);
+			
+//				String qq = rest.getName() + ": " + Integer.toString(time) + " min";
+//				System.out.println(qq);
+				HBox hbox = new HBox(8);
+				hbox.setPrefWidth(275);
+				Label label14 = new Label();
+				label14.setText(rest + " $" + value);
+				label14.setFont(new Font("Yu Gothic UI Semibold", 18));
+				try {
+					if (rest.getBytes("UTF-8").length < 35) {
+						label14.setPrefWidth(220);
+					}
+				} catch (UnsupportedEncodingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				label14.setStyle("-fx-background-color: #e3d5ca; -fx-text-alignment: center;");
+				ComboBox<Integer> numberCombo = new ComboBox<Integer> ();
+				numberCombo.getItems().setAll(0, 1, 2, 3, 4, 5); // set the options
+				numberCombo.setValue(0);
+				numberCombo.setMaxWidth(10);
+				numberCombo.setMaxHeight(3);
+				numberCombo.setId(rest);
+				System.out.println("Add id " + "#" + rest);
+				numberCombo.setStyle("-fx-background-color: rgba(0,0,0,0);  -fx-border-color: #e3d5ca; -fx-border-width: 0.5 0.5 0.5 0.5;-fx-text-color: black; ");
+				hbox.getChildren().addAll(label14, numberCombo);
+				displayVb.getChildren().add(hbox);
+			});
+			Button b = new Button("Add to Cart!");
+			b.setStyle("-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 0.2 0.2 0.2 0.2; -fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1); -fx-cursor: hand");
+			b.setOnAction(e -> {
+				pressAddToCartBtn(b.getScene());
+			});
+			displayVb.getChildren().add(b);
+			
+		} else {
+			Label label13;
+			System.out.println("Something Wrong! No Product!");
+			displayVb.getChildren().clear();
+			label13 = new Label("No Result!");
+			label13.setFont(new Font("Yu Gothic UI Semibold", 18));
+			displayVb.getChildren().add(label13);
+		
+		}
+		goBtn.setVisible(false);
+	}
 	
 	public void pressCouponBtn() throws SQLException {
 		// TODO: Coupon Logic
@@ -227,7 +386,7 @@ public class MemberController extends Controller implements Initializable {
 		pressSearchBtn();
 	}
 
-	public void pressVipConfirmBtn() {
+	public void pressVipConfirmBtn() throws SQLException {
 		// TODO: VIP Logic
 		vipBtn.setVisible(true);
 		vipConfirmBtn.setVisible(false);
@@ -242,6 +401,7 @@ public class MemberController extends Controller implements Initializable {
 			System.out.println("Fail to become Vip");
 		}
 		render();
+		pressInfoBtn();
 	}
 
 	
@@ -362,13 +522,18 @@ public class MemberController extends Controller implements Initializable {
 
 							t = ((Button) e.getSource());
 							t.setStyle("-fx-background-color: #7ec6ed; -fx-cursor: hand;");
-							;
-
+							
+							goBtn.setVisible(true);
 							System.out.println(((Button) (e.getSource())).getId());
 						});
 						displayVb.getChildren().add(label14);
 						System.out.println(rest.getName());
 						System.out.println(rest.getName() + "time: " + value / 60 + " (min)");
+					} else {
+						displayVb.getChildren().clear();
+						Label tmp = new Label("No Result!");
+						tmp.setFont(new Font("Yu Gothic UI Semibold", 18));
+						displayVb.getChildren().add(tmp);
 					}
 //					System.out.println(time);
 				});
@@ -397,7 +562,7 @@ public class MemberController extends Controller implements Initializable {
 							}
 						}
 						selectedRestaurant = ((Button) (e.getSource())).getId();
-
+						goBtn.setVisible(true);
 						t = ((Button) e.getSource());
 						t.setStyle("-fx-background-color: #7ec6ed; -fx-cursor: hand;");
 						;
@@ -479,42 +644,20 @@ public class MemberController extends Controller implements Initializable {
 		render();
 	}
 
-	public void pressOrderBtn() throws SQLException {
-		status = MemberView.Order;
-		Label label13 = new Label("");
-		if (selectedRestaurant != null) {
-			label13 = new Label(selectedRestaurant.replaceAll("%", " ") + "\nMenu: \n");
-		} else {
-			label13 = new Label("Please search restaurant first !");
-		}
-		displayVb.getChildren().clear();
-		label13.setFont(new Font("Yu Gothic UI Semibold", 18));
-		displayVb.getChildren().add(label13);
-
-		Restaurant restaurant = new Restaurant();
-		restaurant.setName(selectedRestaurant);
-		// Maybe can be refactor
-		restaurant = restaurant.getRestaurantInfoByName();
-//		System.out.println(restaurantInfo.getName());
-		if (restaurant != null) {
-
-			HashMap<String, Integer> restaurantProduct = restaurant.getProducts();
-
-			if (restaurantProduct != null) {
-				// TODO [FX] handle the info fx.
-				System.out.println("Products List: ");
-
-				for (String key : restaurantProduct.keySet())
-					System.out.println(key + ": $" + restaurantProduct.get(key));
-
-			} else {
-				System.out.println("some error occur, getting null");
-			}
-			System.out.println();
-		}
-
-		render();
-	}
+//	public void pressOrderBtn() throws SQLException {
+//		status = MemberView.Order;
+//		Label label13 = new Label("");
+//		if (selectedRestaurant != null) {
+//			label13 = new Label(selectedRestaurant.replaceAll("%", " ") + "\nMenu: \n");
+//		} else {
+//			label13 = new Label("Please search restaurant first !");
+//		}
+//		displayVb.getChildren().clear();
+//		label13.setFont(new Font("Yu Gothic UI Semibold", 18));
+//		displayVb.getChildren().add(label13);
+//		
+//		render();
+//	}
 
 	public void pressTrackBtn() {
 		status = MemberView.Track;
