@@ -39,11 +39,14 @@ public class RestaurantController extends Controller implements Initializable {
 
 	@FXML
 	private Button productBtn;
+	
+	private ComboBox<String> couponCombo = new ComboBox<String>();
 
 	private String tmp;
 	private Restaurant restaurant;
 	private Restaurant restaurantInfo;
-
+	private Button confirmBtn = new Button("Confirm");
+	
 //	private String tmp = "";
 
 	private String username;
@@ -73,9 +76,19 @@ public class RestaurantController extends Controller implements Initializable {
 		Label lb;
 		switch (status) {
 		case Coupon:
+			tmp = (restaurantInfo.getCoupon().equals(""))? "You can set coupon for your restaurant here\nCoupon now: None": "You can set coupon for your restaurant here\nCoupon now: \n" + restaurantInfo.getCoupon() + "\n";
+			Label l = new Label(tmp);
 			displayVb.getChildren().clear();
-			tmp = "";
-//			tmp = "Coupon of " + username;
+			couponCombo.setValue("");
+			couponCombo.getItems().setAll("", "滿200九折", "滿300八折", "省20", "省30"); // set the options
+			displayVb.getChildren().add(l);
+			displayVb.getChildren().add(couponCombo);
+			displayVb.getChildren().add(confirmBtn);
+			confirmBtn.setOnAction(e -> {
+				// [MING] Please set coupon here.
+				String t = couponCombo.getValue();
+				System.out.println("Set: " + t);
+			});
 			break;
 		case Order:
 			displayVb.getChildren().clear();
