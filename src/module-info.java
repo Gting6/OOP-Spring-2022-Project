@@ -8,4 +8,5 @@ module OOP {
 	requires okhttp3;
 	requires java.net.http;
 	opens application to javafx.graphics, javafx.fxml;
+	opens model to javafx.base;
 }
