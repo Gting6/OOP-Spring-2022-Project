@@ -219,6 +219,28 @@ public class Restaurant extends User{
 	public String getCoupon() {
 		return dbService.getCoupon(this.getUserName());
 	}
+	
+	public String getCouponFromDB() {
+		String coupon = dbService.getCoupon(this.getUserName());
+		switch (coupon) {
+		case "buy_200_get_90_percent_off":
+			coupon = "æ»¿200ä¹æŠ˜";
+			break;
+		case "buy_300_get_80_percent_off":
+			coupon = "æ»¿300å…«æŠ˜";
+			break;
+		case "save_20_dollars":
+			coupon = "çœ20";
+			break;
+		case "save_30_dollars":
+			coupon = "çœ30";
+			break;
+		default :
+			coupon = "";
+			break;
+	}
+		return coupon;
+	}
 
 	public void setCoupon(String coupon) {
 		this.coupon = coupon;
@@ -226,16 +248,16 @@ public class Restaurant extends User{
 	
 	public void setCouponInDB(String coupon) {
 		switch (coupon) {
-		case "º¡200¤E§é":
+		case "æ»¿200ä¹æŠ˜":
 			this.coupon = "buy_200_get_90_percent_off";
 			break;
-		case "º¡300¤K§é":
+		case "æ»¿300å…«æŠ˜":
 			this.coupon = "buy_300_get_80_percent_off";
 			break;
-		case "¬Ù20":
+		case "çœ20":
 			this.coupon = "save_20_dollars";
 			break;
-		case "¬Ù30":
+		case "çœ30":
 			this.coupon = "save_30_dollars";
 			break;
 		default :

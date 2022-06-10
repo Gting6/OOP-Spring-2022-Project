@@ -87,7 +87,7 @@ public class RestaurantController extends Controller implements Initializable {
 		switch (status) {
 		case Coupon:
 			Restaurant restaurant = new Restaurant(this.username);
-			tmp = (restaurant.getCoupon().equals(""))? "You can set coupon for your restaurant here\nCoupon now: None": "You can set coupon for your restaurant here\nCoupon now: \n" + restaurant.getCoupon() + "\n";
+			tmp = (restaurant.getCoupon().equals(""))? "You can set coupon for your restaurant here\nCoupon now: None": "You can set coupon for your restaurant here\nCoupon now: \n" + restaurant.getCouponFromDB() + "\n";
 			Label l = new Label(tmp);
 			displayVb.getChildren().clear();
 			couponCombo.setValue("");
@@ -101,6 +101,7 @@ public class RestaurantController extends Controller implements Initializable {
 				System.out.println("Set: " + t);
 				try {
 					restaurant.setCouponInDB(t);
+					pressCouponBtn();
 				} catch (Exception eCoupon) {
 					System.out.println("Some error occur");
 				}
@@ -242,6 +243,7 @@ public class RestaurantController extends Controller implements Initializable {
 	                        	// You may call pressOrderBtn() after finishing altering database.
 	                        	Order data = getTableView().getItems().get(getIndex());
 	                            System.out.println("selectedData: " + data.getId() + " "+ data.getItems() );
+	                        	restaurant.setOrderStatusTakeOrder(data.getId());
 	                        });
 	                    }
 	                    @Override
@@ -274,6 +276,7 @@ public class RestaurantController extends Controller implements Initializable {
 	                        	// You may call pressOrderBtn() after finishing altering database.
 	                        	Order data = getTableView().getItems().get(getIndex());
 	                            System.out.println("Finish: " + data.getId() + " "+ data.getItems() );
+	                        	restaurant.setOrderStatusFinishOrder(data.getId());
 	                        });
 	                    }
 	                    @Override
