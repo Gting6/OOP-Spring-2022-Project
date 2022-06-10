@@ -116,7 +116,12 @@ public class DeliveryMan extends User {
 	}
 	
 	public void setOrderStatus(String order_id) {
-		int status = 2;
+		int status = 3;
+		dbService.setOrderStatus(status, order_id);
+	}
+	
+	public void setOrderStatusDone(String order_id) {
+		int status = 4;
 		dbService.setOrderStatus(status, order_id);
 	}
 	
