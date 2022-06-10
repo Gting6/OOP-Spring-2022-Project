@@ -69,12 +69,27 @@
                         <Insets left="30.0" top="15.0" />
                      </VBox.margin>
                   </Button>
+                  <Button fx:id="myOrderBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressMyOrderBtn" prefHeight="38.0" prefWidth="118.0" styleClass="left-side-member-button" stylesheets="@style.css" text="My Order">
+                     <font>
+                        <Font name="Arial" size="17.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imgs/to-do-list.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="30.0" top="15.0" />
+                     </VBox.margin>
+                  </Button>
                   <Button fx:id="logoutBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefHeight="29.0" prefWidth="118.0" styleClass="left-side-background" stylesheets="@style.css" text="Log out" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="30.0" top="156.0" />
+                        <Insets left="30.0" top="100.0" />
                      </VBox.margin>
                   </Button>
                </children>

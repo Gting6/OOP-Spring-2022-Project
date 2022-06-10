@@ -30,6 +30,9 @@ public class DeliverController extends Controller implements Initializable{
 	private Button orderBtn;
 		
 	@FXML
+	private Button myOrderBtn;
+
+	@FXML
 	private Button infoBtn;
 	
 	private String username;
@@ -72,13 +75,21 @@ public class DeliverController extends Controller implements Initializable{
 			displayVb.getChildren().clear();
 			tmp = "";
 			break;			
+		case MyOrder:
+			displayVb.getChildren().clear();
+			tmp = "";
+			break;			
 		default:
 			displayVb.getChildren().clear();
 			tmp = "";
 			break;
 		}
 	}
-		
+	
+	public void pressMyOrderBtn() {
+		System.out.println("See all of your order");
+	}
+	
 	public void pressInfoBtn() throws SQLException {
 		status = DeliverView.Info;
 		if (deliverymanInfo != null) {
