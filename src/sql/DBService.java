@@ -1001,4 +1001,48 @@ public class DBService {
 		}
 		return status;
 	}
+	
+	public String getThisOrderRestaurantName(String restaurant_id) {
+		
+		String restaurant_name = "";
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from restaurants WHERE username=?"); 
+			query_orders.setString(1, restaurant_id);
+			ResultSet res = query_orders.executeQuery();
+			if(res.next()) {
+				restaurant_name = res.getString("name");
+			}
+			conn.close();
+			return restaurant_name;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return restaurant_name;
+	}	
+	
+	public String getThisOrderDeliverymanName(String deliveryman_id) {
+		
+		String deliveryman = "";
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from deliverymen WHERE username=?"); 
+			query_orders.setString(1, deliveryman_id);
+			ResultSet res = query_orders.executeQuery();
+			if(res.next()) {
+				deliveryman = res.getString("name");
+			}
+			conn.close();
+			return deliveryman;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deliveryman;
+	}	
 }

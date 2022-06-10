@@ -295,4 +295,23 @@ public class Order {
 		return s;
 	}
 	
+	public String getRestaurant_name() {
+		return dbService.getThisOrderRestaurantName(this.restaurant_id);
+	}
+	
+	public String getDeliveryman_name() {
+		return dbService.getThisOrderDeliverymanName(this.deliveryman_id);
+	}
+	
+	public String getStatusToString() {
+		// TODO Auto-generated method stub
+		if(this.status == 0)
+			return "This order is set";
+		else if(this.status == 1)
+			return "Ready To Deliver";
+		else if(this.status == 2)
+			return "Has Arrived!";
+		return "";		
+	}
+	
 }
