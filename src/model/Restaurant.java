@@ -117,12 +117,17 @@ public class Restaurant extends User{
 			for(String order_id : all_orders) {
 				Order order = dbService.getOrder(order_id);
 				Timestamp now = new Timestamp(System.currentTimeMillis());
+				System.out.println(">");
+				System.out.println(now);
+				System.out.println(order.getCreate_time());
+				System.out.println(order.getDeliver_time());
 				if(order.getCreate_time().compareTo(now) < 0 && order.getDeliver_time().compareTo(now) > 0) {
 					valid_orders.add(order_id);
 				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println(e.toString());
 			e.printStackTrace();
 		}
 		return valid_orders;

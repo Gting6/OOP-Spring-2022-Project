@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -13,8 +14,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.util.Callback;
 import model.Order;
 import model.Restaurant;
 import view.MemberView;
@@ -48,6 +54,8 @@ public class RestaurantController extends Controller implements Initializable {
 	private Restaurant restaurant;
 	private Restaurant restaurantInfo;
 	private Button confirmBtn = new Button("Confirm");
+	private int tmpCount = 0;
+	private int tmpCount2 = 0;
 	
 //	private String tmp = "";
 
@@ -91,6 +99,7 @@ public class RestaurantController extends Controller implements Initializable {
 				String t = couponCombo.getValue();
 				System.out.println("Set: " + t);
 			});
+			tmp = "";
 			break;
 		case Order:
 			displayVb.getChildren().clear();
@@ -108,10 +117,12 @@ public class RestaurantController extends Controller implements Initializable {
 			break;
 		case Product:
 			displayVb.getChildren().clear();
+			displayVb.setPrefHeight(150 + 30 * tmpCount);
+			tmpCount = 0;
 			lb = new Label(tmp);
+			tmp = "";
 			lb.setFont(new Font("Yu Gothic UI Semibold", 15));
 			displayVb.getChildren().add(lb);
-			tmp = "";
 //			tmp = "Product of " + username;
 			break;
 
@@ -170,6 +181,11 @@ public class RestaurantController extends Controller implements Initializable {
 		render();
 	}
 
+	private int max(int tmpCount22, int i) {
+		// TODO Auto-generated method stub
+		return (tmpCount22 > i)? tmpCount22: i;
+	}
+
 	public void pressOrderBtn() throws SQLException {
 		status = RestaurantView.Order;
 		render();
@@ -180,22 +196,119 @@ public class RestaurantController extends Controller implements Initializable {
 		
 		ArrayList<String> order_ids = restaurantInfo.checkOrders();
 		
+		System.out.println(order_ids.size());
 		// List all valid order
 		order_ids.forEach(order -> System.out.println(order));
 		
+		if (order_ids.size() < 1) {
+			Label lb = new Label("No order yet!");
+			lb.setFont(new Font("Yu Gothic UI Semibold", 16));
+			displayVb.getChildren().add(lb);			
+		} else {
 		
-		// choose one order
+		    TableView<Order> tableView = new TableView<Order>();
+		    
+			TableColumn<Order, String> statusColumn = new TableColumn<>("Status");
+		    statusColumn.setCellValueFactory(new PropertyValueFactory<>("statusToString"));
+			tableView.getColumns().add(statusColumn);
+
+		    TableColumn<Order, String> detailColumn = new TableColumn<>("Details");
+		    detailColumn.setCellValueFactory(new PropertyValueFactory<>("items"));
+			tableView.getColumns().add(detailColumn);
+
+		    TableColumn<Order, Timestamp> createTimeColumn = new TableColumn<>("Create Time");
+		    createTimeColumn.setCellValueFactory(new PropertyValueFactory<>("create_time"));
+			tableView.getColumns().add(createTimeColumn);
+
+			
+
+			
+	        TableColumn<Order, Void> colBtn = new TableColumn("Take Order");
+	        Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
+	            @Override
+	            public TableCell<Order, Void> call(final TableColumn<Order, Void> param) {
+	                final TableCell<Order, Void> cell = new TableCell<Order, Void>() {
+
+	                    private final Button btn = new Button("Take!");
+	                    {
+	                        btn.setOnAction((ActionEvent event) -> {
+	                        	// [MING] set the take order logic here, you can see "data" is correspond to the item
+	                        	// You may call pressOrderBtn() after finishing altering database.
+	                        	Order data = getTableView().getItems().get(getIndex());
+	                            System.out.println("selectedData: " + data.getId() + " "+ data.getItems() );
+	                        });
+	                    }
+	                    @Override
+	                    public void updateItem(Void item, boolean empty) {
+	                        super.updateItem(item, empty);
+	                        if (empty) {
+	                            setGraphic(null);
+	                        } else {
+	                            setGraphic(btn);
+	                        }
+	                    }
+	                };
+	                return cell;
+	            }
+	        };
+	        colBtn.setCellFactory(cellFactory);
+	        tableView.getColumns().add(colBtn);
+			
+
+	        TableColumn<Order, Void> colBtn2 = new TableColumn("Finish Order");
+	        Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory2 = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
+	            @Override
+	            public TableCell<Order, Void> call(final TableColumn<Order, Void> param) {
+	                final TableCell<Order, Void> cell = new TableCell<Order, Void>() {
+
+	                    private final Button btn = new Button("Finish!");
+	                    {
+	                        btn.setOnAction((ActionEvent event) -> {
+	                        	// [MING] set the take order logic here, you can see "data" is correspond to the item
+	                        	// You may call pressOrderBtn() after finishing altering database.
+	                        	Order data = getTableView().getItems().get(getIndex());
+	                            System.out.println("Finish: " + data.getId() + " "+ data.getItems() );
+	                        });
+	                    }
+	                    @Override
+	                    public void updateItem(Void item, boolean empty) {
+	                        super.updateItem(item, empty);
+	                        if (empty) {
+	                            setGraphic(null);
+	                        } else {
+	                            setGraphic(btn);
+	                        }
+	                    }
+	                };
+	                return cell;
+	            }
+	        };
+	        colBtn2.setCellFactory(cellFactory2);
+	        tableView.getColumns().add(colBtn2);
+	        
+			for (int i = 0; i < order_ids.size(); i++) {
+				Order order_detail = restaurantInfo.checkOrderDetail(order_ids.get(i));
+				tmpCount2 = max(tmpCount2, 800+order_detail.getItems().length() * 10);
+				tableView.getItems().add(order_detail);		
+			}
+			
+			displayVb.setPrefWidth(tmpCount2);
+			tmpCount2 = 0;
+			displayVb.getChildren().add(tableView);	
+		}		//		ArrayList<ArrayList<String>>  order_items = restaurantInfo.checkItemValuePerOrder(order_ids.get(0));
 		
-		Order order_detail = restaurantInfo.checkOrderDetail(order_ids.get(0));
-		ArrayList<ArrayList<String>>  order_items = restaurantInfo.checkItemValuePerOrder(order_ids.get(0));
-		
-		System.out.println(order_detail.getId());
-		order_items.forEach(orderitem -> System.out.println(orderitem.get(0) + " * " + orderitem.get(1)));
+//		System.out.println("<");
+//		System.out.println(order_detail.getItems());
+//		System.out.println(order_detail.getStatusToString());
+//
+//		System.out.println(">");
+//		order_items.forEach(orderitem -> System.out.println(orderitem.get(0) + " * " + orderitem.get(1)));
 		
 		// if the restaurant want to accept the order
-		restaurantInfo.setOrderStatus(order_ids.get(0));
+//		restaurantInfo.setOrderStatus(order_ids.get(0));
 		
 		} catch (Exception e) {
+			System.out.println(e.toString());
 			System.out.println("order not found or expire");
 		}
 		
@@ -235,8 +348,9 @@ public class RestaurantController extends Controller implements Initializable {
 			for (String key : restaurantProduct.keySet()) {
 				System.out.println(key + ": $" + restaurantProduct.get(key));
 				tmp += (key + ": $" + restaurantProduct.get(key) + "\n");
+				tmpCount += 1;
 			}
-				
+			
 
 		} else {
 			System.out.println("some error occur, getting null");
