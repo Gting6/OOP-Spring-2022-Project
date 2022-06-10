@@ -207,6 +207,27 @@ public class Restaurant extends User{
 
 	public void setCoupon(String coupon) {
 		this.coupon = coupon;
+	}
+	
+	public void setCouponInDB(String coupon) {
+		switch (coupon) {
+		case "滿200九折":
+			this.coupon = "buy_200_get_90_percent_off";
+			break;
+		case "滿300八折":
+			this.coupon = "buy_300_get_80_percent_off";
+			break;
+		case "省20":
+			this.coupon = "save_20_dollars";
+			break;
+		case "省30":
+			this.coupon = "save_30_dollars";
+			break;
+		default :
+			this.coupon = "";
+			break;
+	}
+		
 		dbService.addCoupon(this.getUserName(), this.coupon);
 	}
 	

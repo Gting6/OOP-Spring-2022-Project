@@ -78,7 +78,8 @@ public class RestaurantController extends Controller implements Initializable {
 		Label lb;
 		switch (status) {
 		case Coupon:
-			tmp = (restaurantInfo.getCoupon().equals(""))? "You can set coupon for your restaurant here\nCoupon now: None": "You can set coupon for your restaurant here\nCoupon now: \n" + restaurantInfo.getCoupon() + "\n";
+			Restaurant restaurant = new Restaurant(this.username);
+			tmp = (restaurant.getCoupon().equals(""))? "You can set coupon for your restaurant here\nCoupon now: None": "You can set coupon for your restaurant here\nCoupon now: \n" + restaurant.getCoupon() + "\n";
 			Label l = new Label(tmp);
 			displayVb.getChildren().clear();
 			couponCombo.setValue("");
@@ -90,6 +91,11 @@ public class RestaurantController extends Controller implements Initializable {
 				// [MING] Please set coupon here.
 				String t = couponCombo.getValue();
 				System.out.println("Set: " + t);
+				try {
+					restaurant.setCouponInDB(t);
+				} catch (Exception eCoupon) {
+					System.out.println("Some error occur");
+				}
 			});
 			break;
 		case Order:
@@ -210,7 +216,7 @@ public class RestaurantController extends Controller implements Initializable {
 		status = RestaurantView.Coupon;
 		render();
 
-		// TODO maybe setting coupon in DB later and show out the result
+//		// TODO maybe setting coupon in DB later and show out the result
 		System.out.println(this.username);
 		Restaurant restaurant = new Restaurant(this.username);
 		Restaurant restaurantInfo = restaurant.getRestaurantInfo();
