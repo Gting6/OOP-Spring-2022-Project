@@ -22,7 +22,6 @@ import javafx.util.Callback;
 import model.DeliveryMan;
 import model.Order;
 import view.DeliverView;
-import view.MemberView;
 
 public class DeliverController extends Controller implements Initializable{
 	@FXML

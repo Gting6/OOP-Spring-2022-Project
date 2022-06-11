@@ -1,25 +1,17 @@
 package model;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.*;
 //import static RestaurantProcess.deserializeStorejson.data;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 //import model.ResponseDetail;
 //import ResponseDataProcess.ResponseDetail;
 import sql.DBService;
