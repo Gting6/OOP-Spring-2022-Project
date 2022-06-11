@@ -244,6 +244,7 @@ public class MemberController extends Controller implements Initializable {
 			Restaurant restaurant = new Restaurant();
 			restaurant.setName(selectedRestaurant.replaceAll("%", " "));
 			restaurant = restaurant.getRestaurantInfoByName();
+			String coupon = restaurant.getCouponFromDB();
 			String restaurantName = restaurant.getUserName();
 			Order order = new Order(this.username, restaurantName);
 			
@@ -280,11 +281,13 @@ public class MemberController extends Controller implements Initializable {
 				displayVb.getChildren().add(tmp);
 			} else {
 				System.out.println("order without fee is" + count.toString());
+
 				System.out.println("Success! you need to pay $" + order.getFee());
 
 				displayVb.getChildren().clear();
 				tmp += "----------------------------------\n";
-				tmp += "$:" + count.toString() + "\n";
+				tmp += "$:" + order.getFee() + "  " + coupon +"\n";
+				tmp += "Expect Arrival Time: " + (order.getDistance()+ 15) +"\n";
 				Label tmpLb = new Label(tmp);
 				tmp = "";
 				tmpLb.setFont(new Font("Yu Gothic UI Semibold", 16));

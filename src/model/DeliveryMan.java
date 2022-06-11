@@ -51,8 +51,16 @@ public class DeliveryMan extends User {
 	public ArrayList<String> getNoDeliverymanOrders() {
 //		add google search distance in the future
 		ArrayList<String> orders_can_deliver = new ArrayList<>();
+		ArrayList<String> all_order_deliver = new ArrayList<>();
 		try {
-			orders_can_deliver = dbService.getOrdersNoDeliveryman();
+			all_order_deliver = dbService.getOrdersNoDeliveryman();
+			for(String order_id : all_order_deliver) {
+				Order order = dbService.getOrder(order_id);
+				Timestamp now = new Timestamp(System.currentTimeMillis());
+				if(order.getCreate_time().compareTo(now) < 0 && order.getArrival_time().compareTo(now) > 0) {
+					orders_can_deliver.add(order_id);
+				}
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
