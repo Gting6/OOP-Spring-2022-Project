@@ -245,6 +245,9 @@ public class RestaurantController extends Controller implements Initializable {
 	                            System.out.println("selectedData: " + data.getId() + " "+ data.getItems() );
 	                        	System.out.println("Before: " + data.getStatusToString());
 	                        	restaurant.setOrderStatusTakeOrder(data.getId());
+	                        	
+	                        	
+	                        	
 	                        	try {
 									pressOrderBtn();
 								} catch (SQLException e) {
@@ -259,6 +262,10 @@ public class RestaurantController extends Controller implements Initializable {
 	                        if (empty) {
 	                            setGraphic(null);
 	                        } else {
+	                        	Order data = getTableView().getItems().get(getIndex());
+	                        	if (data.getStatus() != 0) {
+	                        		btn.setDisable(true);
+	                        	}
 	                            setGraphic(btn);
 	                        }
 	                    }
@@ -283,12 +290,14 @@ public class RestaurantController extends Controller implements Initializable {
 	                        	// You may call pressOrderBtn() after finishing altering database.
 	                        	Order data = getTableView().getItems().get(getIndex());
 	                        	restaurant.setOrderStatusFinishOrder(data.getId());
+	                        	System.out.println(event);
 	                        	try {
 									pressOrderBtn();
 								} catch (SQLException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
+	                     
 	                        });
 	                    }
 	                    @Override
@@ -297,6 +306,10 @@ public class RestaurantController extends Controller implements Initializable {
 	                        if (empty) {
 	                            setGraphic(null);
 	                        } else {
+	                        	Order data = getTableView().getItems().get(getIndex());
+	                        	if (data.getStatus() != 1) {
+	                        		btn.setDisable(true);
+	                        	}
 	                            setGraphic(btn);
 	                        }
 	                    }
