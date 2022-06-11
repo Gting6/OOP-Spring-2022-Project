@@ -671,6 +671,7 @@ public class DBService {
 				Timestamp d = Timestamp.valueOf(c);
 				Timestamp d_bar = Timestamp.valueOf(c_bar);
 				Timestamp deliver_time = Timestamp.valueOf(dt);
+				System.out.println("hahaha"+ Integer.toString(res.getInt("status")));
 				Order order = new Order(res.getString("id"), res.getInt("status"), d, deliver_time, d_bar, res.getString("member_name"), 
 						res.getString("deliveryman_name"), res.getString("restaurant_name"), res.getInt("fee"));
 				conn.close();
@@ -859,9 +860,14 @@ public class DBService {
 		try {
 			Connection conn = DBConnection.getConnection();
 			
-			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE deliveryman_name=? and status=1 order by create_time"); 
-			query_orders.setString(1, "");
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from orders WHERE deliveryman_name=? and status=2 order by create_time"); 
+			query_orders.setString(1, "None");
 			ResultSet res = query_orders.executeQuery();
+			while(res.next()) {
+				orders.add(res.getString("id"));
+			}
+			query_orders.setString(1, "");
+			res = query_orders.executeQuery();
 			while(res.next()) {
 				orders.add(res.getString("id"));
 			}
@@ -1067,5 +1073,47 @@ public class DBService {
 		e.printStackTrace();
 	}
 		return null;
+	}
+
+	public String getConsumerAddress(String member_id) {
+		// TODO Auto-generated method stub
+		String consumer_address = "";
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from members WHERE username=?"); 
+			query_orders.setString(1, member_id);
+			ResultSet res = query_orders.executeQuery();
+			if(res.next()) {
+				consumer_address = res.getString("address");
+			}
+			conn.close();
+			return consumer_address;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return consumer_address;
+	}
+
+	public String getRestaurantAddress(String restaurant_id) {
+		// TODO Auto-generated method stub
+		String restaurant_address = "";
+		try {
+			Connection conn = DBConnection.getConnection();
+			
+			PreparedStatement query_orders = conn.prepareStatement("SELECT * from restaurants WHERE username=?"); 
+			query_orders.setString(1, restaurant_id);
+			ResultSet res = query_orders.executeQuery();
+			if(res.next()) {
+				restaurant_address = res.getString("pos_addr");
+			}
+			conn.close();
+			return restaurant_address;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return restaurant_address;
 	}
 }

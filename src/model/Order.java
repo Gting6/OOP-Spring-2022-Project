@@ -21,12 +21,20 @@ public class Order {
 	private String deliveryman_id;
 	private String restaurant_id; // can be search by call static function
 	private HashMap<String, Integer> items;
+	private long distance = 0;
 	// TODO Location?
 	private int fee;
 	
 	DBService dbService = new DBService();
 	
-	
+	public long getDistance() {
+		return distance;
+	}
+
+	public void setDistance(long a) {
+		distance = a;
+	}
+
 	// float how to calculate
 	public Order() {
 		
@@ -221,6 +229,8 @@ public class Order {
 				Model model = new Model();
 				long distance = model.CalculateDistanceMemberRest(member_id, restaurant_id) / 60;
 				System.out.println(distance);
+				
+				setDistance(distance);
 				if (distance > 30) {
 					distance_fee = (int) distance;
 				}
@@ -309,8 +319,22 @@ public class Order {
 		return dbService.getThisOrderDeliverymanName(this.deliveryman_id);
 	}
 	
+	public String getConsumer_address() {
+		return dbService.getConsumerAddress(this.member_id);
+	}
+
+	
+	public String getRestaurant_address() {
+		return dbService.getRestaurantAddress(this.restaurant_id);
+	}
+
+	
 	public String getStatusToString() {
 		// TODO Auto-generated method stub
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		if(!(this.getCreate_time().compareTo(now) < 0 && this.getArrival_time().compareTo(now) > 0)) {
+			return "Expired!";
+		}
 		if(this.status == 0)
 			return "This order is not yet checked by restaurant";
 		else if(this.status == 1)
