@@ -23,7 +23,6 @@ import javafx.scene.text.Font;
 import javafx.util.Callback;
 import model.Order;
 import model.Restaurant;
-import view.MemberView;
 import view.RestaurantView;
 
 public class RestaurantController extends Controller implements Initializable {
