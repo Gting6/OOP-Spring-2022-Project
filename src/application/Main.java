@@ -29,8 +29,6 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		// Initialize FX
 		launch(args);
-		Controller controller = new Controller();
-		controller.controlMain();
 
 	}
 }

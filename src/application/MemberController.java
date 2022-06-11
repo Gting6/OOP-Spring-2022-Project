@@ -701,7 +701,7 @@ public class MemberController extends Controller implements Initializable {
 		// Maybe can be refactor
 		render();
 		displayVb.getChildren().clear();
-		displayVb.setPrefWidth(900);
+		displayVb.setPrefWidth(1000);
 		tmpCount2 = 0;
 	    TableView<Order> tableView = new TableView<Order>();
 
@@ -749,7 +749,7 @@ public class MemberController extends Controller implements Initializable {
 		orders.forEach(order->{
 			tableView.getItems().add(order);
 			System.out.println("---------------------");
-			tmpCount2 = max(tmpCount2, 800+order.getItems().length() * 10);
+			tmpCount2 = max(tmpCount2, 1000+order.getItems().length() * 10);
 			System.out.println(order.getId());
 			System.out.println(order.getStatus());
 			System.out.println(order.getConsumer_id());

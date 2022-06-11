@@ -56,7 +56,7 @@ public class Order {
 	public Order(String id, int status, Timestamp create_time, Timestamp deliver_time, Timestamp arrival_time, 
 			String member_id, String deliveryman_id, String restaurant_id, int fee) {
 		this.id = id;
-		this.status = 0;  // 0 -> inserted; 1 -> deliveryman_designated
+		this.status = status;  // 0 -> inserted; 1 -> deliveryman_designated
 		this.create_time = create_time;
 		this.deliver_time = deliver_time;
 		this.arrival_time = arrival_time;

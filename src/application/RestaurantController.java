@@ -243,7 +243,14 @@ public class RestaurantController extends Controller implements Initializable {
 	                        	// You may call pressOrderBtn() after finishing altering database.
 	                        	Order data = getTableView().getItems().get(getIndex());
 	                            System.out.println("selectedData: " + data.getId() + " "+ data.getItems() );
+	                        	System.out.println("Before: " + data.getStatusToString());
 	                        	restaurant.setOrderStatusTakeOrder(data.getId());
+	                        	try {
+									pressOrderBtn();
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 	                        });
 	                    }
 	                    @Override
@@ -275,8 +282,13 @@ public class RestaurantController extends Controller implements Initializable {
 	                        	// [MING] set the take order logic here, you can see "data" is correspond to the item
 	                        	// You may call pressOrderBtn() after finishing altering database.
 	                        	Order data = getTableView().getItems().get(getIndex());
-	                            System.out.println("Finish: " + data.getId() + " "+ data.getItems() );
 	                        	restaurant.setOrderStatusFinishOrder(data.getId());
+	                        	try {
+									pressOrderBtn();
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 	                        });
 	                    }
 	                    @Override
@@ -297,7 +309,7 @@ public class RestaurantController extends Controller implements Initializable {
 	        
 			for (int i = 0; i < order_ids.size(); i++) {
 				Order order_detail = restaurantInfo.checkOrderDetail(order_ids.get(i));
-				tmpCount2 = max(tmpCount2, 800+order_detail.getItems().length() * 10);
+				tmpCount2 = max(tmpCount2, 1000+order_detail.getItems().length() * 10);
 				tableView.getItems().add(order_detail);		
 			}
 			
