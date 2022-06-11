@@ -80,11 +80,11 @@
                               <Insets />
                            </HBox.margin>
                         </Pane>
-                        <TextField fx:id="passwordTf" prefHeight="51.0" prefWidth="233.0" promptText="Password" styleClass="transparent">
+                        <PasswordField fx:id="passwordTf" prefHeight="51.0" prefWidth="233.0" styleClass="transparent" stylesheets="@style.css">
                            <HBox.margin>
                               <Insets top="3.0" />
                            </HBox.margin>
-                        </TextField>
+                        </PasswordField>
                      </children>
                      <VBox.margin>
                         <Insets left="60.0" top="15.0" />
