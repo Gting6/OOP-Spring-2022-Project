@@ -7,49 +7,44 @@ import java.util.HashMap;
 
 import sql.DBService;
 
-public class Restaurant extends User{
-	
+public class Restaurant extends User {
+
 	public enum coupon_type {
-		buy_200_get_90_percent_off, buy_300_get_80_percent_off, save_20_dollars, save_30_dollars, none; 
+		buy_200_get_90_percent_off, buy_300_get_80_percent_off, save_20_dollars, save_30_dollars, none;
 	};
-	
-	
+
 	private String latitude;
 	private String longitude;
 	private String store_description;
 	private String order_despcription;
 	private String[] types;
 	private String coupon;
-	// TODO coupon list
-	// TODO Business time
-	// TODO json data
-	// TODO OrderHandler waiting doing done queue
-	
+
 	private HashMap<String, Integer> products;
 	DBService dbService = new DBService();
-	
+
 	public Restaurant() {
 		// TODO Init
 	}
-	
+
 	public Restaurant(String username) {
 		super(username);
 		// TODO Init
 	}
-	
+
 	public Restaurant(String username, String password, String address, String phone, String email, String name) {
 		super(username, password, address, phone, email, name);
 	}
-	
-	public Restaurant(String [] s) {
-		super(s[0], s[1], s[4], s[7],s[2], s[3]);
+
+	public Restaurant(String[] s) {
+		super(s[0], s[1], s[4], s[7], s[2], s[3]);
 		this.setLatitude(s[5]);
 		this.setLongitude(s[6]);
 		this.setStore_description(s[8]);
 		this.setOrder_despcription(s[9]);
 		this.setCoupon(s[10]);
 	}
-		
+
 	public void setToDB() {
 
 //		since we have add new stuff in json to fill all the blanks, the restaurant needs to be reset to fulfill the new form of input
@@ -58,8 +53,8 @@ public class Restaurant extends User{
 //			
 //		dbService.createRestaurant(this);
 //			
-		//		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		// } catch (SQLException e) {
+		// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 
@@ -77,7 +72,7 @@ public class Restaurant extends User{
 		}
 		return null;
 	}
-	
+
 	public Restaurant getRestaurantInfoByName() throws SQLException {
 		// TODO view page
 		try {
@@ -95,7 +90,6 @@ public class Restaurant extends User{
 ////		do create restaurant and create products
 //	}
 
-
 ////	fix it after model changed
 //	public Restaurant getRestaurantInfo() throws SQLException {
 //		String[] s = dbService.getRestaurant(this.getUserName());
@@ -108,20 +102,20 @@ public class Restaurant extends User{
 		// TODO Return Products list
 		return dbService.getProducts(this.getUserName());
 	}
-	
-	public ArrayList<String> checkOrders(){
+
+	public ArrayList<String> checkOrders() {
 		// TODO Return Order status
 		ArrayList<String> valid_orders = new ArrayList<>();
 		try {
 			ArrayList<String> all_orders = dbService.getOrdersRestaurant(this.getUserName());
-			for(String order_id : all_orders) {
+			for (String order_id : all_orders) {
 				Order order = dbService.getOrder(order_id);
 				Timestamp now = new Timestamp(System.currentTimeMillis());
 				System.out.println(">");
 				System.out.println(now);
 				System.out.println(order.getCreate_time());
 				System.out.println(order.getDeliver_time());
-				if(order.getCreate_time().compareTo(now) < 0 && order.getDeliver_time().compareTo(now) > 0) {
+				if (order.getCreate_time().compareTo(now) < 0 && order.getDeliver_time().compareTo(now) > 0) {
 					valid_orders.add(order_id);
 				}
 			}
@@ -132,17 +126,17 @@ public class Restaurant extends User{
 		}
 		return valid_orders;
 	}
-	
+
 	public void setOrderStatusTakeOrder(String order_id) {
 		int status = 1;
 		dbService.setOrderStatus(status, order_id);
 	}
-	
+
 	public void setOrderStatusFinishOrder(String order_id) {
 		int status = 2;
 		dbService.setOrderStatus(status, order_id);
 	}
-	
+
 	public ArrayList<String> checkItemPerOrder(String order_id) {
 		ArrayList<String> items = new ArrayList<>();
 		try {
@@ -153,8 +147,8 @@ public class Restaurant extends User{
 		}
 		return items;
 	}
-	
-	public Order checkOrderDetail(String order_id){
+
+	public Order checkOrderDetail(String order_id) {
 		Order order = null;
 		try {
 			order = dbService.getOrder(order_id);
@@ -164,7 +158,7 @@ public class Restaurant extends User{
 		}
 		return order;
 	}
-	
+
 	public ArrayList<ArrayList<String>> checkItemValuePerOrder(String order_id) {
 		ArrayList<ArrayList<String>> items = new ArrayList<ArrayList<String>>();
 		try {
@@ -199,7 +193,7 @@ public class Restaurant extends User{
 	public void setStore_description(String store_description) {
 		this.store_description = store_description;
 	}
-	
+
 	public String getOrder_despcription() {
 		return order_despcription;
 	}
@@ -219,7 +213,7 @@ public class Restaurant extends User{
 	public String getCoupon() {
 		return dbService.getCoupon(this.getUserName());
 	}
-	
+
 	public String getCouponFromDB() {
 		String coupon = dbService.getCoupon(this.getUserName());
 		switch (coupon) {
@@ -235,17 +229,17 @@ public class Restaurant extends User{
 		case "save_30_dollars":
 			coupon = "省30";
 			break;
-		default :
+		default:
 			coupon = "";
 			break;
-	}
+		}
 		return coupon;
 	}
 
 	public void setCoupon(String coupon) {
 		this.coupon = coupon;
 	}
-	
+
 	public void setCouponInDB(String coupon) {
 		switch (coupon) {
 		case "滿200九折":
@@ -260,14 +254,14 @@ public class Restaurant extends User{
 		case "省30":
 			this.coupon = "save_30_dollars";
 			break;
-		default :
+		default:
 			this.coupon = "";
 			break;
-	}
-		
+		}
+
 		dbService.addCoupon(this.getUserName(), this.coupon);
 	}
-	
+
 	public void setOrderStatus(String order_id) {
 		int status = 1;
 		dbService.setOrderStatus(status, order_id);

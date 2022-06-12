@@ -8,7 +8,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+/*
+ * This class for Default controller pattern.
+ */
 public class Controller {
 	private Stage stage;
 	private Scene scene;
@@ -23,7 +25,7 @@ public class Controller {
 	}
 	
 	
-	//Helper function to switch
+	// Helper function to switch
 	// Version 1: Without user info (For logout)
 	protected void switchScene(final ViewEnum p, ActionEvent event) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(p.getFxmlFile()));

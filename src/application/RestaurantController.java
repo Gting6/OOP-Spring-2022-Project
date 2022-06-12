@@ -46,7 +46,7 @@ public class RestaurantController extends Controller implements Initializable {
 
 	@FXML
 	private Button productBtn;
-	
+
 	private ComboBox<String> couponCombo = new ComboBox<String>();
 
 	private String tmp;
@@ -55,7 +55,7 @@ public class RestaurantController extends Controller implements Initializable {
 	private Button confirmBtn = new Button("Confirm");
 	private int tmpCount = 0;
 	private int tmpCount2 = 0;
-	
+
 //	private String tmp = "";
 
 	private String username;
@@ -86,7 +86,9 @@ public class RestaurantController extends Controller implements Initializable {
 		switch (status) {
 		case Coupon:
 			Restaurant restaurant = new Restaurant(this.username);
-			tmp = (restaurant.getCoupon().equals(""))? "You can set coupon for your restaurant here\nCoupon now: None": "You can set coupon for your restaurant here\nCoupon now: \n" + restaurant.getCouponFromDB() + "\n";
+			tmp = (restaurant.getCoupon().equals("")) ? "You can set coupon for your restaurant here\nCoupon now: None"
+					: "You can set coupon for your restaurant here\nCoupon now: \n" + restaurant.getCouponFromDB()
+							+ "\n";
 			Label l = new Label(tmp);
 			displayVb.getChildren().clear();
 			couponCombo.setValue("");
@@ -144,11 +146,11 @@ public class RestaurantController extends Controller implements Initializable {
 		// Maybe can be refactor
 		if (restaurantInfo != null) {
 			// TODO [FX] handle the info fx.
-		
+
 			tmp = "Username: " + restaurantInfo.getUserName() + "\n";
 			if (restaurantInfo.getAddress().length() > 14) {
 				tmp += "Address: " + restaurantInfo.getAddress().substring(0, 14) + "\n";
-				tmp += restaurantInfo.getAddress().substring(14	, restaurantInfo.getAddress().length()) + "\n";
+				tmp += restaurantInfo.getAddress().substring(14, restaurantInfo.getAddress().length()) + "\n";
 			} else {
 				tmp += "Address: " + restaurantInfo.getAddress() + "\n";
 			}
@@ -157,7 +159,7 @@ public class RestaurantController extends Controller implements Initializable {
 			tmp += "Email: " + restaurantInfo.getEmail() + "\n";
 			tmp += "Name: " + restaurantInfo.getName() + "\n";
 			tmp += "Type: ";
-						
+
 			System.out.println();
 			System.out.println("Username: " + restaurantInfo.getUserName());
 			System.out.println("Address: " + restaurantInfo.getAddress());
@@ -189,166 +191,149 @@ public class RestaurantController extends Controller implements Initializable {
 
 	private int max(int tmpCount22, int i) {
 		// TODO Auto-generated method stub
-		return (tmpCount22 > i)? tmpCount22: i;
+		return (tmpCount22 > i) ? tmpCount22 : i;
 	}
 
 	public void pressOrderBtn() throws SQLException {
 		status = RestaurantView.Order;
 		render();
-		
+
 		try {
-		System.out.println("Order in "+this.username);
-		
-		
-		ArrayList<String> order_ids = restaurantInfo.checkOrders();
-		
-		System.out.println(order_ids.size());
-		// List all valid order
-		order_ids.forEach(order -> System.out.println(order));
-		
-		if (order_ids.size() < 1) {
-			Label lb = new Label("No order yet!");
-			lb.setFont(new Font("Yu Gothic UI Semibold", 16));
-			displayVb.getChildren().add(lb);			
-		} else {
-		
-		    TableView<Order> tableView = new TableView<Order>();
-		    
-			TableColumn<Order, String> statusColumn = new TableColumn<>("Status");
-		    statusColumn.setCellValueFactory(new PropertyValueFactory<>("statusToString"));
-			tableView.getColumns().add(statusColumn);
+			System.out.println("Order in " + this.username);
 
-		    TableColumn<Order, String> detailColumn = new TableColumn<>("Details");
-		    detailColumn.setCellValueFactory(new PropertyValueFactory<>("items"));
-			tableView.getColumns().add(detailColumn);
+			ArrayList<String> order_ids = restaurantInfo.checkOrders();
 
-		    TableColumn<Order, Timestamp> createTimeColumn = new TableColumn<>("Create Time");
-		    createTimeColumn.setCellValueFactory(new PropertyValueFactory<>("create_time"));
-			tableView.getColumns().add(createTimeColumn);
+			System.out.println(order_ids.size());
+			// List all valid order
+			order_ids.forEach(order -> System.out.println(order));
 
-			
+			if (order_ids.size() < 1) {
+				Label lb = new Label("No order yet!");
+				lb.setFont(new Font("Yu Gothic UI Semibold", 16));
+				displayVb.getChildren().add(lb);
+			} else {
 
-			
-	        TableColumn<Order, Void> colBtn = new TableColumn("Take Order");
-	        Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
-	            @Override
-	            public TableCell<Order, Void> call(final TableColumn<Order, Void> param) {
-	                final TableCell<Order, Void> cell = new TableCell<Order, Void>() {
+				TableView<Order> tableView = new TableView<Order>();
 
-	                    private final Button btn = new Button("Take!");
-	                    {
-	                        btn.setOnAction((ActionEvent event) -> {
-	                        	// [MING] set the take order logic here, you can see "data" is correspond to the item
-	                        	// You may call pressOrderBtn() after finishing altering database.
-	                        	Order data = getTableView().getItems().get(getIndex());
-	                            System.out.println("selectedData: " + data.getId() + " "+ data.getItems() );
-	                        	System.out.println("Before: " + data.getStatusToString());
-	                        	restaurant.setOrderStatusTakeOrder(data.getId());
-	                        	
-	                        	
-	                        	
-	                        	try {
-									pressOrderBtn();
-								} catch (SQLException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+				TableColumn<Order, String> statusColumn = new TableColumn<>("Status");
+				statusColumn.setCellValueFactory(new PropertyValueFactory<>("statusToString"));
+				tableView.getColumns().add(statusColumn);
+
+				TableColumn<Order, String> detailColumn = new TableColumn<>("Details");
+				detailColumn.setCellValueFactory(new PropertyValueFactory<>("items"));
+				tableView.getColumns().add(detailColumn);
+
+				TableColumn<Order, Timestamp> createTimeColumn = new TableColumn<>("Create Time");
+				createTimeColumn.setCellValueFactory(new PropertyValueFactory<>("create_time"));
+				tableView.getColumns().add(createTimeColumn);
+
+				TableColumn<Order, Void> colBtn = new TableColumn("Take Order");
+				Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
+					@Override
+					public TableCell<Order, Void> call(final TableColumn<Order, Void> param) {
+						final TableCell<Order, Void> cell = new TableCell<Order, Void>() {
+
+							private final Button btn = new Button("Take!");
+							{
+								btn.setOnAction((ActionEvent event) -> {
+									// [MING] set the take order logic here, you can see "data" is correspond to the
+									// item
+									// You may call pressOrderBtn() after finishing altering database.
+									Order data = getTableView().getItems().get(getIndex());
+									System.out.println("selectedData: " + data.getId() + " " + data.getItems());
+									System.out.println("Before: " + data.getStatusToString());
+									restaurant.setOrderStatusTakeOrder(data.getId());
+
+									try {
+										pressOrderBtn();
+									} catch (SQLException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+								});
+							}
+
+							@Override
+							public void updateItem(Void item, boolean empty) {
+								super.updateItem(item, empty);
+								if (empty) {
+									setGraphic(null);
+								} else {
+									Order data = getTableView().getItems().get(getIndex());
+									if (data.getStatus() != 0) {
+										btn.setDisable(true);
+									}
+									setGraphic(btn);
 								}
-	                        });
-	                    }
-	                    @Override
-	                    public void updateItem(Void item, boolean empty) {
-	                        super.updateItem(item, empty);
-	                        if (empty) {
-	                            setGraphic(null);
-	                        } else {
-	                        	Order data = getTableView().getItems().get(getIndex());
-	                        	if (data.getStatus() != 0) {
-	                        		btn.setDisable(true);
-	                        	}
-	                            setGraphic(btn);
-	                        }
-	                    }
-	                };
-	                return cell;
-	            }
-	        };
-	        colBtn.setCellFactory(cellFactory);
-	        tableView.getColumns().add(colBtn);
-			
+							}
+						};
+						return cell;
+					}
+				};
+				colBtn.setCellFactory(cellFactory);
+				tableView.getColumns().add(colBtn);
 
-	        TableColumn<Order, Void> colBtn2 = new TableColumn("Finish Order");
-	        Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory2 = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
-	            @Override
-	            public TableCell<Order, Void> call(final TableColumn<Order, Void> param) {
-	                final TableCell<Order, Void> cell = new TableCell<Order, Void>() {
+				TableColumn<Order, Void> colBtn2 = new TableColumn("Finish Order");
+				Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory2 = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
+					@Override
+					public TableCell<Order, Void> call(final TableColumn<Order, Void> param) {
+						final TableCell<Order, Void> cell = new TableCell<Order, Void>() {
 
-	                    private final Button btn = new Button("Finish!");
-	                    {
-	                        btn.setOnAction((ActionEvent event) -> {
-	                        	// [MING] set the take order logic here, you can see "data" is correspond to the item
-	                        	// You may call pressOrderBtn() after finishing altering database.
-	                        	Order data = getTableView().getItems().get(getIndex());
-	                        	restaurant.setOrderStatusFinishOrder(data.getId());
-	                        	System.out.println(event);
-	                        	try {
-									pressOrderBtn();
-								} catch (SQLException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+							private final Button btn = new Button("Finish!");
+							{
+								btn.setOnAction((ActionEvent event) -> {
+									// [MING] set the take order logic here, you can see "data" is correspond to the
+									// item
+									// You may call pressOrderBtn() after finishing altering database.
+									Order data = getTableView().getItems().get(getIndex());
+									restaurant.setOrderStatusFinishOrder(data.getId());
+									System.out.println(event);
+									try {
+										pressOrderBtn();
+									} catch (SQLException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+
+								});
+							}
+
+							@Override
+							public void updateItem(Void item, boolean empty) {
+								super.updateItem(item, empty);
+								if (empty) {
+									setGraphic(null);
+								} else {
+									Order data = getTableView().getItems().get(getIndex());
+									if (data.getStatus() != 1) {
+										btn.setDisable(true);
+									}
+									setGraphic(btn);
 								}
-	                     
-	                        });
-	                    }
-	                    @Override
-	                    public void updateItem(Void item, boolean empty) {
-	                        super.updateItem(item, empty);
-	                        if (empty) {
-	                            setGraphic(null);
-	                        } else {
-	                        	Order data = getTableView().getItems().get(getIndex());
-	                        	if (data.getStatus() != 1) {
-	                        		btn.setDisable(true);
-	                        	}
-	                            setGraphic(btn);
-	                        }
-	                    }
-	                };
-	                return cell;
-	            }
-	        };
-	        colBtn2.setCellFactory(cellFactory2);
-	        tableView.getColumns().add(colBtn2);
-	        
-			for (int i = 0; i < order_ids.size(); i++) {
-				Order order_detail = restaurantInfo.checkOrderDetail(order_ids.get(i));
-				tmpCount2 = max(tmpCount2, 1000+order_detail.getItems().length() * 10);
-				tableView.getItems().add(order_detail);		
-			}
-			
-			displayVb.setPrefWidth(tmpCount2);
-			tmpCount2 = 0;
-			displayVb.getChildren().add(tableView);	
-		}		//		ArrayList<ArrayList<String>>  order_items = restaurantInfo.checkItemValuePerOrder(order_ids.get(0));
-		
-//		System.out.println("<");
-//		System.out.println(order_detail.getItems());
-//		System.out.println(order_detail.getStatusToString());
-//
-//		System.out.println(">");
-//		order_items.forEach(orderitem -> System.out.println(orderitem.get(0) + " * " + orderitem.get(1)));
-		
-		// if the restaurant want to accept the order
-//		restaurantInfo.setOrderStatus(order_ids.get(0));
-		
+							}
+						};
+						return cell;
+					}
+				};
+				colBtn2.setCellFactory(cellFactory2);
+				tableView.getColumns().add(colBtn2);
+
+				for (int i = 0; i < order_ids.size(); i++) {
+					Order order_detail = restaurantInfo.checkOrderDetail(order_ids.get(i));
+					tmpCount2 = max(tmpCount2, 1000 + order_detail.getItems().length() * 10);
+					tableView.getItems().add(order_detail);
+				}
+
+				displayVb.setPrefWidth(tmpCount2);
+				tmpCount2 = 0;
+				displayVb.getChildren().add(tableView);
+			} // ArrayList<ArrayList<String>> order_items =
+				// restaurantInfo.checkItemValuePerOrder(order_ids.get(0));
+
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			System.out.println("order not found or expire");
 		}
-		
-		
-		
-		
-		
 
 	}
 
@@ -383,7 +368,6 @@ public class RestaurantController extends Controller implements Initializable {
 				tmp += (key + ": $" + restaurantProduct.get(key) + "\n");
 				tmpCount += 1;
 			}
-			
 
 		} else {
 			System.out.println("some error occur, getting null");
