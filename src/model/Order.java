@@ -218,16 +218,17 @@ public class Order {
 				total_price = total_price > 30 ? total_price - 30 : 0;
 			}
 		}
-
+		
+		Model model = new Model();
+		long distance = model.CalculateDistanceMemberRest(member_id, restaurant_id) / 60;
+		System.out.println(distance);
+		
+		setDistance(distance);
 		try {
 			if (total_price > 100 && mem.is_vip) {
 				distance_fee = 0;
-			} else {
-				Model model = new Model();
-				long distance = model.CalculateDistanceMemberRest(member_id, restaurant_id) / 60;
-				System.out.println(distance);
-
-				setDistance(distance);
+			}
+			else {
 				if (distance > 30) {
 					distance_fee = (int) distance;
 				} else
