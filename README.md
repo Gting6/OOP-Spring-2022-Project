@@ -81,7 +81,7 @@ The Detail can see the below Steps.
 ## Step1
 Install the related jar above and setup them in eclipse.
 
-The related jar can be search online or we have some jar in NeededJar.zip.
+The related jar can be search online or we have some jar in branch `feature/JarFiles`, go to the branch and you can see the jar files in NeededJar Folder(If fail to load this folder, you may need to download the related file by google).
 
 ## Step2
 Open the project with eclipse and modify some setting.
