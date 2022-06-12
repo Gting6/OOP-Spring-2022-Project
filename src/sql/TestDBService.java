@@ -36,7 +36,7 @@ public class TestDBService {
 //		test order function ex: add to cart ...
 		HashMap<String, Integer> product1 = new HashMap<>();
 		HashMap<String, Integer> all_products = dbService.getProducts("f3746aef-935f-44cf-9dae-0455d2f7727d");
-		product1.put("�׺�", 50);
+		product1.put("麵", 50);
 		Order order = new Order("member", "f3746aef-935f-44cf-9dae-0455d2f7727d", product1);
 		System.out.println(order.getRestaurantDescription());
 		order.addToCart(product1);

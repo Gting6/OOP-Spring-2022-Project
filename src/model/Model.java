@@ -133,14 +133,11 @@ public class Model {
 			DeliveryMan deliverymanOb = new DeliveryMan(deliveryString);
 			String deliverymanAddress = deliverymanOb.getAddress().replace(" ", "%20");
 
-			String findplaceurl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + deliverymanAddress
-					+ "&destinations=" + restaurant.getLatitude() + "," + restaurant.getLongitude()
+			String findplaceurl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="
+					+ deliverymanAddress + "&destinations=" + restaurant.getLatitude() + "," + restaurant.getLongitude()
 					+ "&key=" + apikey;
 
-			HttpRequest request = HttpRequest.newBuilder()
-					  .uri(new URI(findplaceurl))
-					  .GET()
-					  .build();
+			HttpRequest request = HttpRequest.newBuilder().uri(new URI(findplaceurl)).GET().build();
 
 			HttpClient client = HttpClient.newHttpClient();
 			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
@@ -152,7 +149,8 @@ public class Model {
 			}
 
 			System.out.println(response.body());
-			Integer time = jp.getAsJsonArray("rows").get(0).getAsJsonObject().getAsJsonArray("elements").get(0).getAsJsonObject().getAsJsonObject("duration").get("value").getAsInt();
+			Integer time = jp.getAsJsonArray("rows").get(0).getAsJsonObject().getAsJsonArray("elements").get(0)
+					.getAsJsonObject().getAsJsonObject("duration").get("value").getAsInt();
 			System.out.println(time);
 			return time;
 
@@ -171,13 +169,9 @@ public class Model {
 			String userAddress = this.DBService.getMember(username).getAddress().replace(" ", "%20");
 
 			String findplaceurl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + userAddress
-					+ "&destinations=" + restaurant.getLatitude() + "," + restaurant.getLongitude()
-					+ "&key=" + apikey;
+					+ "&destinations=" + restaurant.getLatitude() + "," + restaurant.getLongitude() + "&key=" + apikey;
 
-			HttpRequest request = HttpRequest.newBuilder()
-					  .uri(new URI(findplaceurl))
-					  .GET()
-					  .build();
+			HttpRequest request = HttpRequest.newBuilder().uri(new URI(findplaceurl)).GET().build();
 
 			HttpClient client = HttpClient.newHttpClient();
 			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
@@ -189,7 +183,8 @@ public class Model {
 			}
 
 			System.out.println(response.body());
-			Integer time = jp.getAsJsonArray("rows").get(0).getAsJsonObject().getAsJsonArray("elements").get(0).getAsJsonObject().getAsJsonObject("duration").get("value").getAsInt();
+			Integer time = jp.getAsJsonArray("rows").get(0).getAsJsonObject().getAsJsonArray("elements").get(0)
+					.getAsJsonObject().getAsJsonObject("duration").get("value").getAsInt();
 			System.out.println(time);
 			return time;
 
@@ -200,7 +195,7 @@ public class Model {
 
 	}
 
-	public Map <Restaurant, Integer> SearchRestaurantByDistance(String username) {
+	public Map<Restaurant, Integer> SearchRestaurantByDistance(String username) {
 
 		try {
 			String[][] ret = this.DBService.getAllRestaurant();
@@ -208,7 +203,7 @@ public class Model {
 			Restaurant[] restaurants = new Restaurant[29];
 
 			String userAddress = this.DBService.getMember(username).getAddress().replace(" ", "%20");
-			
+
 			for (int i = 0; i < 29; i++) {
 				restaurants[i] = new Restaurant(ret[i]);
 			}
@@ -219,37 +214,36 @@ public class Model {
 
 			String[] findplaceurl = new String[29];
 
-			Map <Restaurant, Integer> map = new HashMap<>();
-			
+			Map<Restaurant, Integer> map = new HashMap<>();
+
 			for (int i = 0; i < 29; i++) {
 //	            findplaceurl[i] = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + latitude + "," + longitude + "&destinations=" + data[i].getlatitude() + "," + data[i].getlongitude() + "&key=" + apikey;
 				findplaceurl[i] = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + userAddress
 						+ "&destinations=" + restaurants[i].getLatitude() + "," + restaurants[i].getLongitude()
 						+ "&key=" + apikey;
 
-				HttpRequest request = HttpRequest.newBuilder()
-						  .uri(new URI(findplaceurl[i]))
-						  .GET()
-						  .build();
-				
+				HttpRequest request = HttpRequest.newBuilder().uri(new URI(findplaceurl[i])).GET().build();
+
 				HttpClient client = HttpClient.newHttpClient();
 				HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
-				
+
 				JsonObject jp = new JsonParser().parse(response.body()).getAsJsonObject();
-				
+
 				if (response.body().contains("ZERO_RESULTS")) {
 					return null;
 				}
-				
-				Integer time = jp.getAsJsonArray("rows").get(0).getAsJsonObject().getAsJsonArray("elements").get(0).getAsJsonObject().getAsJsonObject("duration").get("value").getAsInt();
-				
+
+				Integer time = jp.getAsJsonArray("rows").get(0).getAsJsonObject().getAsJsonArray("elements").get(0)
+						.getAsJsonObject().getAsJsonObject("duration").get("value").getAsInt();
+
 //				System.out.println(time);
 				map.put(restaurants[i], time);
-				
+
 			}
-			
+
 //			map.forEach((key, value)->{System.out.println(key.getName() + "time: " + value);});	
-			Map<Restaurant, Integer> sortedMap = map.entrySet().stream().sorted(Entry.comparingByValue()).collect(Collectors.toMap(Entry::getKey, Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+			Map<Restaurant, Integer> sortedMap = map.entrySet().stream().sorted(Entry.comparingByValue())
+					.collect(Collectors.toMap(Entry::getKey, Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
 //			sortedMap.forEach((key, value)->{System.out.println(key.getName() + "time: " + value);});
 
@@ -276,7 +270,7 @@ public class Model {
 	public ArrayList<Restaurant> SearchRestaurantByName(String input) {
 		// TODO Auto-generated method stub
 		try {
-			
+
 			ArrayList<String[]> ret = this.DBService.searchRestaurantByName(input);
 			if (ret.size() == 0) {
 				return null;
@@ -288,7 +282,7 @@ public class Model {
 				restaurants.add(new Restaurant(e));
 			}
 			return restaurants;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -299,7 +293,7 @@ public class Model {
 	public ArrayList<Restaurant> SearchRestaurantByType(String input) {
 		// TODO Auto-generated method stub
 		try {
-			
+
 			ArrayList<String[]> ret = this.DBService.searchRestaurantByType(input);
 			if (ret.size() == 0) {
 				return null;
@@ -311,7 +305,7 @@ public class Model {
 				restaurants.add(new Restaurant(e));
 			}
 			return restaurants;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -322,13 +316,17 @@ public class Model {
 	public ArrayList<Restaurant> SearchRestaurantByCoupon(String input) {
 		// TODO Auto-generated method stub
 		try {
-			if (input.equals("滿200九折")) input = "buy_200_get_90_percent_off";
-			if (input.equals("滿300八折")) input = "buy_300_get_80_percent_off";
-			if (input.equals("省20")) input = "save_20_dollars";
-			if (input.equals("省30")) input = "save_30_dollars";
+			if (input.equals("滿200九折"))
+				input = "buy_200_get_90_percent_off";
+			if (input.equals("滿300八折"))
+				input = "buy_300_get_80_percent_off";
+			if (input.equals("省20"))
+				input = "save_20_dollars";
+			if (input.equals("省30"))
+				input = "save_30_dollars";
 
 			ArrayList<String[]> ret = this.DBService.searchRestaurantByCoupon(input);
-			
+
 			if (ret.size() == 0) {
 				return null;
 			}
@@ -339,7 +337,7 @@ public class Model {
 				restaurants.add(new Restaurant(e));
 			}
 			return restaurants;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -9,17 +9,14 @@ import java.util.Calendar;
 import sql.DBService;
 
 public class Member extends User {
-	// ���info頛詨蝟餌絞
 	boolean is_vip;
 	Date vip_expire_date;
 	DBService dbService = new DBService();
 
-	// TODO OrderHandler
-
 	public Member() {
 
 	}
-	
+
 	public Member(String username) {
 		super(username);
 	}
@@ -27,15 +24,16 @@ public class Member extends User {
 	public Member(String username, String password, String address, String phone, String email, String name) {
 		super(username, password, address, phone, email, name);
 		this.is_vip = false;
-		this.vip_expire_date = null;	
+		this.vip_expire_date = null;
 	}
-	
-	public Member(String username, String password, String address, String phone,String email, String name, Date vip_expire_date) {
+
+	public Member(String username, String password, String address, String phone, String email, String name,
+			Date vip_expire_date) {
 		super(username, password, address, phone, email, name);
-		this.vip_expire_date = vip_expire_date;	
+		this.vip_expire_date = vip_expire_date;
 		this.is_vip = getVIP();
 	}
-	
+
 	public void setToDB() {
 		try {
 			dbService.createMember(this);
@@ -87,16 +85,7 @@ public class Member extends User {
 		// return newOrder.getStatus();
 	}
 
-	// ��府閬�status
-	// user.callSearch
-	// 閬銝�銝�獐摮�獐����靽格����靘�
 	public Restaurant searchRestaurant(String restaurant_name) {
-		// 閬model����� name->Restaurant
-		// 瘥酉����停閬憓���
-		// ����獐� 摮num
-		// �摰閰Ｘ撘�
-		// call �閰Ｘ撘�
-		// �����閰Ｘ��� 頛詨UI銝血�������
 		return null;
 	}
 
@@ -104,7 +93,6 @@ public class Member extends User {
 		return restaurant;
 	}
 
-	// view�� ��迄����
 	public Order checkOrderStatus(String order_id) {
 		Order order = null;
 		try {
@@ -115,7 +103,7 @@ public class Member extends User {
 		}
 		return order;
 	}
-	
+
 	public ArrayList<String> checkAllOrders() {
 		ArrayList<String> all_orders = new ArrayList<>();
 		try {
@@ -126,17 +114,17 @@ public class Member extends User {
 		}
 		return all_orders;
 	}
-	
+
 	public ArrayList<String> checkAllOrdersNotExpired() {
-		
+
 		ArrayList<String> not_expired_orders = new ArrayList<>();
-		
+
 		ArrayList<String> all_orders = checkAllOrders();
 		try {
-			for(String order_id : all_orders) {
+			for (String order_id : all_orders) {
 				Order order = dbService.getOrder(order_id);
 				Timestamp now = new Timestamp(System.currentTimeMillis());
-				if(order.getCreate_time().compareTo(now) < 0 && order.getDeliver_time().compareTo(now) > 0) {
+				if (order.getCreate_time().compareTo(now) < 0 && order.getDeliver_time().compareTo(now) > 0) {
 					not_expired_orders.add(order_id);
 				}
 			}
@@ -148,21 +136,21 @@ public class Member extends User {
 	}
 
 	public boolean getVIP() {
-		
+
 		boolean vip_check = false;
-		
+
 		Calendar c = Calendar.getInstance();
 		c.getTime();
 		Date today = new java.sql.Date(c.getTimeInMillis());
 		Date expire_day;
 		try {
 			expire_day = dbService.getVIPDate(this.getUserName());
-			if(expire_day == null)
+			if (expire_day == null)
 				vip_check = false;
-			else if(today.compareTo(expire_day) >= 0) {
+			else if (today.compareTo(expire_day) >= 0) {
 				vip_check = false;
-			}
-			else vip_check = true;
+			} else
+				vip_check = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

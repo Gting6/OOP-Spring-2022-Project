@@ -8,10 +8,10 @@ public class TestConnection {
 		Connection conn = DBConnection.getConnection();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("show databases;");
-	    while(rs.next()) {
-	    	System.out.print(rs.getString(1));
-	    	System.out.println();
-	    }
+		while (rs.next()) {
+			System.out.print(rs.getString(1));
+			System.out.println();
+		}
 	}
 
 }

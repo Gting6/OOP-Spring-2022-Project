@@ -19,10 +19,10 @@ import model.UserType;
 import view.LoginView;
 
 public class SignupSuccessController extends Controller implements Initializable {
-	
+
 	@FXML
 	private TextField usernameTf;
-	
+
 	@FXML
 	private TextField passwordTf;
 
@@ -56,7 +56,6 @@ public class SignupSuccessController extends Controller implements Initializable
 	private LoginView status;
 	private UserType usertype;
 
-	
 	@Override
 	protected void render() {
 		if (status == LoginView.SignUp) {
@@ -68,7 +67,7 @@ public class SignupSuccessController extends Controller implements Initializable
 			emailTf.setVisible(true);
 			phoneTf.setVisible(true);
 			nameTf.setVisible(true);
-			typeCombo.setVisible(true);	
+			typeCombo.setVisible(true);
 			confirmBtn.setVisible(true);
 
 		} else { // sign up success
@@ -80,15 +79,15 @@ public class SignupSuccessController extends Controller implements Initializable
 			emailTf.setVisible(false);
 			phoneTf.setVisible(false);
 			nameTf.setVisible(false);
-			typeCombo.setVisible(false);	
+			typeCombo.setVisible(false);
 			confirmBtn.setVisible(false);
 		}
 	}
-	
+
 	public void pressBackBtn(ActionEvent event) throws IOException {
 		switchScene(ViewEnum.LOGIN, event);
 	}
-	
+
 	private void setWrongLb(String s) {
 		wrongLb.setText(s);
 		wrongLb.setVisible(true);
@@ -111,7 +110,7 @@ public class SignupSuccessController extends Controller implements Initializable
 		String name = nameTf.getText();
 
 		String pattern = "[0-9a-zA-Z]+";
-		
+
 		String phonePattern = "09[0-9]{8}";
 		String emailPattern = "^\\w{1,63}@[a-zA-Z0-9]{2,63}\\.[a-zA-Z]{2,63}(\\.[a-zA-Z]{2,63})?$";
 
@@ -138,21 +137,20 @@ public class SignupSuccessController extends Controller implements Initializable
 
 		while (true) {
 
-			if (!Pattern.matches(pattern, usernameTf.getText())
-					|| !Pattern.matches(pattern, passwordTf.getText())) {
+			if (!Pattern.matches(pattern, usernameTf.getText()) || !Pattern.matches(pattern, passwordTf.getText())) {
 				// TODO [Fx](done) The string in wrongLb can be change to the string mentioned
 				// below.
 				setWrongLb("Error pattern in username or password");
 				wrongLb.setVisible(true);
 				break;
 			}
-			
+
 			if (!Pattern.matches(phonePattern, phone)) {
 				setWrongLb("Error pattern in phone");
 				wrongLb.setVisible(true);
 				break;
 			}
-			
+
 			if (!Pattern.matches(emailPattern, email)) {
 				setWrongLb("Error pattern in email");
 				wrongLb.setVisible(true);
@@ -167,8 +165,9 @@ public class SignupSuccessController extends Controller implements Initializable
 				break;
 			}
 			if (usertype == UserType.Member) {
-				Member member = new Member(usernameTf.getText(), passwordTf.getText(),address, phone, email, name);
-				if (!model.checkMemberInWhenRegister(member.getUserName(), member.getPassword()) && !model.checkDeliverManWhenRegister(member.getUserName())) {
+				Member member = new Member(usernameTf.getText(), passwordTf.getText(), address, phone, email, name);
+				if (!model.checkMemberInWhenRegister(member.getUserName(), member.getPassword())
+						&& !model.checkDeliverManWhenRegister(member.getUserName())) {
 					model.addMember(member);
 					// TODO (done) [FX] Success, show sign-up success, and give a button to back to
 					// login
@@ -176,7 +175,7 @@ public class SignupSuccessController extends Controller implements Initializable
 					setWrongLb("Successfully sign up!, press Go back to login!");
 					status = LoginView.Success;
 					render();
-					//					switchScene(ViewEnum.LOGIN, event);
+					// switchScene(ViewEnum.LOGIN, event);
 					System.out.println(model.checkMemberInWhenRegister(member.getUserName(), member.getPassword()));
 					// switchScene(ViewEnum.MEMBER, event, member.getUserName());
 				} else {
@@ -187,24 +186,25 @@ public class SignupSuccessController extends Controller implements Initializable
 				}
 				break;
 			}
-			
+
 			if (usertype == UserType.Deliver) {
-				DeliveryMan deliveryman= new DeliveryMan(usernameTf.getText(), passwordTf.getText(),address, phone, email, name);
-				if (!model.checkDeliverManWhenRegister(deliveryman.getUserName()) && !model.checkMemberInWhenRegister(deliveryman.getUserName(), deliveryman.getPassword())) {
+				DeliveryMan deliveryman = new DeliveryMan(usernameTf.getText(), passwordTf.getText(), address, phone,
+						email, name);
+				if (!model.checkDeliverManWhenRegister(deliveryman.getUserName())
+						&& !model.checkMemberInWhenRegister(deliveryman.getUserName(), deliveryman.getPassword())) {
 					model.addDeliverMan(deliveryman);
 					setWrongLb("Successfully sign up!, press Go back to login!");
 					status = LoginView.Success;
 					render();
 //					switchScene(ViewEnum.LOGIN, event);
 					System.out.println(model.checkDeliverManWhenRegister(deliveryman.getUserName()));
-				}
-				else {
+				} else {
 					setWrongLb("Fail to register deliveryman");
 					wrongLb.setVisible(true);
 				}
 				break;
 			}
-			
+
 			if (usertype == UserType.Restaurant) {
 				setWrongLb("Not allow Restaurant to register now");
 				wrongLb.setVisible(true);
@@ -212,8 +212,7 @@ public class SignupSuccessController extends Controller implements Initializable
 			break;
 		}
 	}
-	
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub

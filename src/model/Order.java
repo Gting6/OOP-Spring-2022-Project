@@ -23,9 +23,9 @@ public class Order {
 	private long distance = 0;
 	// TODO Location?
 	private int fee;
-	
+
 	DBService dbService = new DBService();
-	
+
 	public long getDistance() {
 		return distance;
 	}
@@ -36,34 +36,34 @@ public class Order {
 
 	// float how to calculate
 	public Order() {
-		
+
 	}
-	
+
 	public Order(String member_id, String restaurant_id) {
 		this.id = UUID.randomUUID().toString();
 		this.member_id = member_id;
 		this.restaurant_id = restaurant_id;
-		this.deliveryman_id = "";  // it should be designated only when the order is established
+		this.deliveryman_id = ""; // it should be designated only when the order is established
 		this.deliver_time = null;
 		this.items = new HashMap<>();
 	}
-	
+
 	// An order is created when a customer clicked on the first item to the cart
 	// TODO Clear cart when buy things from another store
 	public Order(String member_id, String restaurant_id, HashMap<String, Integer> product) {
 		this.id = UUID.randomUUID().toString();
 		this.member_id = member_id;
 		this.restaurant_id = restaurant_id;
-		this.deliveryman_id = "";  // it should be designated only when the order is established
+		this.deliveryman_id = ""; // it should be designated only when the order is established
 		this.deliver_time = null;
 		this.items = new HashMap<>();
 		addToCart(product);
 	}
-	
-	public Order(String id, int status, Timestamp create_time, Timestamp deliver_time, Timestamp arrival_time, 
+
+	public Order(String id, int status, Timestamp create_time, Timestamp deliver_time, Timestamp arrival_time,
 			String member_id, String deliveryman_id, String restaurant_id, int fee) {
 		this.id = id;
-		this.status = status;  // 0 -> inserted; 1 -> deliveryman_designated
+		this.status = status; // 0 -> inserted; 1 -> deliveryman_designated
 		this.create_time = create_time;
 		this.deliver_time = deliver_time;
 		this.arrival_time = arrival_time;
@@ -72,7 +72,7 @@ public class Order {
 		this.restaurant_id = restaurant_id;
 		this.fee = fee;
 	}
-	
+
 	public void setToDB() {
 		try {
 			dbService.createOrder(this);
@@ -81,7 +81,7 @@ public class Order {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// getter and setter
 	public String getId() {
 		return this.id;
@@ -116,7 +116,7 @@ public class Order {
 	}
 
 	public String getDeliveryman_id() {
-		return deliveryman_id.equals("")? "None": deliveryman_id;
+		return deliveryman_id.equals("") ? "None" : deliveryman_id;
 	}
 
 	public void setDeliveryman_id(String deliveryman_id) {
@@ -130,7 +130,6 @@ public class Order {
 	public void setRestaurant_id(String restaurant_id) {
 		this.restaurant_id = restaurant_id;
 	}
-
 
 	public Order getOrderInfo() {
 		try {
@@ -153,29 +152,32 @@ public class Order {
 	public int getFee() {
 		return fee;
 	}
-		
+
 	public void addToCart(HashMap<String, Integer> product) {
-		if(this.items == null) {
+		if (this.items == null) {
 			System.out.println("HERE");
-			this.items.put((String) product.keySet().toArray()[0],1);		}
-		else if(this.items.containsKey((String) product.keySet().toArray()[0]))
-			this.items.put((String) product.keySet().toArray()[0], this.items.get((String) product.keySet().toArray()[0])+1);
+			this.items.put((String) product.keySet().toArray()[0], 1);
+		} else if (this.items.containsKey((String) product.keySet().toArray()[0]))
+			this.items.put((String) product.keySet().toArray()[0],
+					this.items.get((String) product.keySet().toArray()[0]) + 1);
 		else
-			this.items.put((String) product.keySet().toArray()[0],1);
+			this.items.put((String) product.keySet().toArray()[0], 1);
 	}
-	
+
 	public void removeFromCart(HashMap<String, Integer> product) {
-		if(this.items == null) {
+		if (this.items == null) {
 			return;
-			}
-		else if(this.items.containsKey((String) product.keySet().toArray()[0]) && this.items.get((String) product.keySet().toArray()[0]) > 1)
-			this.items.put((String) product.keySet().toArray()[0], this.items.get((String) product.keySet().toArray()[0])-1);
-		else if(this.items.containsKey((String) product.keySet().toArray()[0]) && this.items.get((String) product.keySet().toArray()[0]) == 1)
+		} else if (this.items.containsKey((String) product.keySet().toArray()[0])
+				&& this.items.get((String) product.keySet().toArray()[0]) > 1)
+			this.items.put((String) product.keySet().toArray()[0],
+					this.items.get((String) product.keySet().toArray()[0]) - 1);
+		else if (this.items.containsKey((String) product.keySet().toArray()[0])
+				&& this.items.get((String) product.keySet().toArray()[0]) == 1)
 			this.items.remove((String) product.keySet().toArray()[0]);
 	}
-	
+
 	public void calculateFee() {
-		
+
 		String[] rest_info;
 		String coupon = "";
 		double discount = 1.0;
@@ -194,28 +196,25 @@ public class Order {
 			e.printStackTrace();
 		}
 
-		for(String key : items.keySet()) {
+		for (String key : items.keySet()) {
 			System.out.println("key==========");
 			System.out.println(key);
 			total_price += items.get(key) * products.get(key);
 		}
-		
-		if(coupon != "") {
+
+		if (coupon != "") {
 //			parse the coupon info and change discount
-			if(coupon.equals(Restaurant.coupon_type.buy_200_get_90_percent_off.name())) {
-				if(total_price >= 200) {
-					total_price = (int) (total_price*0.9);
+			if (coupon.equals(Restaurant.coupon_type.buy_200_get_90_percent_off.name())) {
+				if (total_price >= 200) {
+					total_price = (int) (total_price * 0.9);
 				}
-			}
-			else if(coupon.equals(Restaurant.coupon_type.buy_300_get_80_percent_off.name())) {
-				if(total_price >= 300) {
-					total_price = (int) (total_price*0.8);
+			} else if (coupon.equals(Restaurant.coupon_type.buy_300_get_80_percent_off.name())) {
+				if (total_price >= 300) {
+					total_price = (int) (total_price * 0.8);
 				}
-			}
-			else if(coupon.equals(Restaurant.coupon_type.save_20_dollars.name())) {
+			} else if (coupon.equals(Restaurant.coupon_type.save_20_dollars.name())) {
 				total_price = total_price > 20 ? total_price - 20 : 0;
-			}
-			else if(coupon.equals(Restaurant.coupon_type.save_30_dollars.name())) {
+			} else if (coupon.equals(Restaurant.coupon_type.save_30_dollars.name())) {
 				total_price = total_price > 30 ? total_price - 30 : 0;
 			}
 		}
@@ -232,34 +231,34 @@ public class Order {
 			else {
 				if (distance > 30) {
 					distance_fee = (int) distance;
-				}
-				else distance_fee = 30; // change to result from google API
+				} else
+					distance_fee = 30; // change to result from google API
 			}
 		} catch (Exception e) {
 			System.out.println("Member not found!");
 		}
-		
+
 		this.fee = (int) (total_price * discount) + distance_fee;
 	}
-	
+
 	public void showOrder() {
 		calculateFee();
 		Timestamp now = new Timestamp(Calendar.getInstance().getTimeInMillis());
-		long l = now.getTime() + 3600*8*1000;
+		long l = now.getTime() + 3600 * 8 * 1000;
 		now = new Timestamp(l);
-		long n = 15*60*1000;			// n should be calculated by googleMap API
+		long n = 15 * 60 * 1000; // n should be calculated by googleMap API
 		Model model = new Model();
-		long m = model.CalculateDistanceMemberRest(member_id, restaurant_id)*1000;
+		long m = model.CalculateDistanceMemberRest(member_id, restaurant_id) * 1000;
 		// n may be a long type?
 //		long m = 30*60*1000;			// m should be calculated by googleMap API
-		Timestamp later = new Timestamp(l+n+m);
+		Timestamp later = new Timestamp(l + n + m);
 		this.status = 0;
-		this.deliveryman_id = "";		// should be selected by googleMap API
-		this.deliver_time = new Timestamp(l+n);// may be a number?
-		this.create_time = now; 
+		this.deliveryman_id = ""; // should be selected by googleMap API
+		this.deliver_time = new Timestamp(l + n);// may be a number?
+		this.create_time = now;
 		this.arrival_time = later;
 	}
-	
+
 	public void establishOrder() {
 //		calculateFee();
 //		Timestamp now = new Timestamp(Calendar.getInstance().getTimeInMillis());
@@ -293,12 +292,12 @@ public class Order {
 		// TODO Auto-generated method stub
 		return this.status;
 	}
-	
+
 	public void setStatus() {
 		this.status += 1;
 		dbService.setOrderStatus(status, id);
 	}
-	
+
 	public String getRestaurantDescription() {
 		String s = "";
 		try {
@@ -309,46 +308,44 @@ public class Order {
 		}
 		return s;
 	}
-	
+
 	public String getRestaurant_name() {
 		return dbService.getThisOrderRestaurantName(this.restaurant_id);
 	}
-	
+
 	public String getDeliveryman_name() {
 		return dbService.getThisOrderDeliverymanName(this.deliveryman_id);
 	}
-	
+
 	public String getConsumer_address() {
 		return dbService.getConsumerAddress(this.member_id);
 	}
 
-	
 	public String getRestaurant_address() {
 		return dbService.getRestaurantAddress(this.restaurant_id);
 	}
 
-	
 	public String getStatusToString() {
 		// TODO Auto-generated method stub
 		Timestamp now = new Timestamp(System.currentTimeMillis());
-		if(!(this.getCreate_time().compareTo(now) < 0 && this.getArrival_time().compareTo(now) > 0)) {
+		if (!(this.getCreate_time().compareTo(now) < 0 && this.getArrival_time().compareTo(now) > 0)) {
 			return "Expired!";
 		}
-		if(this.status == 0)
+		if (this.status == 0)
 			return "This order is not yet checked by restaurant";
-		else if(this.status == 1)
+		else if (this.status == 1)
 			return "Restaurant preparing the order...";
-		else if(this.status == 2)
+		else if (this.status == 2)
 			return "Ready To Deliver";
-		else if(this.status == 3)
+		else if (this.status == 3)
 			return "Order being delivered";
-		else if(this.status == 4)
+		else if (this.status == 4)
 			return "Has Arrived";
-		return "";		
+		return "";
 	}
-	
+
 	public String getItems() {
-		
+
 		String s = "";
 		HashMap<String, String> items = new HashMap<>();
 		try {
@@ -357,10 +354,10 @@ public class Order {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(String key: items.keySet()) {
+		for (String key : items.keySet()) {
 			s += "" + key + " x" + items.get(key) + ",";
 		}
-		return s.substring(0,s.length() - 1);
+		return s.substring(0, s.length() - 1);
 	}
-	
+
 }

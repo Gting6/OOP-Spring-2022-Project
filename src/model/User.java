@@ -2,7 +2,6 @@ package model;
 
 // User is Member, Deliver or Restaurant.
 public abstract class User {
-	// 可能做user 輸出系統
 	private String username;
 	private String password;
 	private String address;
@@ -13,7 +12,7 @@ public abstract class User {
 	public User() {
 
 	}
-	
+
 	public User(String username) {
 		this.username = username;
 
@@ -54,7 +53,7 @@ public abstract class User {
 	public String getAddress() {
 		return this.address;
 	}
-	
+
 	public String getPhone() {
 		return this.phone;
 	}
@@ -66,7 +65,6 @@ public abstract class User {
 	public String getName() {
 		return this.name;
 	}
-	
 
 	// Setter part
 	public void setUserName(String name) {
@@ -80,7 +78,7 @@ public abstract class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}

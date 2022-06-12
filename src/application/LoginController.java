@@ -30,8 +30,6 @@ public class LoginController extends Controller implements Initializable {
 	@FXML
 	private TextField passwordTf;
 
-
-	
 	// To set the error message for wrongLb
 	// Can be extend to input label.
 	private void setWrongLb(String s) {
@@ -42,10 +40,12 @@ public class LoginController extends Controller implements Initializable {
 	// There is only 1 status at login -> No need to render here
 	@Override
 	protected void render() {
-		
+
 	}
-
-
+	
+	/*
+	 * Handle the login logic here.
+	 */
 	public void pressLoginBtn(ActionEvent event) throws IOException {
 		Model model = new Model();
 		usernameTf.getText();
@@ -59,27 +59,24 @@ public class LoginController extends Controller implements Initializable {
 				setWrongLb("Error pattern in username or password");
 				wrongLb.setVisible(true);
 				// refresh
-					break;
-				}
+				break;
+			}
 
-				if (model.checkMemberLoginIn(usernameTf.getText(), passwordTf.getText())) {
-					switchScene(ViewEnum.MEMBER, event, usernameTf.getText());
-					System.out.println("Login success as member");
-				} 
-				else if (model.checkDeliverManrLoginIn(usernameTf.getText(), passwordTf.getText())) {
-					switchScene(ViewEnum.DELIVER, event, usernameTf.getText());
-					System.out.println("Login success as Deliver");
-				}
-				else if (model.checkRestaurantLoginIn(usernameTf.getText(), passwordTf.getText())) {
-					switchScene(ViewEnum.RESTAURANT, event, usernameTf.getText());
-					System.out.println("Login success as Restaurant");
-				}
-				else {
-					setWrongLb("Login Fail");
-					wrongLb.setVisible(true);
-				}
-      
-        break;
+			if (model.checkMemberLoginIn(usernameTf.getText(), passwordTf.getText())) {
+				switchScene(ViewEnum.MEMBER, event, usernameTf.getText());
+				System.out.println("Login success as member");
+			} else if (model.checkDeliverManrLoginIn(usernameTf.getText(), passwordTf.getText())) {
+				switchScene(ViewEnum.DELIVER, event, usernameTf.getText());
+				System.out.println("Login success as Deliver");
+			} else if (model.checkRestaurantLoginIn(usernameTf.getText(), passwordTf.getText())) {
+				switchScene(ViewEnum.RESTAURANT, event, usernameTf.getText());
+				System.out.println("Login success as Restaurant");
+			} else {
+				setWrongLb("Login Fail");
+				wrongLb.setVisible(true);
+			}
+
+			break;
 		}
 	}
 
