@@ -131,10 +131,12 @@ If fail many time, you can try to open the application by our jar file below.
 
 Put the jar file in your favorite folder and run the command below or seeing the launch.bat
 
+```
 java --module-path "{Your javafx lib folder}\javafx-sdk-18.0.1\lib" --add-modules=javafx.controls,javafx.fxml -jar OOP.jar
+```
 
 Example:
 
+```
 java --module-path "C:\Users\user\Downloads\openjfx\openjfx-18.0.1_windows-x64_bin-sdk (1)\javafx-sdk-18.0.1\lib" --add-modules=javafx.controls,javafx.fxml -jar OOP.jar
-
-
+```
