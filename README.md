@@ -125,7 +125,16 @@ If success, Congratulations, then you will see the login page as below.
 If any error occur, delete the related data, and go to Step1.
 
 ## Quetion
-If fail many time, you can try to open the application by our jar file.
+If fail many time, you can try to open the application by our jar file below.
 
+[Jar](https://gntuedutw-my.sharepoint.com/personal/b08505023_g_ntu_edu_tw/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fb08505023%5Fg%5Fntu%5Fedu%5Ftw%2FDocuments%2FOOP&ga=1)
+
+Put the jar file in your favorite folder and run the command below or seeing the launch.bat
+
+java --module-path "{Your javafx lib folder}\javafx-sdk-18.0.1\lib" --add-modules=javafx.controls,javafx.fxml -jar OOP.jar
+
+Example:
+
+java --module-path "C:\Users\user\Downloads\openjfx\openjfx-18.0.1_windows-x64_bin-sdk (1)\javafx-sdk-18.0.1\lib" --add-modules=javafx.controls,javafx.fxml -jar OOP.jar
 
 
